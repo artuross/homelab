@@ -1,0 +1,8 @@
+[tools]
+crane = "latest"
+talhelper = "latest"
+talosctl = "1.10.2"
+
+[settings]
+experimental = true
+lockfile = true

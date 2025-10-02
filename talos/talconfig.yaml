@@ -1,0 +1,39 @@
+# yaml-language-server: $schema=../schemas/talconfig.json
+clusterName: pl-rcwz-homelab
+endpoint: https://192.168.0.82:6443
+kubernetesVersion: v1.30.0
+talosVersion: v1.10.2
+allowSchedulingOnMasters: true
+nodes:
+  - hostname: rpi51
+    ipAddress: 192.168.0.82
+    installDisk: /dev/nvme0n1
+    controlPlane: true
+    userVolumes: &user-volumes
+      - name: persistent-data
+        provisioning:
+          diskSelector:
+            match: disk.transport == "nvme"
+          minSize: 200GB
+          grow: true
+    volumes: &volumes
+      - name: EPHEMERAL
+        provisioning:
+          diskSelector:
+            match: disk.transport == "nvme"
+          minSize: 50GiB
+          maxSize: 50GiB
+  - hostname: rpi52
+    ipAddress: 192.168.0.94
+    installDisk: /dev/nvme0n1
+    controlPlane: false
+    userVolumes: *user-volumes
+    volumes: *volumes
+patches:
+  # use custom installer for Raspberry Pi 5, based on the work of:
+  # https://github.com/siderolabs/sbc-raspberrypi/issues/23
+  # https://github.com/talos-rpi5/talos-builder/releases/tag/v1.10.2-rpi5-pre3
+  - |
+    machine:
+      install:
+        image: ghcr.io/artuross/talos-installer:v1.10.2-rpi5

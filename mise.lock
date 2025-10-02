@@ -1,0 +1,21 @@
+[[tools.crane]]
+version = "0.20.6"
+backend = "aqua:google/go-containerregistry"
+
+[tools.crane.platforms.macos-arm64]
+checksum = "sha256:ae30b28498de3e1ac51a37042eab46116ec70d86aa9d10431a1fbde35b9918b9"
+size = 15181073
+url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Darwin_arm64.tar.gz"
+
+[[tools.talhelper]]
+version = "3.0.36"
+backend = "aqua:budimanjojo/talhelper"
+
+[[tools.talosctl]]
+version = "1.10.2"
+backend = "aqua:siderolabs/talos"
+
+[tools.talosctl.platforms.macos-arm64]
+checksum = "sha512:f8fd1cf178c5682303ca52bf0d89a39404d404fd1324221f86368b1137e39cad54ea3714605338b798af512d42cf89b73b9862c1985da7b516b90cd697a22b75"
+size = 89624274
+url = "https://github.com/siderolabs/talos/releases/download/v1.10.2/talosctl-darwin-arm64"
