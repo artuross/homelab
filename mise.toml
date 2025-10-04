@@ -1,7 +1,7 @@
 [tools]
 crane = "latest"
 talhelper = "latest"
-talosctl = "1.10.2"
+talosctl = "1.10.7"
 
 [settings]
 experimental = true
