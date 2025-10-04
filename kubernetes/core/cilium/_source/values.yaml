@@ -1,0 +1,41 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/cilium/cilium/refs/heads/main/install/kubernetes/cilium/values.schema.json
+cgroup:
+  autoMount:
+    enabled: false
+  hostRoot: /sys/fs/cgroup
+
+ipam:
+  mode: kubernetes
+
+k8sServiceHost: localhost
+k8sServicePort: 7445
+kubeProxyReplacement: true
+
+# run only 1 replica
+operator:
+  replicas: 1
+
+# reuse core-cilium namespace
+tls:
+  secretsNamespace:
+    create: false
+    name: core-cilium
+
+securityContext:
+  capabilities:
+    ciliumAgent:
+      - CHOWN
+      - DAC_OVERRIDE
+      - FOWNER
+      - IPC_LOCK
+      - KILL
+      - NET_ADMIN
+      - NET_RAW
+      - SETGID
+      - SETUID
+      - SYS_ADMIN
+      - SYS_RESOURCE
+    cleanCiliumState:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_RESOURCE

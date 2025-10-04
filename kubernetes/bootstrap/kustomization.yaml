@@ -1,0 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+secretGenerator:
+  - name: cilium-ca
+    namespace: core-cilium
+    files:
+      - secrets/cilium/ca.crt
+      - secrets/cilium/ca.key
+    options:
+      disableNameSuffixHash: true
+
+  - name: hubble-server-certs
+    namespace: core-cilium
+    files:
+      - secrets/cilium/ca.crt
+      - secrets/cilium/tls.crt
+      - secrets/cilium/tls.key
+    type: kubernetes.io/tls
+    options:
+      disableNameSuffixHash: true

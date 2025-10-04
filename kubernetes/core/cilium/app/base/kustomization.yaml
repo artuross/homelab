@@ -1,0 +1,23 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ClusterRole--cilium-operator.yaml
+- ClusterRole--cilium.yaml
+- ClusterRoleBinding--cilium-operator.yaml
+- ClusterRoleBinding--cilium.yaml
+- ConfigMap--core-cilium--cilium-config.yaml
+- ConfigMap--core-cilium--cilium-envoy-config.yaml
+- DaemonSet--core-cilium--cilium-envoy.yaml
+- DaemonSet--core-cilium--cilium.yaml
+- Deployment--core-cilium--cilium-operator.yaml
+- Role--core-cilium--cilium-config-agent.yaml
+- Role--core-cilium--cilium-operator-tlsinterception-secrets.yaml
+- Role--core-cilium--cilium-tlsinterception-secrets.yaml
+- RoleBinding--core-cilium--cilium-config-agent.yaml
+- RoleBinding--core-cilium--cilium-operator-tlsinterception-secrets.yaml
+- RoleBinding--core-cilium--cilium-tlsinterception-secrets.yaml
+- Service--core-cilium--cilium-envoy.yaml
+- Service--core-cilium--hubble-peer.yaml
+- ServiceAccount--core-cilium--cilium-envoy.yaml
+- ServiceAccount--core-cilium--cilium-operator.yaml
+- ServiceAccount--core-cilium--cilium.yaml

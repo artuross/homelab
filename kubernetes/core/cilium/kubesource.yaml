@@ -1,0 +1,8 @@
+apiVersion: kubesource.rcwz.pl/v1alpha1
+kind: Config
+sourceDir: _source
+targets:
+  - directory: app/base
+    filter:
+      exclude:
+        - kind: Secret

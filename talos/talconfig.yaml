@@ -41,3 +41,12 @@ patches:
     machine:
       install:
         image: ghcr.io/artuross/talos-installer:v1.10.7-rpi5
+
+  # disable CNI and proxy to use Cilium
+  - |-
+    cluster:
+      network:
+        cni:
+          name: none
+      proxy:
+        disabled: true

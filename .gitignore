@@ -1,2 +1,3 @@
+/kubernetes/bootstrap/secrets/
 /talos/.build/
 /talos/.rendered/
