@@ -1,0 +1,14 @@
+doublestar: true
+patterns:
+  - "**/*.yaml"
+formatter:
+  type: basic
+  disallow_anchors: false
+  eof_newline: true
+  force_array_style: block
+  indent: 2
+  indentless_arrays: false
+  line_ending: lf
+  max_line_length: 120
+  retain_line_breaks_single: true
+  trim_trailing_whitespace: true

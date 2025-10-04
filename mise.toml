@@ -1,7 +1,9 @@
 [tools]
+"go:github.com/google/yamlfmt/cmd/yamlfmt" = "latest"
 crane = "latest"
 talhelper = "latest"
 talosctl = "1.10.7"
+
 
 [settings]
 experimental = true

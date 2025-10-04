@@ -1,6 +1,13 @@
 _list:
     @just --list
 
+format:
+    yamlfmt -continue_on_error **/*.yaml
+
+generate-k8s-manifests:
+    kubesource
+    just format
+
 generate-schemas:
     rip ./schemas
     mkdir ./schemas

@@ -7,6 +7,10 @@ checksum = "sha256:ae30b28498de3e1ac51a37042eab46116ec70d86aa9d10431a1fbde35b991
 size = 15181073
 url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Darwin_arm64.tar.gz"
 
+[[tools."go:github.com/google/yamlfmt/cmd/yamlfmt"]]
+version = "0.17.2"
+backend = "go:github.com/google/yamlfmt/cmd/yamlfmt"
+
 [[tools.talhelper]]
 version = "3.0.36"
 backend = "aqua:budimanjojo/talhelper"
