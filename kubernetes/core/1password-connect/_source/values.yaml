@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/1Password/connect-helm-charts/refs/heads/main/charts/connect/values.schema.json
+acceptanceTests:
+  enabled: false
+  healthCheck:
+    enabled: false

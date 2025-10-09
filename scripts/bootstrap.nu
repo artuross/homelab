@@ -10,6 +10,10 @@ op read --no-newline "op://homelab/addons.cilium.ca/ca.key" | base64 --decode | 
 op read --no-newline "op://homelab/addons.cilium.hubble-server-certs/tls.crt" | base64 --decode | save --force kubernetes/bootstrap/secrets/cilium/tls.crt
 op read --no-newline "op://homelab/addons.cilium.hubble-server-certs/tls.key" | base64 --decode | save --force kubernetes/bootstrap/secrets/cilium/tls.key
 
+# create 1Password secrets
+mkdir kubernetes/bootstrap/secrets/1password-connect
+op read --no-newline "op://homelab/addons.1password.credentials/1password-credentials.json" | jq -c '.' | base64 | save --force kubernetes/bootstrap/secrets/1password-connect/1password-credentials.json
+
 # create namespaces
 kubectl apply --kustomize kubernetes/cluster/namespaces
 
@@ -17,4 +21,5 @@ kubectl apply --kustomize kubernetes/cluster/namespaces
 kubectl apply --kustomize kubernetes/bootstrap
 
 # deploy apps
+kubectl apply --kustomize kubernetes/core/1password-connect/app
 kubectl apply --kustomize kubernetes/core/cilium/app

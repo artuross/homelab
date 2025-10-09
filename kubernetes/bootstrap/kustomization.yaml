@@ -2,6 +2,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 secretGenerator:
+  # 1password-connect
+  - name: op-credentials
+    namespace: core-1password-connect
+    files:
+      - secrets/1password-connect/1password-credentials.json
+    options:
+      disableNameSuffixHash: true
+
   # cilium
   - name: cilium-ca
     namespace: core-cilium
