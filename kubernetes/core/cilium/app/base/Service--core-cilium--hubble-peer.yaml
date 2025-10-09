@@ -10,9 +10,9 @@ metadata:
 spec:
   internalTrafficPolicy: Local
   ports:
-  - name: peer-service
-    port: 443
-    protocol: TCP
-    targetPort: 4244
+    - name: peer-service
+      port: 443
+      protocol: TCP
+      targetPort: 4244
   selector:
     k8s-app: cilium

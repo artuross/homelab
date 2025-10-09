@@ -2,7 +2,9 @@ _list:
     @just --list
 
 format:
-    yamlfmt -continue_on_error **/*.yaml
+    for file in `fd . --extension=yaml`; do \
+        yamlfmt $file; \
+    done
 
 generate-k8s-manifests:
     kubesource
