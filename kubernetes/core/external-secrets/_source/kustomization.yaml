@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmCharts:
+  - name: external-secrets
+    namespace: core-external-secrets
+    repo: https://charts.external-secrets.io
+    releaseName: external-secrets
+    includeCRDs: true
+    version: 0.20.2

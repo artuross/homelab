@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ClusterRole--external-secrets-cert-controller.yaml
+  - ClusterRole--external-secrets-controller.yaml
+  - ClusterRole--external-secrets-edit.yaml
+  - ClusterRole--external-secrets-servicebindings.yaml
+  - ClusterRole--external-secrets-view.yaml
+  - ClusterRoleBinding--external-secrets-cert-controller.yaml
+  - ClusterRoleBinding--external-secrets-controller.yaml
+  - Deployment--core-external-secrets--external-secrets-cert-controller.yaml
+  - Deployment--core-external-secrets--external-secrets-webhook.yaml
+  - Deployment--core-external-secrets--external-secrets.yaml
+  - Role--core-external-secrets--external-secrets-leaderelection.yaml
+  - RoleBinding--core-external-secrets--external-secrets-leaderelection.yaml
+  - Secret--core-external-secrets--external-secrets-webhook.yaml
+  - Service--core-external-secrets--external-secrets-webhook.yaml
+  - ServiceAccount--core-external-secrets--external-secrets-cert-controller.yaml
+  - ServiceAccount--core-external-secrets--external-secrets-webhook.yaml
+  - ServiceAccount--core-external-secrets--external-secrets.yaml
+  - ValidatingWebhookConfiguration--externalsecret-validate.yaml
+  - ValidatingWebhookConfiguration--secretstore-validate.yaml
