@@ -28,3 +28,11 @@ secretGenerator:
     type: kubernetes.io/tls
     options:
       disableNameSuffixHash: true
+
+  # external-secrets
+  - name: onepassword-connect-token
+    namespace: core-external-secrets
+    files:
+      - secrets/1password-connect/token
+    options:
+      disableNameSuffixHash: true

@@ -12,7 +12,8 @@ op read --no-newline "op://homelab/addons.cilium.hubble-server-certs/tls.key" | 
 
 # create 1Password secrets
 mkdir kubernetes/bootstrap/secrets/1password-connect
-op read --no-newline "op://homelab/addons.1password.credentials/1password-credentials.json" | jq -c '.' | base64 | save --force kubernetes/bootstrap/secrets/1password-connect/1password-credentials.json
+op read --no-newline "op://homelab/addons.1password.credentials/1password-credentials.json" | save --force kubernetes/bootstrap/secrets/1password-connect/1password-credentials.json
+op read --no-newline "op://homelab/addons.1password.tokens/token" | save --force kubernetes/bootstrap/secrets/1password-connect/token
 
 # create CRDs
 kubectl apply --server-side --kustomize kubernetes/core/external-secrets/crds
