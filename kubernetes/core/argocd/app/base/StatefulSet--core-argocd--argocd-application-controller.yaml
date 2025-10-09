@@ -23,7 +23,7 @@ spec:
     metadata:
       annotations:
         checksum/cm: 919caf78cab3fabce5a224f573f1e09e3383fff4813b59f84437734d67cabd9e
-        checksum/cmd-params: 1e8799f764607882385e128badef058dd42a52f2886ba8f5771c90206bbfd2f3
+        checksum/cmd-params: 6efb6c68a805ad66c761d3548073c98c4e3a7a6a441afaeebdb3168062ea7f82
       labels:
         app.kubernetes.io/component: application-controller
         app.kubernetes.io/instance: argocd
@@ -213,7 +213,7 @@ spec:
                 secretKeyRef:
                   key: auth
                   name: argocd-redis
-                  optional: false
+                  optional: true
             - name: REDIS_SENTINEL_USERNAME
               valueFrom:
                 secretKeyRef:

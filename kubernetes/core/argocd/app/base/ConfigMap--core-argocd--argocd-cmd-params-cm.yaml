@@ -29,9 +29,7 @@ data:
   reposerver.log.level: info
   reposerver.parallelism.limit: "0"
   server.basehref: /
-  server.dex.server: https://argocd-dex-server:5556
-  server.dex.server.strict.tls: "false"
-  server.disable.auth: "false"
+  server.disable.auth: "true"
   server.enable.gzip: "true"
   server.enable.proxy.extension: "false"
   server.insecure: "false"

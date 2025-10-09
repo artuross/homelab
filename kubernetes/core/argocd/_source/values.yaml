@@ -1,0 +1,15 @@
+configs:
+  params:
+    server.disable.auth: true
+
+  secret:
+    createSecret: false
+
+dex:
+  enabled: false
+
+notifications:
+  enabled: false
+
+redisSecretInit:
+  enabled: false
