@@ -11,6 +11,9 @@ k8sServiceHost: localhost
 k8sServicePort: 7445
 kubeProxyReplacement: true
 
+socketLB:
+  hostNamespaceOnly: true
+
 # run only 1 replica
 operator:
   replicas: 1

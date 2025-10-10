@@ -18,7 +18,7 @@ spec:
       containers:
         - env:
             - name: OPERATOR_INITIAL_TAGS
-              value: tag:k8s-operator
+              value: tag:homelab-k8s-operator
             - name: OPERATOR_HOSTNAME
               value: tailscale-operator
             - name: OPERATOR_SECRET
@@ -40,7 +40,7 @@ spec:
             - name: PROXY_IMAGE
               value: tailscale/tailscale:v1.88.2
             - name: PROXY_TAGS
-              value: tag:k8s
+              value: tag:homelab-k8s-service
             - name: APISERVER_PROXY
               value: "false"
             - name: PROXY_FIREWALL_MODE

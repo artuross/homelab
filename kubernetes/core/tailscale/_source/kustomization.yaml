@@ -8,3 +8,4 @@ helmCharts:
     releaseName: tailscale-operator
     includeCRDs: true
     version: 1.88.2
+    valuesFile: values.yaml

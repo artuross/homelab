@@ -1,0 +1,6 @@
+operatorConfig:
+  defaultTags:
+    - "tag:homelab-k8s-operator"
+
+proxyConfig:
+  defaultTags: "tag:homelab-k8s-service"
