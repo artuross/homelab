@@ -1,6 +1,6 @@
 apiVersion: v1
 data:
-  default-setting.yaml: "default-data-path: \"/var/mnt/persistent-data\"\npriority-class: \"longhorn-critical\"\ndisable-revision-counter:
+  default-setting.yaml: "default-data-path: \"/var/mnt/persistent-data\"\ndefault-replica-count: \"1\"\npriority-class: \"longhorn-critical\"\ndisable-revision-counter:
     \"{\\\"v1\\\":\\\"true\\\"}\""
 kind: ConfigMap
 metadata:
