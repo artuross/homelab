@@ -10,9 +10,6 @@ resources:
   - DaemonSet--core-longhorn--longhorn-manager.yaml
   - Deployment--core-longhorn--longhorn-driver-deployer.yaml
   - Deployment--core-longhorn--longhorn-ui.yaml
-  - Job--core-longhorn--longhorn-post-upgrade.yaml
-  - Job--core-longhorn--longhorn-pre-upgrade.yaml
-  - Job--core-longhorn--longhorn-uninstall.yaml
   - PriorityClass--longhorn-critical.yaml
   - Role--core-longhorn--longhorn.yaml
   - RoleBinding--core-longhorn--longhorn.yaml

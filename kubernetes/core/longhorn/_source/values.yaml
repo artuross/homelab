@@ -1,2 +1,8 @@
 defaultSettings:
   defaultDataPath: /var/mnt/persistent-data
+
+longhornUI:
+  replicas: 1
+
+preUpgradeChecker:
+  jobEnabled: false

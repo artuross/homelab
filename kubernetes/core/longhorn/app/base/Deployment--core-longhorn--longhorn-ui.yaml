@@ -11,7 +11,7 @@ metadata:
   name: longhorn-ui
   namespace: core-longhorn
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: longhorn-ui

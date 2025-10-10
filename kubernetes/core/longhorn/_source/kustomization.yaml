@@ -7,5 +7,6 @@ helmCharts:
     repo: https://charts.longhorn.io
     releaseName: longhorn
     includeCRDs: true
+    skipHooks: true
     version: 1.10.0
     valuesFile: values.yaml
