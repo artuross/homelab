@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ClusterRole--tailscale-operator.yaml
+  - ClusterRoleBinding--tailscale-operator.yaml
+  - Deployment--core-tailscale--operator.yaml
+  - IngressClass--tailscale.yaml
+  - Role--core-tailscale--operator.yaml
+  - Role--core-tailscale--proxies.yaml
+  - RoleBinding--core-tailscale--operator.yaml
+  - RoleBinding--core-tailscale--proxies.yaml
+  - ServiceAccount--core-tailscale--operator.yaml
+  - ServiceAccount--core-tailscale--proxies.yaml

@@ -1,0 +1,16 @@
+apiVersion: kubesource.rcwz.pl/v1alpha1
+kind: Config
+sourceDir: _source
+targets:
+  - directory: app/base
+    filter:
+      exclude:
+        - kind: CustomResourceDefinition
+        - metadata:
+            name: longhorn-post-upgrade
+        - metadata:
+            name: longhorn-uninstall
+  - directory: crds
+    filter:
+      include:
+        - kind: CustomResourceDefinition
