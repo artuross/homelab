@@ -1,0 +1,11 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - resources/Certificate--core-pocket-id--pocket-id.yaml
+  - resources/DNSEndpoint--core-pocket-id--pocket-id.yaml
+  - resources/Deployment--core-pocket-id--pocket-id.yaml
+  - resources/IngressRoute--core-pocket-id--pocket-id.yaml
+  - resources/PersistentVolumeClaim--core-pocket-id--pocket-id.yaml
+  - resources/Service--core-pocket-id--pocket-id.yaml
+  - resources/Cluster--core-pocket-id--pocket-id.yaml

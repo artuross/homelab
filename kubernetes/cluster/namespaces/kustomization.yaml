@@ -12,6 +12,7 @@ resources:
   - resources/core-grafana-alloy.yaml
   - resources/core-longhorn.yaml
   - resources/core-metrics-server.yaml
+  - resources/core-pocket-id.yaml
   - resources/core-tailscale.yaml
   - resources/core-talos.yaml
   - resources/core-traefik.yaml

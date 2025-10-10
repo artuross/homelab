@@ -1,0 +1,17 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  namespace: core-pocket-id
+spec:
+  imageName: ghcr.io/cloudnative-pg/postgresql:18.0-202510201453-minimal-trixie
+  instances: 1
+  storage:
+    storageClass: longhorn
+    size: 1Gi
+  resources:
+    requests:
+      cpu: 10m
+      memory: 500Mi
+    limits:
+      memory: 500Mi
