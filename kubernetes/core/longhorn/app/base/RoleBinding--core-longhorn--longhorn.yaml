@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: longhorn
+  namespace: core-longhorn
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: longhorn
+subjects:
+  - kind: ServiceAccount
+    name: longhorn-service-account
+    namespace: core-longhorn

@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - CustomResourceDefinition--backingimagedatasources.longhorn.io.yaml
+  - CustomResourceDefinition--backingimagemanagers.longhorn.io.yaml
+  - CustomResourceDefinition--backingimages.longhorn.io.yaml
+  - CustomResourceDefinition--backupbackingimages.longhorn.io.yaml
+  - CustomResourceDefinition--backups.longhorn.io.yaml
+  - CustomResourceDefinition--backuptargets.longhorn.io.yaml
+  - CustomResourceDefinition--backupvolumes.longhorn.io.yaml
+  - CustomResourceDefinition--engineimages.longhorn.io.yaml
+  - CustomResourceDefinition--engines.longhorn.io.yaml
+  - CustomResourceDefinition--instancemanagers.longhorn.io.yaml
+  - CustomResourceDefinition--nodes.longhorn.io.yaml
+  - CustomResourceDefinition--orphans.longhorn.io.yaml
+  - CustomResourceDefinition--recurringjobs.longhorn.io.yaml
+  - CustomResourceDefinition--replicas.longhorn.io.yaml
+  - CustomResourceDefinition--settings.longhorn.io.yaml
+  - CustomResourceDefinition--sharemanagers.longhorn.io.yaml
+  - CustomResourceDefinition--snapshots.longhorn.io.yaml
+  - CustomResourceDefinition--supportbundles.longhorn.io.yaml
+  - CustomResourceDefinition--systembackups.longhorn.io.yaml
+  - CustomResourceDefinition--systemrestores.longhorn.io.yaml
+  - CustomResourceDefinition--volumeattachments.longhorn.io.yaml
+  - CustomResourceDefinition--volumes.longhorn.io.yaml

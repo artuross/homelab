@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: longhorn-ui
+    app.kubernetes.io/instance: longhorn
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: longhorn
+    app.kubernetes.io/version: v1.10.0
+    helm.sh/chart: longhorn-1.10.0
+  name: longhorn-frontend
+  namespace: core-longhorn
+spec:
+  ports:
+    - name: http
+      nodePort: null
+      port: 80
+      targetPort: http
+  selector:
+    app: longhorn-ui
+  type: ClusterIP

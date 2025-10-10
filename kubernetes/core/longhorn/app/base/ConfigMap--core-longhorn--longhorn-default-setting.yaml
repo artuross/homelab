@@ -1,0 +1,14 @@
+apiVersion: v1
+data:
+  default-setting.yaml: "default-data-path: \"/var/mnt/persistent-data\"\npriority-class: \"longhorn-critical\"\ndisable-revision-counter:
+    \"{\\\"v1\\\":\\\"true\\\"}\""
+kind: ConfigMap
+metadata:
+  labels:
+    app.kubernetes.io/instance: longhorn
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: longhorn
+    app.kubernetes.io/version: v1.10.0
+    helm.sh/chart: longhorn-1.10.0
+  name: longhorn-default-setting
+  namespace: core-longhorn
