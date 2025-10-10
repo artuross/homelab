@@ -1,4 +1,7 @@
 # yaml-language-server: $schema=https://json.schemastore.org/kustomization
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources: []
+resources:
+  - resources/Application--core-argocd--cluster-namespaces.yaml
+  - resources/ApplicationSet--core-argocd--core-app.yaml
+  - resources/ApplicationSet--core-argocd--core-crds.yaml
