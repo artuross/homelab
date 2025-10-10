@@ -6,3 +6,4 @@ resources:
   - resources/core-argocd.yaml
   - resources/core-cilium.yaml
   - resources/core-external-secrets.yaml
+  - resources/core-tailscale.yaml
