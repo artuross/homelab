@@ -3,6 +3,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - base
+  - resources/Certificate--core-traefik--traefik.yaml
   - resources/DNSEndpoint--core-traefik--dashboard.yaml
   - resources/IngressRoute--core-traefik--dashboard.yaml
 patches:
