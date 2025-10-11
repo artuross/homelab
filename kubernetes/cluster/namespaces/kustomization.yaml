@@ -10,5 +10,6 @@ resources:
   - resources/core-external-secrets.yaml
   - resources/core-longhorn.yaml
   - resources/core-tailscale.yaml
+  - resources/core-talos.yaml
   - resources/core-traefik.yaml
   - resources/core-vector.yaml
