@@ -25,6 +25,18 @@ nodes:
             match: disk.transport == "nvme"
           minSize: 50GiB
           maxSize: 50GiB
+    patches:
+      # enable Talos API access for the core-talos namespace
+      - |
+        machine:
+          features:
+            kubernetesTalosAPIAccess:
+              enabled: true
+              allowedRoles:
+                - os:admin
+                - os:etcd:backup
+              allowedKubernetesNamespaces:
+                - core-talos
 
   - hostname: rpi52
     ipAddress: 192.168.0.94
