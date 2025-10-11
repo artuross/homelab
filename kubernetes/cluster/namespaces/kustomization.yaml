@@ -5,6 +5,7 @@ resources:
   - resources/core-1password-connect.yaml
   - resources/core-argocd.yaml
   - resources/core-cilium.yaml
+  - resources/core-external-dns.yaml
   - resources/core-external-secrets.yaml
   - resources/core-tailscale.yaml
   - resources/core-traefik.yaml
