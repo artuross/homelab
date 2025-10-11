@@ -3,6 +3,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - base
+  - resources/DNSEndpoint--core-argocd--argocd.yaml
   - resources/External-Secret--core-argocd--argocd-redis.yaml
   - resources/External-Secret--core-argocd--argocd-secret.yaml
   - resources/External-Secret--core-argocd--github-credentials.yaml
+  - resources/IngressRoute--core-argocd--argocd.yaml

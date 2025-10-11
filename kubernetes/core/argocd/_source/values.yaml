@@ -14,10 +14,3 @@ notifications:
 
 redisSecretInit:
   enabled: false
-
-server:
-  service:
-    type: LoadBalancer
-    loadBalancerClass: tailscale
-    annotations:
-      tailscale.com/hostname: argocd
