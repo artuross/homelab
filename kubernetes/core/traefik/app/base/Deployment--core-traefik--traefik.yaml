@@ -48,7 +48,6 @@ spec:
             - --providers.kubernetesingress
             - --providers.kubernetesingress.allowEmptyServices=true
             - --providers.kubernetesingress.ingressendpoint.publishedservice=core-traefik/traefik
-            - --entryPoints.websecure.http.tls=true
             - --log.level=INFO
           env:
             - name: POD_NAME
