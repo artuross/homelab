@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - resources/core-1password-connect.yaml
   - resources/core-argocd.yaml
+  - resources/core-cert-manager.yaml
   - resources/core-cilium.yaml
   - resources/core-external-dns.yaml
   - resources/core-external-secrets.yaml
