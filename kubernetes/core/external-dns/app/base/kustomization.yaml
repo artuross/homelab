@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ClusterRole--external-dns.yaml
+  - ClusterRoleBinding--external-dns-viewer.yaml
+  - Deployment--core-external-dns--external-dns.yaml
+  - Service--core-external-dns--external-dns.yaml
+  - ServiceAccount--core-external-dns--external-dns.yaml
