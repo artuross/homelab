@@ -6,10 +6,6 @@ targets:
     filter:
       exclude:
         - kind: CustomResourceDefinition
-        - metadata:
-            name: longhorn-post-upgrade
-        - metadata:
-            name: longhorn-uninstall
   - directory: crds
     filter:
       include:
