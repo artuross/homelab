@@ -1,7 +1,7 @@
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: cloudflare
+  name: lets-encrypt
 spec:
   acme:
     email: letsencrypt@rcwz.pl
@@ -13,8 +13,5 @@ spec:
       - dns01:
           cloudflare:
             apiTokenSecretRef:
-              name: cloudflare-api-token-secret
+              name: cloudflare
               key: api-token
-        selector:
-          dnsNames:
-            - "*.rcwz.pl"

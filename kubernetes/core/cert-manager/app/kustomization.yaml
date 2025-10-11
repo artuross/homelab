@@ -3,6 +3,6 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - base
-  - resources/ClusterIssuer--cloudflare.yaml
+  - resources/ClusterIssuer--lets-encrypt.yaml
   - resources/ExternalSecret--core-cert-manager--cloudflare.yaml
   - resources/ExternalSecret--core-cert-manager--lets-encrypt.yaml
