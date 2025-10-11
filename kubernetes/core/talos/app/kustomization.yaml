@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - resources/ClusterRole--talos-etcd-backup-nodes-list.yaml
+  - resources/ClusterRoleBinding--talos-etcd-backup-nodes-list.yaml
+  - resources/CronJob--core-talos--etcd-backup-create.yaml
+  - resources/ExternalSecret--core-talos--r2-kubernetes-etcd-backups.yaml
+  - resources/ServiceAccount--core-talos--talos-etcd-backup.yaml
+  - resources/ServiceAccount--core-talos--talos-system-etcd-backup.yaml
+configMapGenerator:
+  - name: etcd-backup-create
+    namespace: core-talos
+    files:
+      - backup-create.nu=resources/scripts/backup-create.nu
+    options:
+      disableNameSuffixHash: true
