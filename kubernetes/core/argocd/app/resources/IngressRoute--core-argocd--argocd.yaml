@@ -11,3 +11,5 @@ spec:
         - kind: Service
           name: argocd-server
           port: 80
+  tls:
+    secretName: certificate-argocd
