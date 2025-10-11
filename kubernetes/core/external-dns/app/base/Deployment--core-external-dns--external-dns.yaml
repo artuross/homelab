@@ -33,7 +33,19 @@ spec:
             - --source=ingress
             - --policy=upsert-only
             - --registry=txt
-            - --provider=aws
+            - --txt-prefix=pl-rcwz-homelab-
+            - --domain-filter=rcwz.pl
+            - --managed-record-types=A
+            - --managed-record-types=AAAA
+            - --managed-record-types=CNAME
+            - --provider=cloudflare
+            - --cloudflare-dns-records-per-page=1000
+          env:
+            - name: CF_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: token
+                  name: cloudflare
           image: registry.k8s.io/external-dns/external-dns:v0.19.0
           imagePullPolicy: IfNotPresent
           livenessProbe:

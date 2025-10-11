@@ -1,1 +1,23 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/kubernetes-sigs/external-dns/refs/heads/master/charts/external-dns/values.schema.json
+domainFilters:
+  - rcwz.pl
+
+env:
+  - name: CF_API_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: cloudflare
+        key: token
+
+extraArgs:
+  - --cloudflare-dns-records-per-page=1000
+
+managedRecordTypes:
+  - A
+  - AAAA
+  - CNAME
+
+provider:
+  name: cloudflare
+
+txtPrefix: pl-rcwz-homelab-
