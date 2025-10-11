@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - CustomResourceDefinition--accesscontrolpolicies.hub.traefik.io.yaml
+  - CustomResourceDefinition--aiservices.hub.traefik.io.yaml
+  - CustomResourceDefinition--apiauths.hub.traefik.io.yaml
+  - CustomResourceDefinition--apibundles.hub.traefik.io.yaml
+  - CustomResourceDefinition--apicatalogitems.hub.traefik.io.yaml
+  - CustomResourceDefinition--apiplans.hub.traefik.io.yaml
+  - CustomResourceDefinition--apiportalauths.hub.traefik.io.yaml
+  - CustomResourceDefinition--apiportals.hub.traefik.io.yaml
+  - CustomResourceDefinition--apiratelimits.hub.traefik.io.yaml
+  - CustomResourceDefinition--apis.hub.traefik.io.yaml
+  - CustomResourceDefinition--apiversions.hub.traefik.io.yaml
+  - CustomResourceDefinition--gatewayclasses.gateway.networking.k8s.io.yaml
+  - CustomResourceDefinition--gateways.gateway.networking.k8s.io.yaml
+  - CustomResourceDefinition--grpcroutes.gateway.networking.k8s.io.yaml
+  - CustomResourceDefinition--httproutes.gateway.networking.k8s.io.yaml
+  - CustomResourceDefinition--ingressroutes.traefik.io.yaml
+  - CustomResourceDefinition--ingressroutetcps.traefik.io.yaml
+  - CustomResourceDefinition--ingressrouteudps.traefik.io.yaml
+  - CustomResourceDefinition--managedapplications.hub.traefik.io.yaml
+  - CustomResourceDefinition--managedsubscriptions.hub.traefik.io.yaml
+  - CustomResourceDefinition--middlewares.traefik.io.yaml
+  - CustomResourceDefinition--middlewaretcps.traefik.io.yaml
+  - CustomResourceDefinition--referencegrants.gateway.networking.k8s.io.yaml
+  - CustomResourceDefinition--serverstransports.traefik.io.yaml
+  - CustomResourceDefinition--serverstransporttcps.traefik.io.yaml
+  - CustomResourceDefinition--tlsoptions.traefik.io.yaml
+  - CustomResourceDefinition--tlsstores.traefik.io.yaml
+  - CustomResourceDefinition--traefikservices.traefik.io.yaml
