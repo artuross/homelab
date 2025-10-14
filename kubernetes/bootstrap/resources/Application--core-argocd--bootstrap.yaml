@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: bootstrap
+  namespace: core-argocd
+spec:
+  project: default
+  source:
+    repoURL: git@github.com:artuross/homelab
+    targetRevision: HEAD
+    path: kubernetes/cluster/apps
+  destination:
+    name: in-cluster
+    namespace: core-argocd
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: true
+      allowEmpty: true
