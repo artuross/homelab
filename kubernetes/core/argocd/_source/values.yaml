@@ -1,6 +1,7 @@
 configs:
   params:
     server.disable.auth: true
+    server.insecure: true
 
   secret:
     createSecret: false
