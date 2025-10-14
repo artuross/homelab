@@ -16,6 +16,7 @@ op read --no-newline "op://homelab/addons.1password.credentials/1password-creden
 op read --no-newline "op://homelab/addons.1password.tokens/token" | save --force kubernetes/bootstrap/secrets/1password-connect/token
 
 # create CRDs
+kubectl apply --server-side --kustomize kubernetes/core/argocd/crds
 kubectl apply --server-side --kustomize kubernetes/core/external-secrets/crds
 
 # create namespaces
@@ -26,5 +27,6 @@ kubectl apply --kustomize kubernetes/bootstrap
 
 # deploy apps
 kubectl apply --kustomize kubernetes/core/1password-connect/app
+kubectl apply --kustomize kubernetes/core/argocd/app
 kubectl apply --kustomize kubernetes/core/cilium/app
 kubectl apply --kustomize kubernetes/core/external-secrets/app
