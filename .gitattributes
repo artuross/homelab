@@ -1,8 +1,4 @@
-/kubernetes/core/1password-connect/app/base/    text -diff -merge linguist-generated
-/kubernetes/core/argocd/app/base/               text -diff -merge linguist-generated
-/kubernetes/core/argocd/crds/                   text -diff -merge linguist-generated
-/kubernetes/core/cilium/app/base/               text -diff -merge linguist-generated
-/kubernetes/core/external-secrets/app/base/     text -diff -merge linguist-generated
-/kubernetes/core/external-secrets/crds/         text -diff -merge linguist-generated
-/mise.lock                                      text -diff -merge linguist-generated
-/schemas/                                       text -diff -merge linguist-generated
+/kubernetes/core/*/app/base/*   text -diff -merge linguist-generated
+/kubernetes/core/*/crds/*       text -diff -merge linguist-generated
+/mise.lock                      text -diff -merge linguist-generated
+/schemas/*                      text -diff -merge linguist-generated
