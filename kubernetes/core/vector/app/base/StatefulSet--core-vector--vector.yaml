@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/component: Aggregator
+    app.kubernetes.io/instance: vector
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: vector
+    app.kubernetes.io/version: 0.50.0-distroless-libc
+    helm.sh/chart: vector-0.46.0
+  name: vector
+  namespace: core-vector
+spec:
+  minReadySeconds: 0
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: Aggregator
+      app.kubernetes.io/instance: vector
+      app.kubernetes.io/name: vector
+  serviceName: vector-headless
+  template:
+    metadata:
+      annotations:
+        checksum/config: 08e6f90b67f2212b26e462d1271e2351c61b5e8dd7b8d2c6e94dc2346cdbbb85
+      labels:
+        app.kubernetes.io/component: Aggregator
+        app.kubernetes.io/instance: vector
+        app.kubernetes.io/name: vector
+        vector.dev/exclude: "true"
+    spec:
+      containers:
+        - args:
+            - --config-dir
+            - /etc/vector/
+          env:
+            - name: VECTOR_LOG
+              value: info
+          image: timberio/vector:0.50.0-distroless-libc
+          imagePullPolicy: IfNotPresent
+          name: vector
+          ports:
+            - containerPort: 8282
+              name: datadog-agent
+              protocol: TCP
+            - containerPort: 24224
+              name: fluent
+              protocol: TCP
+            - containerPort: 5044
+              name: logstash
+              protocol: TCP
+            - containerPort: 8080
+              name: splunk-hec
+              protocol: TCP
+            - containerPort: 8125
+              name: statsd
+              protocol: TCP
+            - containerPort: 9000
+              name: syslog
+              protocol: TCP
+            - containerPort: 6000
+              name: vector
+              protocol: TCP
+            - containerPort: 9090
+              name: prom-exporter
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /vector-data-dir
+              name: data
+            - mountPath: /etc/vector/
+              name: config
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      serviceAccountName: vector
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - emptyDir: {}
+          name: data
+        - name: config
+          projected:
+            sources:
+              - configMap:
+                  name: vector
+  volumeClaimTemplates: null
