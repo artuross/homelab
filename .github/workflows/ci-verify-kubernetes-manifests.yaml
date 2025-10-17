@@ -33,18 +33,13 @@ jobs:
       - name: Verify repository is clean (no uncommitted changes)
         shell: nu {0}
         run: |
-          let files = (
-            git status --porcelain
-            | lines
-            | each { |l| $l | str slice 3.. | str trim }
-          )
-
-          if ($files | length) == 0 {
+          let changes = (git status --porcelain | lines)
+          if ($changes | length) == 0 {
             print "Kubernetes manifests are up-to-date."
             exit 0
           }
 
           print "::error::Kubernetes manifests are outdated. Run 'just generate-k8s-manifests' locally and commit the changes."
           print "Changed files:"
-          $files | each {|f| print "- " + $f}
+          $changes | each { |l| print $l }
           exit 1
