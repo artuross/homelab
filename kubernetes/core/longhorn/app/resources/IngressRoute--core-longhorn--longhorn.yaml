@@ -8,7 +8,7 @@ spec:
     - kind: Rule
       match: Host(`longhorn.rcwz.pl`)
       services:
-        - kind: TraefikService
+        - kind: Service
           name: longhorn-frontend
           port: 80
 

@@ -8,7 +8,8 @@ spec:
     - kind: Rule
       match: Host(`traefik.rcwz.pl`)
       services:
-        - name: api@internal
-          kind: TraefikService
+        - kind: TraefikService
+          name: api@internal
+
   tls:
     secretName: certificate-traefik
