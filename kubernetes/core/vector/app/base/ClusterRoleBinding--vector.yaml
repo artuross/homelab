@@ -1,0 +1,19 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  labels:
+    app.kubernetes.io/component: Agent
+    app.kubernetes.io/instance: vector
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: vector
+    app.kubernetes.io/version: 0.50.0-distroless-libc
+    helm.sh/chart: vector-0.46.0
+  name: vector
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: vector
+subjects:
+  - kind: ServiceAccount
+    name: vector
+    namespace: core-vector

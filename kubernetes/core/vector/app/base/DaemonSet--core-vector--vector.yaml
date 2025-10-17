@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    app.kubernetes.io/component: Agent
+    app.kubernetes.io/instance: vector
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: vector
+    app.kubernetes.io/version: 0.50.0-distroless-libc
+    helm.sh/chart: vector-0.46.0
+  name: vector
+  namespace: core-vector
+spec:
+  minReadySeconds: 0
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: Agent
+      app.kubernetes.io/instance: vector
+      app.kubernetes.io/name: vector
+  template:
+    metadata:
+      annotations:
+        checksum/config: 499eea388c4fd3b737bd19dac9aded813212a8cc3cff9697f0f170f321244cc0
+      labels:
+        app.kubernetes.io/component: Agent
+        app.kubernetes.io/instance: vector
+        app.kubernetes.io/name: vector
+        vector.dev/exclude: "true"
+    spec:
+      containers:
+        - args:
+            - --config-dir
+            - /etc/vector/
+          env:
+            - name: VECTOR_LOG
+              value: info
+            - name: VECTOR_SELF_NODE_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: VECTOR_SELF_POD_NAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: VECTOR_SELF_POD_NAMESPACE
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: PROCFS_ROOT
+              value: /host/proc
+            - name: SYSFS_ROOT
+              value: /host/sys
+          image: timberio/vector:0.50.0-distroless-libc
+          imagePullPolicy: IfNotPresent
+          name: vector
+          ports:
+            - containerPort: 9090
+              name: prom-exporter
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /vector-data-dir
+              name: data
+            - mountPath: /etc/vector/
+              name: config
+              readOnly: true
+            - mountPath: /var/log/
+              name: var-log
+              readOnly: true
+            - mountPath: /var/lib
+              name: var-lib
+              readOnly: true
+            - mountPath: /host/proc
+              name: procfs
+              readOnly: true
+            - mountPath: /host/sys
+              name: sysfs
+              readOnly: true
+      dnsPolicy: ClusterFirst
+      hostNetwork: true
+      serviceAccountName: vector
+      terminationGracePeriodSeconds: 60
+      volumes:
+        - name: config
+          projected:
+            sources:
+              - configMap:
+                  name: vector
+        - hostPath:
+            path: /var/lib/vector
+          name: data
+        - hostPath:
+            path: /var/log/
+          name: var-log
+        - hostPath:
+            path: /var/lib/
+          name: var-lib
+        - hostPath:
+            path: /proc
+          name: procfs
+        - hostPath:
+            path: /sys
+          name: sysfs
