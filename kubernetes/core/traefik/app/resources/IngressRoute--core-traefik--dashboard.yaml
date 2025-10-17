@@ -1,0 +1,12 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: dashboard
+  namespace: core-traefik
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`traefik.rcwz.pl`)
+      services:
+        - name: api@internal
+          kind: TraefikService

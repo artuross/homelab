@@ -20,4 +20,9 @@ managedRecordTypes:
 provider:
   name: cloudflare
 
+sources:
+  - crd
+  - ingress
+  - service
+
 txtPrefix: pl-rcwz-homelab-

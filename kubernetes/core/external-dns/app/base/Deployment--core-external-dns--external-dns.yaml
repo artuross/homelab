@@ -29,8 +29,9 @@ spec:
             - --log-level=info
             - --log-format=text
             - --interval=1m
-            - --source=service
+            - --source=crd
             - --source=ingress
+            - --source=service
             - --policy=upsert-only
             - --registry=txt
             - --txt-prefix=pl-rcwz-homelab-
