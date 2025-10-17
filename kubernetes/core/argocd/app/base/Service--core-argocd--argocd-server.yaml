@@ -12,6 +12,8 @@ metadata:
   name: argocd-server
   namespace: core-argocd
 spec:
+  externalTrafficPolicy: Cluster
+  loadBalancerClass: tailscale
   ports:
     - name: http
       port: 80
@@ -25,4 +27,4 @@ spec:
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/name: argocd-server
   sessionAffinity: None
-  type: ClusterIP
+  type: LoadBalancer
