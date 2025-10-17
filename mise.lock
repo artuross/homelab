@@ -1,6 +1,11 @@
-[[tools."cargo:nu"]]
+[[tools."aqua:nushell/nushell"]]
 version = "0.108.0"
-backend = "cargo:nu"
+backend = "aqua:nushell/nushell"
+
+[tools."aqua:nushell/nushell".platforms.macos-arm64]
+checksum = "blake3:d13cd5d6c537a31ebf3619cdb3ecb6116e03cf145c20393c2a70fc69648bf401"
+size = 58025942
+url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-aarch64-apple-darwin.tar.gz"
 
 [[tools.crane]]
 version = "0.20.6"
@@ -35,10 +40,6 @@ backend = "go:github.com/google/yamlfmt/cmd/yamlfmt"
 [[tools.just]]
 version = "1.42.4"
 backend = "aqua:casey/just"
-
-[[tools.rust]]
-version = "1.90.0"
-backend = "core:rust"
 
 [[tools.talhelper]]
 version = "3.0.36"

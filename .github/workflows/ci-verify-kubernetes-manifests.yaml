@@ -31,7 +31,7 @@ jobs:
           just generate-k8s-manifests
 
       - name: Verify repository is clean (no uncommitted changes)
-        shell: nu
+        shell: nu {@}
         run: |
           let files = (
             git status --porcelain
