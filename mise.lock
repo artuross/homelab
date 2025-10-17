@@ -1,3 +1,7 @@
+[[tools."cargo:nu"]]
+version = "0.108.0"
+backend = "cargo:nu"
+
 [[tools.crane]]
 version = "0.20.6"
 backend = "aqua:google/go-containerregistry"
@@ -7,9 +11,34 @@ checksum = "sha256:ae30b28498de3e1ac51a37042eab46116ec70d86aa9d10431a1fbde35b991
 size = 15181073
 url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Darwin_arm64.tar.gz"
 
+[[tools.fd]]
+version = "10.3.0"
+backend = "aqua:sharkdp/fd"
+
+[tools.fd.platforms.macos-arm64]
+checksum = "blake3:e7a554aed4fea189f2aa297e82087ceaebb844eac55a2503e5321cce88fbb636"
+size = 1337349
+url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-aarch64-apple-darwin.tar.gz"
+
+[[tools.go]]
+version = "1.25.1"
+backend = "core:go"
+
+[[tools."go:github.com/artuross/kubesource/cmd/kubesource"]]
+version = "0.1.0"
+backend = "go:github.com/artuross/kubesource/cmd/kubesource"
+
 [[tools."go:github.com/google/yamlfmt/cmd/yamlfmt"]]
 version = "0.17.2"
 backend = "go:github.com/google/yamlfmt/cmd/yamlfmt"
+
+[[tools.just]]
+version = "1.42.4"
+backend = "aqua:casey/just"
+
+[[tools.rust]]
+version = "1.90.0"
+backend = "core:rust"
 
 [[tools.talhelper]]
 version = "3.0.36"

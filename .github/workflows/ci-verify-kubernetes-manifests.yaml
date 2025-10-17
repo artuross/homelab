@@ -1,0 +1,50 @@
+name: CI / verify
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: Verify Kubernetes manifests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        uses: jdx/mise-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          install: true
+
+      - name: Generate Kubernetes manifests
+        run: |
+          just generate-k8s-manifests
+
+      - name: Verify repository is clean (no uncommitted changes)
+        shell: nu
+        run: |
+          let files = (
+            git status --porcelain
+            | lines
+            | each { |l| $l | str slice 3.. | str trim }
+          )
+
+          if ($files | length) == 0 {
+            print "Kubernetes manifests are up-to-date."
+            exit 0
+          }
+
+          print "::error::Kubernetes manifests are outdated. Run 'just generate-k8s-manifests' locally and commit the changes."
+          print "Changed files:"
+          $files | each {|f| print "- " + $f}
+          exit 1

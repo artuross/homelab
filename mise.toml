@@ -1,9 +1,16 @@
 [tools]
+go = "latest"
+"go:github.com/artuross/kubesource/cmd/kubesource" = "latest"
 "go:github.com/google/yamlfmt/cmd/yamlfmt" = "latest"
+
+rust = "latest"
+"cargo:nu" = "latest"
+
 crane = "latest"
+fd = "latest"
+just = "latest"
 talhelper = "latest"
 talosctl = "1.10.7"
-
 
 [settings]
 experimental = true
