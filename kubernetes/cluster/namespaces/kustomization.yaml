@@ -11,3 +11,4 @@ resources:
   - resources/core-longhorn.yaml
   - resources/core-tailscale.yaml
   - resources/core-traefik.yaml
+  - resources/core-vector.yaml
