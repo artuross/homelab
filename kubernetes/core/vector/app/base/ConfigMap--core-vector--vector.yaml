@@ -1,17 +1,15 @@
 apiVersion: v1
 data:
-  aggregator.yaml: "data_dir: /vector-data-dir\napi:\n  enabled: true\n  address: 127.0.0.1:8686\n  playground: false\nsources:\n
-    \ datadog_agent:\n    address: 0.0.0.0:8282\n    type: datadog_agent\n  fluent:\n    address: 0.0.0.0:24224\n    type:
-    fluent\n  internal_metrics:\n    type: internal_metrics\n  logstash:\n    address: 0.0.0.0:5044\n    type: logstash\n
-    \ splunk_hec:\n    address: 0.0.0.0:8080\n    type: splunk_hec\n  statsd:\n    address: 0.0.0.0:8125\n    mode: tcp\n
-    \   type: statsd\n  syslog:\n    address: 0.0.0.0:9000\n    mode: tcp\n    type: syslog\n  vector:\n    address: 0.0.0.0:6000\n
-    \   type: vector\n    version: \"2\"\nsinks:\n  prom_exporter:\n    type: prometheus_exporter\n    inputs: [internal_metrics]\n
-    \   address: 0.0.0.0:9090\n  stdout:\n    type: console\n    inputs: [datadog_agent, fluent, logstash, splunk_hec, statsd,
-    syslog, vector]\n    encoding:\n      codec: json\n"
+  agent.yaml: "data_dir: /vector-data-dir\napi:\n  enabled: true\n  address: 127.0.0.1:8686\n  playground: false\nsources:\n
+    \ kubernetes_logs:\n    type: kubernetes_logs\n  host_metrics:\n    filesystem:\n      devices:\n        excludes: [binfmt_misc]\n
+    \     filesystems:\n        excludes: [binfmt_misc]\n      mountpoints:\n        excludes: [\"*/proc/sys/fs/binfmt_misc\"]\n
+    \   type: host_metrics\n  internal_metrics:\n    type: internal_metrics\nsinks:\n  prom_exporter:\n    type: prometheus_exporter\n
+    \   inputs: [host_metrics, internal_metrics]\n    address: 0.0.0.0:9090\n  stdout:\n    type: console\n    inputs: [kubernetes_logs]\n
+    \   encoding:\n      codec: json\n"
 kind: ConfigMap
 metadata:
   labels:
-    app.kubernetes.io/component: Aggregator
+    app.kubernetes.io/component: Agent
     app.kubernetes.io/instance: vector
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: vector

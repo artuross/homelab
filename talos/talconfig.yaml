@@ -43,10 +43,33 @@ patches:
         image: ghcr.io/artuross/talos-installer:v1.10.7-rpi5
 
   # disable CNI and proxy to use Cilium
-  - |-
+  - |
     cluster:
       network:
         cni:
           name: none
       proxy:
         disabled: true
+
+  # send logs to Vector
+  - |-
+    machine:
+      # install:
+      #   extraKernelArgs:
+      #     - talos.logging.kernel=tcp://127.0.0.1:6050/
+
+      logging:
+        destinations:
+          - endpoint: "tcp://127.0.0.1:6051/"
+            format: "json_lines"
+
+# kernel log config:
+# apiVersion: v1alpha1
+# kind: KmsgLogConfig
+# name: test
+# url: tcp://127.0.0.1:6050
+#
+# event log config:
+# apiVersion: v1alpha1
+# kind: EventSinkConfig
+# endpoint: 127.0.0.1:6049
