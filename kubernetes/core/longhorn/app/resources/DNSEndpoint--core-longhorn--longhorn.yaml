@@ -1,0 +1,12 @@
+apiVersion: externaldns.k8s.io/v1alpha1
+kind: DNSEndpoint
+metadata:
+  name: longhorn
+  namespace: core-longhorn
+spec:
+  endpoints:
+    - dnsName: longhorn.rcwz.pl
+      recordTTL: 60
+      recordType: CNAME
+      targets:
+        - ingress.k8s.rcwz.pl
