@@ -1,0 +1,86 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: etcd-backup-cleanup
+  namespace: core-talos
+spec:
+  schedule: "0 12 * * *" # at 12:00 every day
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      backoffLimit: 2
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: etcd-backup
+              image: ghcr.io/artuross/talos-etcd-backup:20251012192653
+              args:
+                - /backup-cleanup.nu
+              workingDir: /tmp
+              imagePullPolicy: IfNotPresent
+              env:
+                - name: AWS_ACCESS_KEY_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: r2-kubernetes-etcd-backups
+                      key: r2-access-key-id
+
+                - name: AWS_SECRET_ACCESS_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: r2-kubernetes-etcd-backups
+                      key: r2-secret-access-key
+
+                - name: CLOUDFLARE_R2_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: r2-kubernetes-etcd-backups
+                      key: r2-url
+
+                - name: RESTIC_PASSWORD_FILE
+                  value: /restic-password.txt
+
+              volumeMounts:
+                - name: restic-password
+                  mountPath: /restic-password.txt
+                  subPath: restic-password.txt
+                  readOnly: true
+
+                - name: script-backup-cleanup
+                  mountPath: /backup-cleanup.nu
+                  subPath: backup-cleanup.nu
+                  readOnly: true
+
+                - name: tmp
+                  mountPath: /tmp
+
+              securityContext:
+                runAsUser: 65532
+                runAsGroup: 65532
+                allowPrivilegeEscalation: false
+                runAsNonRoot: true
+                capabilities:
+                  drop:
+                    - ALL
+                seccompProfile:
+                  type: RuntimeDefault
+          volumes:
+            - name: restic-password
+              secret:
+                secretName: r2-kubernetes-etcd-backups
+                items:
+                  - key: restic-password
+                    path: restic-password.txt
+
+            - name: script-backup-cleanup
+              configMap:
+                name: etcd-backup-cleanup
+                items:
+                  - key: backup-cleanup.nu
+                    path: backup-cleanup.nu
+
+            - name: tmp
+              emptyDir: {}
