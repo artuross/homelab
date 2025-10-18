@@ -1,0 +1,62 @@
+data_dir: /vector-data-dir
+
+sources:
+  source_kubernetes_logs:
+    type: kubernetes_logs
+
+  source_talos_kernel_logs:
+    type: socket
+    address: 0.0.0.0:6050
+    decoding:
+      codec: json
+    mode: tcp
+
+  source_talos_service_logs:
+    type: socket
+    address: 0.0.0.0:6051
+    decoding:
+      codec: json
+    mode: tcp
+
+sinks:
+  sink_kubernetes_logs:
+    type: loki
+    inputs:
+      - source_kubernetes_logs
+    auth:
+      strategy: basic
+      user: "${LOKI_USER}"
+      password: "${LOKI_PASSWORD}"
+    endpoint: "${LOKI_ENDPOINT}"
+    encoding:
+      codec: json
+    labels:
+      source: kubernetes
+
+  sink_talos_kernel_logs:
+    type: loki
+    inputs:
+      - source_talos_kernel_logs
+    auth:
+      strategy: basic
+      user: "${LOKI_USER}"
+      password: "${LOKI_PASSWORD}"
+    endpoint: "${LOKI_ENDPOINT}"
+    encoding:
+      codec: json
+    labels:
+      source: talos-kernel
+
+  sink_talos_service_logs:
+    type: loki
+    inputs:
+      - source_talos_service_logs
+    auth:
+      strategy: basic
+      user: "${LOKI_USER}"
+      password: "${LOKI_PASSWORD}"
+    endpoint: "${LOKI_ENDPOINT}"
+    encoding:
+      codec: json
+    labels:
+      source: talos-service
