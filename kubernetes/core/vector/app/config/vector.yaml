@@ -18,6 +18,60 @@ sources:
       codec: json
     mode: tcp
 
+transforms:
+  transform_talos_service_logs:
+    type: remap
+    inputs:
+      - source_talos_service_logs
+    source: |
+      # move all current fields except ones we will promote into .payload
+      promote = ["timestamp", "talos-time", "talos-level", "talos-service", "source_type", "host", "port"]
+
+      # snapshot keys first
+      all_keys = keys(.)
+
+      # select keys to move (also skip "payload" just in case)
+      to_move = filter(all_keys) -> |_, k| { !includes(promote, k) && k != "payload" }
+
+      # build payload without mutating while iterating over live keys
+      new_payload = {}
+      for_each(to_move) -> |_, k| {
+        new_payload = set!(new_payload, [k], get!(., [k]))
+        . = remove!(., [k])
+      }
+      .payload = new_payload
+
+      # set internal event timestamp from talos-time (RFC3339)
+      if exists(."talos-time") {
+        parsed, err = parse_timestamp(."talos-time", format: "%+")
+        if err == null {
+          .timestamp = parsed
+           del(."talos-time")
+        }
+      }
+
+      # rename talos-level -> level
+      if exists(."talos-level") {
+        .level = ."talos-level"
+        del(."talos-level")
+      }
+
+      # rename talos-service -> service_name
+      if exists(."talos-service") {
+        .service_name = ."talos-service"
+        del(."talos-service")
+      }
+
+      # promote source_type into nested source.type object
+      if exists(.source_type) {
+        .source = { "type": .source_type }
+        del(.source_type)
+      }
+
+      # drop host and port fields if present
+      del(.host)
+      del(.port)
+
 sinks:
   sink_kubernetes_logs:
     type: loki
@@ -50,7 +104,7 @@ sinks:
   sink_talos_service_logs:
     type: loki
     inputs:
-      - source_talos_service_logs
+      - transform_talos_service_logs
     auth:
       strategy: basic
       user: "${LOKI_USER}"
@@ -58,5 +112,8 @@ sinks:
     endpoint: "${LOKI_ENDPOINT}"
     encoding:
       codec: json
+    remove_label_fields: true
+    remove_structured_metadata_fields: true
     labels:
       source: talos-service
+      service_name: "{{ service_name }}"
