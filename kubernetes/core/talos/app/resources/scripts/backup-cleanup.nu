@@ -7,6 +7,7 @@ print $"(ansi bo)(ansi white)Cleaning up snapshots...(ansi reset)"
     --keep-monthly 2
     --keep-weekly 6
     --keep-within 7d
+    --prune
     --repo $"s3:($env.CLOUDFLARE_R2_URL)"
 )
 
