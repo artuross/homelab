@@ -34,6 +34,21 @@ spec:
           env:
             - name: VECTOR_LOG
               value: info
+            - name: LOKI_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  key: endpoint
+                  name: loki
+            - name: LOKI_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: loki
+            - name: LOKI_USER
+              valueFrom:
+                secretKeyRef:
+                  key: user
+                  name: loki
             - name: VECTOR_SELF_NODE_NAME
               valueFrom:
                 fieldRef:
