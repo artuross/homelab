@@ -4,11 +4,19 @@ kind: Kustomization
 resources:
   - resources/ClusterRole--talos-etcd-backup-nodes-list.yaml
   - resources/ClusterRoleBinding--talos-etcd-backup-nodes-list.yaml
+  - resources/CronJob--core-talos--etcd-backup-cleanup.yaml
   - resources/CronJob--core-talos--etcd-backup-create.yaml
   - resources/ExternalSecret--core-talos--r2-kubernetes-etcd-backups.yaml
   - resources/ServiceAccount--core-talos--talos-etcd-backup.yaml
   - resources/ServiceAccount--core-talos--talos-system-etcd-backup.yaml
 configMapGenerator:
+  - name: etcd-backup-cleanup
+    namespace: core-talos
+    files:
+      - backup-cleanup.nu=resources/scripts/backup-cleanup.nu
+    options:
+      disableNameSuffixHash: true
+
   - name: etcd-backup-create
     namespace: core-talos
     files:

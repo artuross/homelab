@@ -29,6 +29,8 @@ print $"(ansi bo)(ansi white)Uploading snapshot to restic repo...(ansi reset)"
     etcd.snapshot
 )
 
+print $"(ansi bo)(ansi white)Backup created...(ansi reset)"
+
 # clean up
 print $"(ansi bo)(ansi white)Cleaning up...(ansi reset)"
 rm etcd.snapshot
