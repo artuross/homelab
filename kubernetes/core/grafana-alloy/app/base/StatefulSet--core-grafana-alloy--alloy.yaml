@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app.kubernetes.io/instance: alloy
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: alloy
+    app.kubernetes.io/part-of: alloy
+    app.kubernetes.io/version: v1.11.2
+    helm.sh/chart: alloy-1.3.1
+  name: alloy
+  namespace: core-grafana-alloy
+spec:
+  minReadySeconds: 10
+  podManagementPolicy: Parallel
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: alloy
+      app.kubernetes.io/name: alloy
+  serviceName: alloy
+  template:
+    metadata:
+      annotations:
+        kubectl.kubernetes.io/default-container: alloy
+      labels:
+        app.kubernetes.io/instance: alloy
+        app.kubernetes.io/name: alloy
+    spec:
+      containers:
+        - args:
+            - run
+            - /etc/alloy/config.alloy
+            - --storage.path=/tmp/alloy
+            - --server.http.listen-addr=0.0.0.0:12345
+            - --server.http.ui-path-prefix=/
+            - --disable-reporting
+            - --stability.level=generally-available
+          env:
+            - name: ALLOY_DEPLOY_MODE
+              value: helm
+            - name: HOSTNAME
+              valueFrom:
+                fieldRef:
+                  fieldPath: spec.nodeName
+            - name: PROMETHEUS_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  key: endpoint
+                  name: prometheus
+            - name: PROMETHEUS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: prometheus
+            - name: PROMETHEUS_USER
+              valueFrom:
+                secretKeyRef:
+                  key: user
+                  name: prometheus
+          image: docker.io/grafana/alloy:v1.11.2
+          imagePullPolicy: IfNotPresent
+          name: alloy
+          ports:
+            - containerPort: 12345
+              name: http-metrics
+          readinessProbe:
+            httpGet:
+              path: /-/ready
+              port: 12345
+              scheme: HTTP
+            initialDelaySeconds: 10
+            timeoutSeconds: 1
+          volumeMounts:
+            - mountPath: /etc/alloy
+              name: config
+      dnsPolicy: ClusterFirst
+      serviceAccountName: alloy
+      volumes:
+        - configMap:
+            name: alloy
+          name: config

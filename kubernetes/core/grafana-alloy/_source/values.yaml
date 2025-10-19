@@ -1,0 +1,28 @@
+alloy:
+  configMap:
+    create: false
+  enableReporting: false
+  extraEnv:
+    - name: PROMETHEUS_ENDPOINT
+      valueFrom:
+        secretKeyRef:
+          name: prometheus
+          key: endpoint
+
+    - name: PROMETHEUS_PASSWORD
+      valueFrom:
+        secretKeyRef:
+          name: prometheus
+          key: password
+
+    - name: PROMETHEUS_USER
+      valueFrom:
+        secretKeyRef:
+          name: prometheus
+          key: user
+
+configReloader:
+  enabled: false
+
+controller:
+  type: "statefulset"

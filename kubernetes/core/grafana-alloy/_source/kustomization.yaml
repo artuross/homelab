@@ -6,7 +6,35 @@ helmCharts:
     namespace: core-grafana-alloy
     repo: https://grafana.github.io/helm-charts
     releaseName: alloy
-    includeCRDs: true
-    skipHooks: false
+    includeCRDs: false
     version: 1.3.1
     valuesFile: values.yaml
+  - name: prometheus-operator-crds
+    namespace: core-grafana-alloy
+    repo: https://prometheus-community.github.io/helm-charts
+    releaseName: prometheus-operator-crds
+    includeCRDs: true
+    version: 24.0.1
+    valuesInline:
+      crds:
+        probes:
+          enabled: true
+        podmonitors:
+          enabled: true
+        scrapeconfigs:
+          enabled: true
+        servicemonitors:
+          enabled: true
+
+        alertmanagerconfigs:
+          enabled: false
+        alertmanagers:
+          enabled: false
+        prometheusagents:
+          enabled: false
+        prometheuses:
+          enabled: false
+        prometheusrules:
+          enabled: false
+        thanosrulers:
+          enabled: false

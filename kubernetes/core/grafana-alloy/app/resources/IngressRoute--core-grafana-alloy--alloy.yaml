@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: alloy
+  namespace: core-grafana-alloy
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`alloy.rcwz.pl`)
+      services:
+        - kind: Service
+          name: alloy-server
+          port: 80
+  tls:
+    secretName: certificate-alloy

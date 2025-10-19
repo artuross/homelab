@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - ClusterRole--alloy.yaml
   - ClusterRoleBinding--alloy.yaml
-  - ConfigMap--core-grafana-alloy--alloy.yaml
-  - DaemonSet--core-grafana-alloy--alloy.yaml
   - Service--core-grafana-alloy--alloy.yaml
   - ServiceAccount--core-grafana-alloy--alloy.yaml
+  - StatefulSet--core-grafana-alloy--alloy.yaml
