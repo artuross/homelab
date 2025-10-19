@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ClusterRole--alloy.yaml
+  - ClusterRoleBinding--alloy.yaml
+  - ConfigMap--core-grafana-alloy--alloy.yaml
+  - DaemonSet--core-grafana-alloy--alloy.yaml
+  - Service--core-grafana-alloy--alloy.yaml
+  - ServiceAccount--core-grafana-alloy--alloy.yaml
