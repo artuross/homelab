@@ -3,6 +3,10 @@ kind: ClusterRole
 metadata:
   name: talos-etcd-backup-nodes-list
 rules:
-  - apiGroups: [""]
-    resources: ["nodes"]
-    verbs: ["get", "list"]
+  - apiGroups:
+      - ""
+    resources:
+      - "nodes"
+    verbs:
+      - "get"
+      - "list"
