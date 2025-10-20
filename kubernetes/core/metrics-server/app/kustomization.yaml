@@ -3,3 +3,64 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - base
+
+patches:
+  - target:
+      kind: APIService
+      name: v1beta1.metrics.k8s.io
+    patch: |
+      - op: replace
+        path: /spec/service/namespace
+        value: core-metrics-server
+
+  - target:
+      kind: ClusterRoleBinding
+      name: metrics-server:system:auth-delegator
+    patch: |
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-metrics-server
+
+  - target:
+      kind: ClusterRoleBinding
+      name: system:metrics-server
+    patch: |
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-metrics-server
+
+  - target:
+      kind: Deployment
+      name: metrics-server
+    patch: |
+      - op: replace
+        path: /metadata/namespace
+        value: core-metrics-server
+
+      - op: add
+        path: /spec/template/spec/containers/0/args/-
+        value: --kubelet-insecure-tls
+
+  - target:
+      kind: RoleBinding
+      name: metrics-server-auth-reader
+    patch: |
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-metrics-server
+
+  - target:
+      kind: Service
+      name: metrics-server
+    patch: |
+      - op: replace
+        path: /metadata/namespace
+        value: core-metrics-server
+
+  - target:
+      kind: ServiceAccount
+      name: metrics-server
+    patch: |
+      - op: replace
+        path: /metadata/namespace
+        value: core-metrics-server
