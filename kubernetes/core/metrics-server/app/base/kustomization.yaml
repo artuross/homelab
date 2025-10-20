@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - APIService--v1beta1.metrics.k8s.io.yaml
+  - ClusterRole--system:aggregated-metrics-reader.yaml
+  - ClusterRole--system:metrics-server.yaml
+  - ClusterRoleBinding--metrics-server:system:auth-delegator.yaml
+  - ClusterRoleBinding--system:metrics-server.yaml
+  - Deployment--kube-system--metrics-server.yaml
+  - RoleBinding--kube-system--metrics-server-auth-reader.yaml
+  - Service--kube-system--metrics-server.yaml
+  - ServiceAccount--kube-system--metrics-server.yaml
