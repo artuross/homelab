@@ -10,6 +10,7 @@ resources:
   - resources/core-external-secrets.yaml
   - resources/core-grafana-alloy.yaml
   - resources/core-longhorn.yaml
+  - resources/core-metrics-server.yaml
   - resources/core-tailscale.yaml
   - resources/core-talos.yaml
   - resources/core-traefik.yaml
