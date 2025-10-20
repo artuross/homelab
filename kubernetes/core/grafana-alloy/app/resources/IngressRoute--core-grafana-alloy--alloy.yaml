@@ -9,7 +9,7 @@ spec:
       match: Host(`alloy.rcwz.pl`)
       services:
         - kind: Service
-          name: alloy-server
-          port: 80
+          name: alloy
+          port: 12345
   tls:
     secretName: certificate-alloy
