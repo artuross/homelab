@@ -6,6 +6,7 @@ resources:
   - resources/core-argocd.yaml
   - resources/core-cert-manager.yaml
   - resources/core-cilium.yaml
+  - resources/core-cloudnative-pg.yaml
   - resources/core-external-dns.yaml
   - resources/core-external-secrets.yaml
   - resources/core-grafana-alloy.yaml
