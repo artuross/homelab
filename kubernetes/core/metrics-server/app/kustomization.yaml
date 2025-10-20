@@ -60,7 +60,7 @@ patches:
   - target:
       kind: ServiceAccount
       name: metrics-server
-    patch: |
+    patch: |-
       - op: replace
         path: /metadata/namespace
         value: core-metrics-server
