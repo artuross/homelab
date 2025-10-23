@@ -1,0 +1,16 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kite
+  namespace: core-kite
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`kite.rcwz.pl`)
+      services:
+        - kind: Service
+          name: kite
+          port: 8080
+
+  tls:
+    secretName: certificate-kite

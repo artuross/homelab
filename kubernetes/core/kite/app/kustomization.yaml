@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: core-kite
+resources:
+  - base
+  - resources/Certificate--core-kite--kite.yaml
+  - resources/Cluster--core-kite--kite.yaml
+  - resources/DNSEndpoint--core-kite--kite.yaml
+  - resources/ExternalSecret--core-kite--admin.yaml
+  - resources/ExternalSecret--core-kite--secrets.yaml
+  - resources/IngressRoute--core-kite--kite.yaml
+
+patches:
+  - path: patches/Deployment--core-kite--kite.yaml

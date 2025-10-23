@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kite
+spec:
+  template:
+    spec:
+      containers:
+        - name: kite
+          env:
+            - name: DB_DSN
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-app
+                  key: uri
+
+            - name: DB_TYPE
+              value: postgres
+
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: jwt-secret
+
+            - name: KITE_ENCRYPT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: kite-encrypt-key
+
+            - name: KITE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: admin
+                  key: password
+
+            - name: KITE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: admin
+                  key: user
+
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: false # TODO: need new image
+            capabilities:
+              drop:
+                - ALL
+            seccompProfile:
+              type: RuntimeDefault

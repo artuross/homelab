@@ -1,0 +1,8 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ClusterRole--kite.yaml
+  - ClusterRoleBinding--kite.yaml
+  - Deployment--kite.yaml
+  - Service--kite.yaml
+  - ServiceAccount--kite.yaml

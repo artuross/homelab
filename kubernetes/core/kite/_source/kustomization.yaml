@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmCharts:
+  - name: kite
+    namespace: core-kite
+    repo: https://zxh326.github.io/kite
+    releaseName: kite
+    version: 0.6.9
+    valuesFile: values.yaml
