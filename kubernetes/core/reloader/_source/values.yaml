@@ -1,0 +1,9 @@
+reloader:
+  autoReloadAll: true
+
+  deployment:
+    containerSecurityContext:
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+          - "ALL"

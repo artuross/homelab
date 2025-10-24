@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+helmCharts:
+  - name: reloader
+    namespace: core-reloader
+    repo: https://stakater.github.io/stakater-charts
+    releaseName: reloader
+    version: 2.2.3
+    valuesFile: values.yaml
