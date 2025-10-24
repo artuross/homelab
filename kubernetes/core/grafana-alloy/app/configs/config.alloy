@@ -52,7 +52,7 @@ prometheus.relabel "node_cadvisor_metrics_filtered" {
   rule {
     action        = "keep"
     source_labels = ["__name__"]
-    regex         = "^(container_cpu_usage_seconds_total|container_memory_working_set_bytes|machine_cpu_cores|machine_memory_bytes)$"
+    regex         = "^(container_blkio_device_usage_total|container_cpu_usage_seconds_total|container_memory_working_set_bytes|machine_cpu_cores|machine_memory_bytes|)$"
   }
 
   forward_to = [prometheus.remote_write.grafanacloud.receiver]
