@@ -10,4 +10,4 @@ spec:
       Provider:
         ClientId: urn:k8s:secret:oidc:clientId
         ClientSecret: urn:k8s:secret:oidc:clientSecret
-        Url: https://pocketid.rcwz.pl/authorize
+        Url: https://pocketid.rcwz.pl/
