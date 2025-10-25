@@ -43,6 +43,8 @@ spec:
             - --ping=true
             - --metrics.prometheus=true
             - --metrics.prometheus.entrypoint=metrics
+            - --experimental.plugins.traefik-oidc-auth.moduleName=github.com/sevensolutions/traefik-oidc-auth
+            - --experimental.plugins.traefik-oidc-auth.version=v0.16.0
             - --providers.kubernetescrd
             - --providers.kubernetescrd.allowEmptyServices=true
             - --providers.kubernetesingress
@@ -109,6 +111,8 @@ spec:
               name: data
             - mountPath: /tmp
               name: tmp
+            - mountPath: /plugins-storage
+              name: plugins
       hostNetwork: false
       securityContext:
         runAsGroup: 65532
@@ -121,3 +125,5 @@ spec:
           name: data
         - emptyDir: {}
           name: tmp
+        - emptyDir: {}
+          name: plugins

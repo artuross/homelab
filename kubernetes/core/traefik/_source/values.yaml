@@ -1,16 +1,22 @@
 # yaml-language-server: $schema=https://raw.githubusercontent.com/traefik/traefik-helm-chart/refs/heads/master/traefik/values.schema.json
+experimental:
+  plugins:
+    traefik-oidc-auth:
+      moduleName: github.com/sevensolutions/traefik-oidc-auth
+      version: v0.16.0
+
 ports:
   websecure:
     tls:
       enabled: false
 
-service:
-  loadBalancerClass: tailscale
-  annotations:
-    external-dns.alpha.kubernetes.io/hostname: ingress.k8s.rcwz.pl
-    external-dns.alpha.kubernetes.io/ttl: "60"
-
 providers:
   kubernetesIngress:
     ingressEndpoint:
       publishedService: core-traefik/traefik
+
+service:
+  annotations:
+    external-dns.alpha.kubernetes.io/hostname: ingress.k8s.rcwz.pl
+    external-dns.alpha.kubernetes.io/ttl: "60"
+  loadBalancerClass: tailscale
