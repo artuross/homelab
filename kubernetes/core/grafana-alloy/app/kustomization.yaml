@@ -5,8 +5,10 @@ resources:
   - base
   - resources/Certificate--core-grafana-alloy--alloy.yaml
   - resources/DNSEndpoint--core-grafana-alloy--alloy.yaml
+  - resources/ExternalSecret--core-grafana-alloy--oidc.yaml
   - resources/ExternalSecret--core-grafana-alloy--prometheus.yaml
   - resources/IngressRoute--core-grafana-alloy--alloy.yaml
+  - resources/Middleware--core-grafana-alloy--oidc.yaml
 
 patches:
   - path: patches/StatefulSet--core-grafana-alloy--alloy.yaml

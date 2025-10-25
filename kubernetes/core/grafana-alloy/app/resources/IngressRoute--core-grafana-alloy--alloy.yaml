@@ -7,6 +7,8 @@ spec:
   routes:
     - kind: Rule
       match: Host(`alloy.rcwz.pl`)
+      middlewares:
+        - name: oidc
       services:
         - kind: Service
           name: alloy
