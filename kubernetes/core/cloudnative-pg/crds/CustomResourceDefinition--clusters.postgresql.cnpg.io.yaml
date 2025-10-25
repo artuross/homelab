@@ -2,7 +2,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.18.0
+    controller-gen.kubebuilder.io/version: v0.19.0
     helm.sh/resource-policy: keep
   name: clusters.postgresql.cnpg.io
 spec:
@@ -37,7 +37,9 @@ spec:
       name: v1
       schema:
         openAPIV3Schema:
-          description: Cluster is the Schema for the PostgreSQL API
+          description: |-
+            Cluster defines the API schema for a highly available PostgreSQL database cluster
+            managed by CloudNativePG.
           properties:
             apiVersion:
               description: "APIVersion defines the versioned schema of this representation of an object.\nServers should convert
@@ -415,8 +417,8 @@ spec:
                             most preferred is the one with the greatest sum of weights, i.e.
                             for each node that meets all of the scheduling requirements (resource
                             request, requiredDuringScheduling anti-affinity expressions, etc.),
-                            compute a sum by iterating through the elements of this field and adding
-                            "weight" to the sum if the node has pods which matches the corresponding podAffinityTerm; the
+                            compute a sum by iterating through the elements of this field and subtracting
+                            "weight" from the sum if the node has pods which matches the corresponding podAffinityTerm; the
                             node(s) with the highest sum are the most preferred.
                           items:
                             description: The weights of all of the matched WeightedPodAffinityTerm fields are added per-node
@@ -2020,7 +2022,9 @@ spec:
                     description: EnvVar represents an environment variable present in a Container.
                     properties:
                       name:
-                        description: Name of the environment variable. Must be a C_IDENTIFIER.
+                        description: |-
+                          Name of the environment variable.
+                          May consist of any printable ASCII characters except '='.
                         type: string
                       value:
                         description: "Variable references $(VAR_NAME) are expanded\nusing the previously defined environment
@@ -2065,6 +2069,42 @@ spec:
                                 type: string
                             required:
                               - fieldPath
+                            type: object
+                            x-kubernetes-map-type: atomic
+                          fileKeyRef:
+                            description: |-
+                              FileKeyRef selects a key of the env file.
+                              Requires the EnvFiles feature gate to be enabled.
+                            properties:
+                              key:
+                                description: |-
+                                  The key within the env file. An invalid key will prevent the pod from starting.
+                                  The keys defined within a source may consist of any printable ASCII characters except '='.
+                                  During Alpha stage of the EnvFiles feature gate, the key size is limited to 128 characters.
+                                type: string
+                              optional:
+                                default: false
+                                description: |-
+                                  Specify whether the file or its key must be defined. If the file or key
+                                  does not exist, then the env var is not published.
+                                  If optional is set to true and the specified key does not exist,
+                                  the environment variable will not be set in the Pod's containers.
+
+                                  If optional is set to false and the specified key does not exist,
+                                  an error will be returned during Pod creation.
+                                type: boolean
+                              path:
+                                description: |-
+                                  The path within the volume from which to select the file.
+                                  Must be relative and may not contain the '..' path or start with '..'.
+                                type: string
+                              volumeName:
+                                description: The name of the volume mount containing the env file.
+                                type: string
+                            required:
+                              - key
+                              - path
+                              - volumeName
                             type: object
                             x-kubernetes-map-type: atomic
                           resourceFieldRef:
@@ -2135,7 +2175,9 @@ spec:
                         type: object
                         x-kubernetes-map-type: atomic
                       prefix:
-                        description: Optional text to prepend to the name of each environment variable. Must be a C_IDENTIFIER.
+                        description: |-
+                          Optional text to prepend to the name of each environment variable.
+                          May consist of any printable ASCII characters except '='.
                         type: string
                       secretRef:
                         description: The Secret to select from
@@ -2357,13 +2399,12 @@ spec:
                               description: "volumeAttributesClassName may be used to set the VolumeAttributesClass used by
                                 this claim.\nIf specified, the CSI driver will create or update the volume with the attributes
                                 defined\nin the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,\nit
-                                can be changed after the claim is created. An empty string value means that no VolumeAttributesClass\nwill
-                                be applied to the claim but it's not allowed to reset this field to empty string once it is
-                                set.\nIf unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass\nwill
-                                be set by the persistentvolume controller if it exists.\nIf the resource referred to by volumeAttributesClass
-                                does not exist, this PersistentVolumeClaim will be\nset to a Pending state, as reflected by
-                                the modifyVolumeStatus field, until such as a resource\nexists.\nMore info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/\n(Beta)
-                                Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default)."
+                                can be changed after the claim is created. An empty string or nil value indicates that no\nVolumeAttributesClass
+                                will be applied to the claim. If the claim enters an Infeasible error state,\nthis field can
+                                be reset to its previous value (including nil) to cancel the modification.\nIf the resource
+                                referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be\nset
+                                to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource\nexists.\nMore
+                                info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/"
                               type: string
                             volumeMode:
                               description: |-
@@ -2784,8 +2825,9 @@ spec:
                           isWALArchiver:
                             default: false
                             description: |-
-                              Only one plugin can be declared as WALArchiver.
-                              Cannot be active if ".spec.backup.barmanObjectStore" configuration is present.
+                              Marks the plugin as the WAL archiver. At most one plugin can be
+                              designated as a WAL archiver. This cannot be enabled if the
+                              `.spec.backup.barmanObjectStore` configuration is present.
                             type: boolean
                           name:
                             description: Name is the plugin name
@@ -3503,17 +3545,20 @@ spec:
                       type: boolean
                     enablePodMonitor:
                       default: false
-                      description: Enable or disable the `PodMonitor`
+                      description: "Enable or disable the `PodMonitor`\n\nDeprecated: This feature will be removed in an upcoming
+                        release. If\nyou need this functionality, you can create a PodMonitor manually."
                       type: boolean
                     podMonitorMetricRelabelings:
-                      description: The list of metric relabelings for the `PodMonitor`. Applied to samples before ingestion.
+                      description: "The list of metric relabelings for the `PodMonitor`. Applied to samples before ingestion.\n\nDeprecated:
+                        This feature will be removed in an upcoming release. If\nyou need this functionality, you can create
+                        a PodMonitor manually."
                       items:
                         description: "RelabelConfig allows dynamic rewriting of the label set for targets, alerts,\nscraped
                           samples and remote write samples.\n\nMore info: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config"
                         properties:
                           action:
                             default: replace
-                            description: "Action to perform based on the regex matching.\n\n`Uppercase` and `Lowercase` actions
+                            description: "action to perform based on the regex matching.\n\n`Uppercase` and `Lowercase` actions
                               require Prometheus >= v2.36.0.\n`DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.\n\nDefault:
                               \"Replace\""
                             enum:
@@ -3542,39 +3587,39 @@ spec:
                             type: string
                           modulus:
                             description: |-
-                              Modulus to take of the hash of the source label values.
+                              modulus to take of the hash of the source label values.
 
                               Only applicable when the action is `HashMod`.
                             format: int64
                             type: integer
                           regex:
-                            description: Regular expression against which the extracted value is matched.
+                            description: regex defines the regular expression against which the extracted value is matched.
                             type: string
                           replacement:
                             description: |-
-                              Replacement value against which a Replace action is performed if the
+                              replacement value against which a Replace action is performed if the
                               regular expression matches.
 
                               Regex capture groups are available.
                             type: string
                           separator:
-                            description: Separator is the string between concatenated SourceLabels.
+                            description: separator defines the string between concatenated SourceLabels.
                             type: string
                           sourceLabels:
                             description: |-
-                              The source labels select values from existing labels. Their content is
+                              sourceLabels defines the source labels select values from existing labels. Their content is
                               concatenated using the configured Separator and matched against the
                               configured regular expression.
                             items:
                               description: |-
-                                LabelName is a valid Prometheus label name which may only contain ASCII
-                                letters, numbers, as well as underscores.
-                              pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$
+                                LabelName is a valid Prometheus label name.
+                                For Prometheus 3.x, a label name is valid if it contains UTF-8 characters.
+                                For Prometheus 2.x, a label name is only valid if it contains ASCII characters, letters, numbers, as well as underscores.
                               type: string
                             type: array
                           targetLabel:
                             description: |-
-                              Label to which the resulting string is written in a replacement.
+                              targetLabel defines the label to which the resulting string is written in a replacement.
 
                               It is mandatory for `Replace`, `HashMod`, `Lowercase`, `Uppercase`,
                               `KeepEqual` and `DropEqual` actions.
@@ -3584,14 +3629,16 @@ spec:
                         type: object
                       type: array
                     podMonitorRelabelings:
-                      description: The list of relabelings for the `PodMonitor`. Applied to samples before scraping.
+                      description: "The list of relabelings for the `PodMonitor`. Applied to samples before scraping.\n\nDeprecated:
+                        This feature will be removed in an upcoming release. If\nyou need this functionality, you can create
+                        a PodMonitor manually."
                       items:
                         description: "RelabelConfig allows dynamic rewriting of the label set for targets, alerts,\nscraped
                           samples and remote write samples.\n\nMore info: https://prometheus.io/docs/prometheus/latest/configuration/configuration/#relabel_config"
                         properties:
                           action:
                             default: replace
-                            description: "Action to perform based on the regex matching.\n\n`Uppercase` and `Lowercase` actions
+                            description: "action to perform based on the regex matching.\n\n`Uppercase` and `Lowercase` actions
                               require Prometheus >= v2.36.0.\n`DropEqual` and `KeepEqual` actions require Prometheus >= v2.41.0.\n\nDefault:
                               \"Replace\""
                             enum:
@@ -3620,39 +3667,39 @@ spec:
                             type: string
                           modulus:
                             description: |-
-                              Modulus to take of the hash of the source label values.
+                              modulus to take of the hash of the source label values.
 
                               Only applicable when the action is `HashMod`.
                             format: int64
                             type: integer
                           regex:
-                            description: Regular expression against which the extracted value is matched.
+                            description: regex defines the regular expression against which the extracted value is matched.
                             type: string
                           replacement:
                             description: |-
-                              Replacement value against which a Replace action is performed if the
+                              replacement value against which a Replace action is performed if the
                               regular expression matches.
 
                               Regex capture groups are available.
                             type: string
                           separator:
-                            description: Separator is the string between concatenated SourceLabels.
+                            description: separator defines the string between concatenated SourceLabels.
                             type: string
                           sourceLabels:
                             description: |-
-                              The source labels select values from existing labels. Their content is
+                              sourceLabels defines the source labels select values from existing labels. Their content is
                               concatenated using the configured Separator and matched against the
                               configured regular expression.
                             items:
                               description: |-
-                                LabelName is a valid Prometheus label name which may only contain ASCII
-                                letters, numbers, as well as underscores.
-                              pattern: ^[a-zA-Z_][a-zA-Z0-9_]*$
+                                LabelName is a valid Prometheus label name.
+                                For Prometheus 3.x, a label name is valid if it contains UTF-8 characters.
+                                For Prometheus 2.x, a label name is only valid if it contains ASCII characters, letters, numbers, as well as underscores.
                               type: string
                             type: array
                           targetLabel:
                             description: |-
-                              Label to which the resulting string is written in a replacement.
+                              targetLabel defines the label to which the resulting string is written in a replacement.
 
                               It is mandatory for `Replace`, `HashMod`, `Lowercase`, `Uppercase`,
                               `KeepEqual` and `DropEqual` actions.
@@ -3703,8 +3750,9 @@ spec:
                       isWALArchiver:
                         default: false
                         description: |-
-                          Only one plugin can be declared as WALArchiver.
-                          Cannot be active if ".spec.backup.barmanObjectStore" configuration is present.
+                          Marks the plugin as the WAL archiver. At most one plugin can be
+                          designated as a WAL archiver. This cannot be enabled if the
+                          `.spec.backup.barmanObjectStore` configuration is present.
                         type: boolean
                       name:
                         description: Name is the plugin name
@@ -4420,6 +4468,86 @@ spec:
                                 type: array
                                 x-kubernetes-list-type: atomic
                             type: object
+                          podCertificate:
+                            description: "Projects an auto-rotating credential bundle (private key and certificate\nchain)
+                              that the pod can use either as a TLS client or server.\n\nKubelet generates a private key and
+                              uses it to send a\nPodCertificateRequest to the named signer.  Once the signer approves the\nrequest
+                              and issues a certificate chain, Kubelet writes the key and\ncertificate chain to the pod filesystem.
+                              \ The pod does not start until\ncertificates have been issued for each podCertificate projected
+                              volume\nsource in its spec.\n\nKubelet will begin trying to rotate the certificate at the time
+                              indicated\nby the signer using the PodCertificateRequest.Status.BeginRefreshAt\ntimestamp.\n\nKubelet
+                              can write a single file, indicated by the credentialBundlePath\nfield, or separate files, indicated
+                              by the keyPath and\ncertificateChainPath fields.\n\nThe credential bundle is a single file in
+                              PEM format.  The first PEM\nentry is the private key (in PKCS#8 format), and the remaining PEM\nentries
+                              are the certificate chain issued by the signer (typically,\nsigners will return their certificate
+                              chain in leaf-to-root order).\n\nPrefer using the credential bundle format, since your application
+                              code\ncan read it atomically.  If you use keyPath and certificateChainPath,\nyour application
+                              must make two separate file reads. If these coincide\nwith a certificate rotation, it is possible
+                              that the private key and leaf\ncertificate you read may not correspond to each other.  Your
+                              application\nwill need to check for this condition, and re-read until they are\nconsistent.\n\nThe
+                              named signer controls chooses the format of the certificate it\nissues; consult the signer implementation's
+                              documentation to learn how to\nuse the certificates it issues."
+                            properties:
+                              certificateChainPath:
+                                description: |-
+                                  Write the certificate chain at this path in the projected volume.
+
+                                  Most applications should use credentialBundlePath.  When using keyPath
+                                  and certificateChainPath, your application needs to check that the key
+                                  and leaf certificate are consistent, because it is possible to read the
+                                  files mid-rotation.
+                                type: string
+                              credentialBundlePath:
+                                description: "Write the credential bundle at this path in the projected volume.\n\nThe credential
+                                  bundle is a single file that contains multiple PEM blocks.\nThe first PEM block is a PRIVATE
+                                  KEY block, containing a PKCS#8 private\nkey.\n\nThe remaining blocks are CERTIFICATE blocks,
+                                  containing the issued\ncertificate chain from the signer (leaf and any intermediates).\n\nUsing
+                                  credentialBundlePath lets your Pod's application code make a single\natomic read that retrieves
+                                  a consistent key and certificate chain.  If you\nproject them to separate files, your application
+                                  code will need to\nadditionally check that the leaf certificate was issued to the key."
+                                type: string
+                              keyPath:
+                                description: |-
+                                  Write the key at this path in the projected volume.
+
+                                  Most applications should use credentialBundlePath.  When using keyPath
+                                  and certificateChainPath, your application needs to check that the key
+                                  and leaf certificate are consistent, because it is possible to read the
+                                  files mid-rotation.
+                                type: string
+                              keyType:
+                                description: |-
+                                  The type of keypair Kubelet will generate for the pod.
+
+                                  Valid values are "RSA3072", "RSA4096", "ECDSAP256", "ECDSAP384",
+                                  "ECDSAP521", and "ED25519".
+                                type: string
+                              maxExpirationSeconds:
+                                description: |-
+                                  maxExpirationSeconds is the maximum lifetime permitted for the
+                                  certificate.
+
+                                  Kubelet copies this value verbatim into the PodCertificateRequests it
+                                  generates for this projection.
+
+                                  If omitted, kube-apiserver will set it to 86400(24 hours). kube-apiserver
+                                  will reject values shorter than 3600 (1 hour).  The maximum allowable
+                                  value is 7862400 (91 days).
+
+                                  The signer implementation is then free to issue a certificate with any
+                                  lifetime *shorter* than MaxExpirationSeconds, but no shorter than 3600
+                                  seconds (1 hour).  This constraint is enforced by kube-apiserver.
+                                  `kubernetes.io` signers will never issue certificates with a lifetime
+                                  longer than 24 hours.
+                                format: int32
+                                type: integer
+                              signerName:
+                                description: Kubelet's generated CSRs will be addressed to this signer.
+                                type: string
+                            required:
+                              - keyType
+                              - signerName
+                            type: object
                           secret:
                             description: secret information about the secret data to project
                             properties:
@@ -4615,7 +4743,7 @@ spec:
                         Claims lists the names of resources, defined in spec.resourceClaims,
                         that are used by this container.
 
-                        This is an alpha field and requires enabling the
+                        This field depends on the
                         DynamicResourceAllocation feature gate.
 
                         This field is immutable. It can only be set for containers.
@@ -4720,7 +4848,7 @@ spec:
                   default: 180
                   description: "The time in seconds that controls the window of time reserved for the smart shutdown of Postgres
                     to complete.\nMake sure you reserve enough time for the operator to request a fast shutdown of Postgres\n(that
-                    is: `stopDelay` - `smartShutdownTimeout`)."
+                    is: `stopDelay` - `smartShutdownTimeout`). Default is 180 seconds."
                   format: int32
                   type: integer
                 startDelay:
@@ -4909,13 +5037,12 @@ spec:
                           description: "volumeAttributesClassName may be used to set the VolumeAttributesClass used by this
                             claim.\nIf specified, the CSI driver will create or update the volume with the attributes defined\nin
                             the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,\nit
-                            can be changed after the claim is created. An empty string value means that no VolumeAttributesClass\nwill
-                            be applied to the claim but it's not allowed to reset this field to empty string once it is set.\nIf
-                            unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass\nwill
-                            be set by the persistentvolume controller if it exists.\nIf the resource referred to by volumeAttributesClass
-                            does not exist, this PersistentVolumeClaim will be\nset to a Pending state, as reflected by the
-                            modifyVolumeStatus field, until such as a resource\nexists.\nMore info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/\n(Beta)
-                            Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default)."
+                            can be changed after the claim is created. An empty string or nil value indicates that no\nVolumeAttributesClass
+                            will be applied to the claim. If the claim enters an Infeasible error state,\nthis field can be
+                            reset to its previous value (including nil) to cancel the modification.\nIf the resource referred
+                            to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be\nset to a Pending
+                            state, as reflected by the modifyVolumeStatus field, until such as a resource\nexists.\nMore info:
+                            https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/"
                           type: string
                         volumeMode:
                           description: |-
@@ -5149,14 +5276,12 @@ spec:
                                 description: "volumeAttributesClassName may be used to set the VolumeAttributesClass used
                                   by this claim.\nIf specified, the CSI driver will create or update the volume with the attributes
                                   defined\nin the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,\nit
-                                  can be changed after the claim is created. An empty string value means that no VolumeAttributesClass\nwill
-                                  be applied to the claim but it's not allowed to reset this field to empty string once it
-                                  is set.\nIf unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass\nwill
-                                  be set by the persistentvolume controller if it exists.\nIf the resource referred to by
-                                  volumeAttributesClass does not exist, this PersistentVolumeClaim will be\nset to a Pending
-                                  state, as reflected by the modifyVolumeStatus field, until such as a resource\nexists.\nMore
-                                  info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/\n(Beta) Using
-                                  this field requires the VolumeAttributesClass feature gate to be enabled (off by default)."
+                                  can be changed after the claim is created. An empty string or nil value indicates that no\nVolumeAttributesClass
+                                  will be applied to the claim. If the claim enters an Infeasible error state,\nthis field
+                                  can be reset to its previous value (including nil) to cancel the modification.\nIf the resource
+                                  referred to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be\nset
+                                  to a Pending state, as reflected by the modifyVolumeStatus field, until such as a resource\nexists.\nMore
+                                  info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/"
                                 type: string
                               volumeMode:
                                 description: |-
@@ -5512,13 +5637,12 @@ spec:
                           description: "volumeAttributesClassName may be used to set the VolumeAttributesClass used by this
                             claim.\nIf specified, the CSI driver will create or update the volume with the attributes defined\nin
                             the corresponding VolumeAttributesClass. This has a different purpose than storageClassName,\nit
-                            can be changed after the claim is created. An empty string value means that no VolumeAttributesClass\nwill
-                            be applied to the claim but it's not allowed to reset this field to empty string once it is set.\nIf
-                            unspecified and the PersistentVolumeClaim is unbound, the default VolumeAttributesClass\nwill
-                            be set by the persistentvolume controller if it exists.\nIf the resource referred to by volumeAttributesClass
-                            does not exist, this PersistentVolumeClaim will be\nset to a Pending state, as reflected by the
-                            modifyVolumeStatus field, until such as a resource\nexists.\nMore info: https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/\n(Beta)
-                            Using this field requires the VolumeAttributesClass feature gate to be enabled (off by default)."
+                            can be changed after the claim is created. An empty string or nil value indicates that no\nVolumeAttributesClass
+                            will be applied to the claim. If the claim enters an Infeasible error state,\nthis field can be
+                            reset to its previous value (including nil) to cancel the modification.\nIf the resource referred
+                            to by volumeAttributesClass does not exist, this PersistentVolumeClaim will be\nset to a Pending
+                            state, as reflected by the modifyVolumeStatus field, until such as a resource\nexists.\nMore info:
+                            https://kubernetes.io/docs/concepts/storage/volume-attributes-classes/"
                           type: string
                         volumeMode:
                           description: |-

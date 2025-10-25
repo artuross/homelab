@@ -161,8 +161,8 @@ metadata:
     app.kubernetes.io/instance: cnpg
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cloudnative-pg
-    app.kubernetes.io/version: 1.27.0
+    app.kubernetes.io/version: 1.27.1
     cnpg.io/reload: ""
-    helm.sh/chart: cloudnative-pg-0.26.0
+    helm.sh/chart: cloudnative-pg-0.26.1
   name: cnpg-default-monitoring
   namespace: core-cloudnative-pg
