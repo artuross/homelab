@@ -1,0 +1,10 @@
+{
+  $schema: "https://docs.renovatebot.com/renovate-schema.json",
+  extends: ["config:recommended"],
+
+  // ignore automatically generated commits
+  gitIgnoredAuthors: ["k8s-manifests-bot@users.noreply.github.com"],
+
+  // keep PRs up to date
+  rebaseWhen: "behind-base-branch",
+}
