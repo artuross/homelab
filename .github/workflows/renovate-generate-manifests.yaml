@@ -60,4 +60,4 @@ jobs:
           git pull --rebase origin $branch | complete
 
           # push updated branch
-          git push origin (git rev-parse HEAD):$branch
+          git push origin (git rev-parse HEAD):($branch)
