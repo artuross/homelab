@@ -5,6 +5,9 @@
   // ignore automatically generated commits
   gitIgnoredAuthors: ["k8s-manifests-bot@users.noreply.github.com"],
 
+  // increase concurrency limit
+  prConcurrentLimit: 10,
+
   // keep PRs up to date
   rebaseWhen: "behind-base-branch",
 }
