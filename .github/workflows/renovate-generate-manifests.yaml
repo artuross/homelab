@@ -1,0 +1,63 @@
+name: Renovate / regenerate manifests
+
+on:
+  push:
+    branches:
+      - renovate/**
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: renovate-generate-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  generate-and-commit:
+    name: Regenerate Kubernetes manifests
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Install dependencies
+        uses: jdx/mise-action@v2
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          install: true
+
+      - name: Generate Kubernetes manifests
+        run: |
+          just generate-k8s-manifests
+
+      - name: Show changes (if any)
+        run: |
+          git status --porcelain
+          git diff --name-only || true
+
+      - name: Commit regenerated manifests
+        shell: nu {0}
+        run: |
+          let changes = (git status --porcelain | lines)
+          if ($changes | length) == 0 {
+            print "No manifest changes to commit."
+            exit 0
+          }
+
+          print "Committing manifest changes..."
+          git config user.name "k8s-manifests-bot"
+          git config user.email "k8s-manifests-bot@users.noreply.github.com"
+
+          git add .
+          git commit -m "chore(manifests): regenerate k8s manifests"
+
+          # rebase onto latest remote in case Renovate pushed meanwhile
+          let branch = (git rev-parse --abbrev-ref HEAD)
+          git pull --rebase origin $branch | complete
+
+          # push updated branch
+          git push origin (git rev-parse HEAD):$branch
