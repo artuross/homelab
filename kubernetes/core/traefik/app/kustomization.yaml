@@ -5,6 +5,9 @@ resources:
   - base
   - resources/Certificate--core-traefik--traefik.yaml
   - resources/DNSEndpoint--core-traefik--dashboard.yaml
+  - resources/ExternalSecret--core-traefik--oidc.yaml
   - resources/IngressRoute--core-traefik--dashboard.yaml
+  - resources/Middleware--core-traefik--oidc.yaml
+
 patches:
   - path: patches/Deployment--core-traefik--traefik.yaml
