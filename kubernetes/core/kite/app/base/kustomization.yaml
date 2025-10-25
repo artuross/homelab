@@ -3,6 +3,6 @@ kind: Kustomization
 resources:
   - ClusterRole--kite.yaml
   - ClusterRoleBinding--kite.yaml
-  - Deployment--kite.yaml
-  - Service--kite.yaml
-  - ServiceAccount--kite.yaml
+  - Deployment--core-kite--kite.yaml
+  - Service--core-kite--kite.yaml
+  - ServiceAccount--core-kite--kite.yaml
