@@ -1,0 +1,9 @@
+apiVersion: tailscale.com/v1alpha1
+kind: Connector
+metadata:
+  name: exit-node-home
+  namespace: core-tailscale
+spec:
+  replicas: 1
+  hostnamePrefix: exit-node-home
+  exitNode: true
