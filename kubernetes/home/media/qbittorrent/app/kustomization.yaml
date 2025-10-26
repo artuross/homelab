@@ -1,0 +1,17 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - resources/Deployment--home-media--qbittorrent.yaml
+  - resources/External-Secret--home-media--proton-vpn.yaml
+  - resources/PersistentVolumeClaim--home-media--gluetun.yaml
+  - resources/PersistentVolumeClaim--home-media--qbittorrent.yaml
+  - resources/Service--home-media--qbittorrent.yaml
+
+configMapGenerator:
+  - name: qbittorrent-config
+    namespace: home-media
+    files:
+      - qBittorrent.conf=config/qBittorrent.conf
+    options:
+      disableNameSuffixHash: true

@@ -1,0 +1,129 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qbittorrent
+  namespace: home-media
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: qbittorrent
+  template:
+    metadata:
+      labels:
+        app: qbittorrent
+    spec:
+      dnsPolicy: None
+      dnsConfig:
+        nameservers:
+          - 127.0.0.1
+      initContainers:
+        # removes old config file to ensure config map is used
+        - name: init-qbittorrent-config
+          image: ghcr.io/home-operations/qbittorrent:5.1.2
+          command:
+            - sh
+            - -c
+            - |
+              mkdir -p /config/qBittorrent
+
+              diff /config/qBittorrent/qBittorrent_new.conf /defaults/qBittorrent.conf || true
+              rm /config/qBittorrent/qBittorrent_new.conf || true
+          env:
+            - name: PGID
+              value: "568"
+            - name: PUID
+              value: "568"
+          volumeMounts:
+            - name: config-dir
+              mountPath: /config
+            - name: config
+              mountPath: /defaults
+
+      containers:
+        - name: gluetun
+          image: ghcr.io/qdm12/gluetun
+          securityContext:
+            runAsUser: 0
+            capabilities:
+              add:
+                - "NET_ADMIN"
+          env:
+            - name: FIREWALL_INPUT_PORTS
+              value: "8080"
+            - name: LOG_LEVEL
+              value: "debug"
+            - name: OPENVPN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: proton-vpn
+                  key: password
+            - name: OPENVPN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: proton-vpn
+                  key: username
+            - name: PORT_FORWARD_ONLY
+              value: "true"
+            - name: SERVER_COUNTRIES
+              value: Poland
+            - name: TZ
+              value: Europe/Warsaw
+            - name: VPN_PORT_FORWARDING
+              value: "on"
+            - name: VPN_PORT_FORWARDING_UP_COMMAND
+              value: '/bin/sh -c ''wget --method=POST --body-data="json={\"listen_port\":{{PORTS}}}" --quiet --output-document=-
+                http://localhost:8080/api/v2/app/setPreferences'''
+            - name: VPN_SERVICE_PROVIDER
+              value: "protonvpn"
+          volumeMounts:
+            - mountPath: /gluetun
+              name: gluetun-conf
+
+        - name: qbittorrent
+          image: ghcr.io/home-operations/qbittorrent:5.1.2
+          env:
+            - name: PGID
+              value: "568"
+            - name: PUID
+              value: "568"
+            - name: WEBUI_PORT_ENV
+              value: "8080"
+          ports:
+            - containerPort: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: config-dir
+              mountPath: /config
+
+            - name: config
+              mountPath: /config/qBittorrent/qBittorrent.conf
+              subPath: qBittorrent.conf
+
+            - name: downloads
+              mountPath: /downloads
+      securityContext:
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 65534
+        fsGroupChangePolicy: OnRootMismatch
+      volumes:
+        - name: config-dir
+          persistentVolumeClaim:
+            claimName: qbittorrent
+
+        - name: config
+          configMap:
+            name: qbittorrent-config
+
+        - name: downloads
+          persistentVolumeClaim:
+            claimName: downloads
+
+        - name: gluetun-conf
+          persistentVolumeClaim:
+            claimName: gluetun

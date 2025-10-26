@@ -5,3 +5,4 @@ resources:
   - resources/Application--core-argocd--cluster-namespaces.yaml
   - resources/ApplicationSet--core-argocd--core-app.yaml
   - resources/ApplicationSet--core-argocd--core-crds.yaml
+  - resources/ApplicationSet--core-argocd--home-media.yaml
