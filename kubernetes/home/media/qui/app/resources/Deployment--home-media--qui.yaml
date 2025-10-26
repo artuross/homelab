@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: qui
+  namespace: home-media
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: qui
+  template:
+    metadata:
+      labels:
+        app: qui
+    spec:
+      containers:
+        - name: qui
+          image: ghcr.io/autobrr/qui:v1.6.1
+          env:
+            - name: QUI__OIDC_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: qui-oidc
+                  key: clientId
+            - name: QUI__OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: qui-oidc
+                  key: clientSecret
+          ports:
+            - containerPort: 7476
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+          volumeMounts:
+            - name: config
+              mountPath: /config
+
+            - name: data
+              mountPath: /data
+      volumes:
+        - name: config
+          configMap:
+            name: qui
+
+        - name: data
+          persistentVolumeClaim:
+            claimName: qui

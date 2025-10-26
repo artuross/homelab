@@ -1,0 +1,10 @@
+checkForUpdates = false
+dataDir = "/data"
+
+host = "0.0.0.0"
+port = 7476
+
+oidcDisableBuiltInLogin = true
+oidcEnabled = true
+oidcIssuer = "https://pocketid.rcwz.pl"
+oidcRedirectUrl = "https://qui.rcwz.pl/api/auth/oidc/callback"

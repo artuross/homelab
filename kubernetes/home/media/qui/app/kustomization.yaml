@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - resources/Certificate--home-media--qui.yaml
+  - resources/DNSEndpoint--home-media--qui.yaml
+  - resources/Deployment--home-media--qui.yaml
+  - resources/ExternalSecret--home-media--qui-oidc.yaml
+  - resources/IngressRoute--home-media--qui.yaml
+  - resources/PersistentVolumeClaim--home-media--qui.yaml
+  - resources/Service--home-media--qui.yaml
+
+configMapGenerator:
+  - name: qui
+    namespace: home-media
+    files:
+      - config.toml=config/config.toml
+    options:
+      disableNameSuffixHash: true

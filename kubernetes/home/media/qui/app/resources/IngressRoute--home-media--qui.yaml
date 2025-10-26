@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: qui
+  namespace: home-media
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`qui.rcwz.pl`)
+      services:
+        - kind: Service
+          name: qui
+          port: 80
+  tls:
+    secretName: certificate-qui
