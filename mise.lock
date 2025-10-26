@@ -30,7 +30,7 @@ version = "1.25.1"
 backend = "core:go"
 
 [[tools."go:github.com/artuross/kubesource/cmd/kubesource"]]
-version = "0.1.0"
+version = "0.2.0"
 backend = "go:github.com/artuross/kubesource/cmd/kubesource"
 
 [[tools."go:github.com/google/yamlfmt/cmd/yamlfmt"]]

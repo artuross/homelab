@@ -1,12 +1,13 @@
-apiVersion: kubesource.rcwz.pl/v1alpha1
+apiVersion: kubesource.rcwz.pl/v1alpha2
 kind: Config
-sourceDir: _source
-targets:
-  - directory: app/base
-    filter:
-      exclude:
-        - kind: CustomResourceDefinition
-  - directory: crds
-    filter:
-      include:
-        - kind: CustomResourceDefinition
+sources:
+  - sourceDir: _source
+    targets:
+      - directory: app/base
+        filter:
+          exclude:
+            - kind: CustomResourceDefinition
+      - directory: crds
+        filter:
+          include:
+            - kind: CustomResourceDefinition
