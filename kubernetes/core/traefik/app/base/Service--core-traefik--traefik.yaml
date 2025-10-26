@@ -12,7 +12,6 @@ metadata:
   name: traefik
   namespace: core-traefik
 spec:
-  loadBalancerClass: tailscale
   ports:
     - name: web
       port: 80
