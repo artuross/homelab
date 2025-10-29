@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: alloy
     app.kubernetes.io/part-of: alloy
-    app.kubernetes.io/version: v1.11.2
-    helm.sh/chart: alloy-1.3.1
+    app.kubernetes.io/version: v1.11.3
+    helm.sh/chart: alloy-1.4.0
   name: alloy
 rules:
   - apiGroups:
@@ -19,9 +19,6 @@ rules:
       - endpoints
       - endpointslices
       - ingresses
-      - nodes
-      - nodes/proxy
-      - nodes/metrics
       - pods
       - services
     verbs:
@@ -54,10 +51,6 @@ rules:
       - get
       - list
       - watch
-  - nonResourceURLs:
-      - /metrics
-    verbs:
-      - get
   - apiGroups:
       - monitoring.coreos.com
     resources:
@@ -88,13 +81,6 @@ rules:
       - watch
   - apiGroups:
       - apps
-    resources:
-      - replicasets
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
       - extensions
     resources:
       - replicasets
@@ -102,3 +88,17 @@ rules:
       - get
       - list
       - watch
+  - apiGroups:
+      - ""
+    resources:
+      - nodes
+      - nodes/proxy
+      - nodes/metrics
+    verbs:
+      - get
+      - list
+      - watch
+  - nonResourceURLs:
+      - /metrics
+    verbs:
+      - get
