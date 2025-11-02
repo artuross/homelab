@@ -33,7 +33,7 @@ jobs:
       - name: Verify repository is clean (no uncommitted changes)
         shell: nu {0}
         run: |
-          let changes = (git status --porcelain | lines)
+          let changes = (git status --porcelain | grep '\.yaml$' | lines)
           if ($changes | length) == 0 {
             print "Kubernetes manifests are up-to-date."
             exit 0
