@@ -6,5 +6,5 @@ helmCharts:
     namespace: core-reloader
     repo: https://stakater.github.io/stakater-charts
     releaseName: reloader
-    version: 2.2.4
+    version: 2.2.5
     valuesFile: values.yaml
