@@ -4,6 +4,7 @@ metadata:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: ingress.k8s.rcwz.pl
     external-dns.alpha.kubernetes.io/ttl: "60"
+    loadBalancerClass: tailscale
   labels:
     app.kubernetes.io/instance: traefik-core-traefik
     app.kubernetes.io/managed-by: Helm
