@@ -45,7 +45,6 @@ spec:
       containers:
         - args:
             - --log-level=info
-            - --auto-reload-all=true
           env:
             - name: GOMAXPROCS
               valueFrom:

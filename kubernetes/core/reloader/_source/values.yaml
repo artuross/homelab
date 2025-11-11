@@ -1,6 +1,4 @@
 reloader:
-  autoReloadAll: true
-
   deployment:
     containerSecurityContext:
       allowPrivilegeEscalation: false
