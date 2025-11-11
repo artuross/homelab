@@ -7,3 +7,6 @@ spec:
   replicas: 1
   hostnamePrefix: exit-node-home
   exitNode: true
+  subnetRouter:
+    advertiseRoutes:
+      - "192.168.0.0/24"
