@@ -1,6 +1,9 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
+  annotations:
+    reloader.stakater.com/auto: "true"
+    reloader.stakater.com/rollout-strategy: restart
   labels:
     app.kubernetes.io/instance: alloy
     app.kubernetes.io/managed-by: Helm
