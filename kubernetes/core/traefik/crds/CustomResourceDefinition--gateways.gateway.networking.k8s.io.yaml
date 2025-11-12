@@ -3,9 +3,8 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     api-approved.kubernetes.io: https://github.com/kubernetes-sigs/gateway-api/pull/3328
-    gateway.networking.k8s.io/bundle-version: v1.3.0
+    gateway.networking.k8s.io/bundle-version: v1.4.0
     gateway.networking.k8s.io/channel: standard
-  creationTimestamp: null
   name: gateways.gateway.networking.k8s.io
 spec:
   group: gateway.networking.k8s.io
@@ -56,7 +55,7 @@ spec:
                 addresses:
                   description: "Addresses requested for this Gateway. This is optional and behavior can\ndepend on the implementation.
                     If a value is set in the spec and the\nrequested address is invalid or unavailable, the implementation
-                    MUST\nindicate this in the associated entry in GatewayStatus.Addresses.\n\nThe Addresses field represents
+                    MUST\nindicate this in an associated entry in GatewayStatus.Conditions.\n\nThe Addresses field represents
                     a request for the address(es) on the\n\"outside of the Gateway\", that traffic bound for this Gateway
                     will use.\nThis could be the IP address or hostname of an external load balancer or\nother networking
                     infrastructure, or some other address that traffic will\nbe sent to.\n\nIf no Addresses are specified,
@@ -96,18 +95,19 @@ spec:
                         type: string
                     type: object
                     x-kubernetes-validations:
-                      - message: "Hostname value must only contain valid characters (matching ^(\\*\\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$)"
-                        rule: "self.type == 'Hostname' ? self.value.matches(r\"\"\"^(\\*\\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$\"\"\"):
+                      - message: "Hostname value must be empty or contain only valid characters (matching ^(\\*\\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$)"
+                        rule: "self.type == 'Hostname' ? (!has(self.value) || self.value.matches(r\"\"\"^(\\*\\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$\"\"\")):
                           true"
                   maxItems: 16
                   type: array
+                  x-kubernetes-list-type: atomic
                   x-kubernetes-validations:
                     - message: IPAddress values must be unique
-                      rule: "self.all(a1, a1.type == 'IPAddress' ? self.exists_one(a2, a2.type == a1.type && a2.value == a1.value)
-                        : true )"
+                      rule: "self.all(a1, a1.type == 'IPAddress' && has(a1.value) ? self.exists_one(a2, a2.type == a1.type
+                        && has(a2.value) && a2.value == a1.value) : true )"
                     - message: Hostname values must be unique
-                      rule: "self.all(a1, a1.type == 'Hostname' ? self.exists_one(a2, a2.type == a1.type && a2.value == a1.value)
-                        : true )"
+                      rule: "self.all(a1, a1.type == 'Hostname'  && has(a1.value) ? self.exists_one(a2, a2.type == a1.type
+                        && has(a2.value) && a2.value == a1.value) : true )"
                 gatewayClassName:
                   description: |-
                     GatewayClassName used for this Gateway. This is the name of a
@@ -326,6 +326,7 @@ spec:
                               type: object
                             maxItems: 8
                             type: array
+                            x-kubernetes-list-type: atomic
                           namespaces:
                             default:
                               from: Same
@@ -444,7 +445,7 @@ spec:
                       tls:
                         description: "TLS is the TLS configuration for the Listener. This field is required if\nthe Protocol
                           field is \"HTTPS\" or \"TLS\". It is invalid to set this field\nif the Protocol field is \"HTTP\",
-                          \"TCP\", or \"UDP\".\n\nThe association of SNIs to Certificate defined in GatewayTLSConfig is\ndefined
+                          \"TCP\", or \"UDP\".\n\nThe association of SNIs to Certificate defined in ListenerTLSConfig is\ndefined
                           based on the Hostname field for this listener.\n\nThe GatewayClass MUST use the longest matching
                           SNI out of all\navailable certificates for any TLS handshake.\n\nSupport: Core"
                         properties:
@@ -509,6 +510,7 @@ spec:
                               type: object
                             maxItems: 64
                             type: array
+                            x-kubernetes-list-type: atomic
                           mode:
                             default: Terminate
                             description: "Mode defines the TLS behavior for the TLS session initiated by the client.\nThere
@@ -636,6 +638,7 @@ spec:
                           true"
                   maxItems: 16
                   type: array
+                  x-kubernetes-list-type: atomic
                 conditions:
                   default:
                     - lastTransitionTime: "1970-01-01T00:00:00Z"
@@ -835,6 +838,7 @@ spec:
                           type: object
                         maxItems: 8
                         type: array
+                        x-kubernetes-list-type: atomic
                     required:
                       - attachedRoutes
                       - conditions
@@ -890,7 +894,7 @@ spec:
                 addresses:
                   description: "Addresses requested for this Gateway. This is optional and behavior can\ndepend on the implementation.
                     If a value is set in the spec and the\nrequested address is invalid or unavailable, the implementation
-                    MUST\nindicate this in the associated entry in GatewayStatus.Addresses.\n\nThe Addresses field represents
+                    MUST\nindicate this in an associated entry in GatewayStatus.Conditions.\n\nThe Addresses field represents
                     a request for the address(es) on the\n\"outside of the Gateway\", that traffic bound for this Gateway
                     will use.\nThis could be the IP address or hostname of an external load balancer or\nother networking
                     infrastructure, or some other address that traffic will\nbe sent to.\n\nIf no Addresses are specified,
@@ -930,18 +934,19 @@ spec:
                         type: string
                     type: object
                     x-kubernetes-validations:
-                      - message: "Hostname value must only contain valid characters (matching ^(\\*\\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$)"
-                        rule: "self.type == 'Hostname' ? self.value.matches(r\"\"\"^(\\*\\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$\"\"\"):
+                      - message: "Hostname value must be empty or contain only valid characters (matching ^(\\*\\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$)"
+                        rule: "self.type == 'Hostname' ? (!has(self.value) || self.value.matches(r\"\"\"^(\\*\\.)?[a-z0-9]([-a-z0-9]*[a-z0-9])?(\\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*$\"\"\")):
                           true"
                   maxItems: 16
                   type: array
+                  x-kubernetes-list-type: atomic
                   x-kubernetes-validations:
                     - message: IPAddress values must be unique
-                      rule: "self.all(a1, a1.type == 'IPAddress' ? self.exists_one(a2, a2.type == a1.type && a2.value == a1.value)
-                        : true )"
+                      rule: "self.all(a1, a1.type == 'IPAddress' && has(a1.value) ? self.exists_one(a2, a2.type == a1.type
+                        && has(a2.value) && a2.value == a1.value) : true )"
                     - message: Hostname values must be unique
-                      rule: "self.all(a1, a1.type == 'Hostname' ? self.exists_one(a2, a2.type == a1.type && a2.value == a1.value)
-                        : true )"
+                      rule: "self.all(a1, a1.type == 'Hostname'  && has(a1.value) ? self.exists_one(a2, a2.type == a1.type
+                        && has(a2.value) && a2.value == a1.value) : true )"
                 gatewayClassName:
                   description: |-
                     GatewayClassName used for this Gateway. This is the name of a
@@ -1160,6 +1165,7 @@ spec:
                               type: object
                             maxItems: 8
                             type: array
+                            x-kubernetes-list-type: atomic
                           namespaces:
                             default:
                               from: Same
@@ -1278,7 +1284,7 @@ spec:
                       tls:
                         description: "TLS is the TLS configuration for the Listener. This field is required if\nthe Protocol
                           field is \"HTTPS\" or \"TLS\". It is invalid to set this field\nif the Protocol field is \"HTTP\",
-                          \"TCP\", or \"UDP\".\n\nThe association of SNIs to Certificate defined in GatewayTLSConfig is\ndefined
+                          \"TCP\", or \"UDP\".\n\nThe association of SNIs to Certificate defined in ListenerTLSConfig is\ndefined
                           based on the Hostname field for this listener.\n\nThe GatewayClass MUST use the longest matching
                           SNI out of all\navailable certificates for any TLS handshake.\n\nSupport: Core"
                         properties:
@@ -1343,6 +1349,7 @@ spec:
                               type: object
                             maxItems: 64
                             type: array
+                            x-kubernetes-list-type: atomic
                           mode:
                             default: Terminate
                             description: "Mode defines the TLS behavior for the TLS session initiated by the client.\nThere
@@ -1470,6 +1477,7 @@ spec:
                           true"
                   maxItems: 16
                   type: array
+                  x-kubernetes-list-type: atomic
                 conditions:
                   default:
                     - lastTransitionTime: "1970-01-01T00:00:00Z"
@@ -1669,6 +1677,7 @@ spec:
                           type: object
                         maxItems: 8
                         type: array
+                        x-kubernetes-list-type: atomic
                     required:
                       - attachedRoutes
                       - conditions
