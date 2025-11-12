@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ApplicationSet
 metadata:
-  name: core-app
+  name: core-usage
   namespace: core-argocd
 spec:
   goTemplate: true
@@ -12,10 +12,10 @@ spec:
         repoURL: git@github.com:artuross/homelab
         revision: HEAD
         directories:
-          - path: kubernetes/core/*/app
+          - path: kubernetes/core/*/usage/*
   template:
     metadata:
-      name: core-{{ index .path.segments 2 }}-app
+      name: core-{{ index .path.segments 2 }}-usage-{{ index .path.segments 4 }}
     spec:
       project: default
       source:

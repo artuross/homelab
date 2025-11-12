@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: core-app-single
+  namespace: core-argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  generators:
+    - git:
+        repoURL: git@github.com:artuross/homelab
+        revision: HEAD
+        directories:
+          - path: kubernetes/core/*/app
+  template:
+    metadata:
+      name: core-{{ index .path.segments 2 }}-app
+    spec:
+      project: default
+      source:
+        repoURL: git@github.com:artuross/homelab
+        targetRevision: HEAD
+        path: "{{ .path.path }}"
+      destination:
+        name: in-cluster
+        namespace: core-argocd
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+          allowEmpty: true
