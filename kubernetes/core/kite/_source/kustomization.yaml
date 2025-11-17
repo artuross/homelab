@@ -6,5 +6,5 @@ helmCharts:
     namespace: core-kite
     repo: https://zxh326.github.io/kite
     releaseName: kite
-    version: 0.7.1
+    version: 0.7.2
     valuesFile: values.yaml
