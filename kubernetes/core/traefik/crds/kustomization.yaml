@@ -12,6 +12,7 @@ resources:
   - CustomResourceDefinition--apiratelimits.hub.traefik.io.yaml
   - CustomResourceDefinition--apis.hub.traefik.io.yaml
   - CustomResourceDefinition--apiversions.hub.traefik.io.yaml
+  - CustomResourceDefinition--backendtlspolicies.gateway.networking.k8s.io.yaml
   - CustomResourceDefinition--gatewayclasses.gateway.networking.k8s.io.yaml
   - CustomResourceDefinition--gateways.gateway.networking.k8s.io.yaml
   - CustomResourceDefinition--grpcroutes.gateway.networking.k8s.io.yaml
