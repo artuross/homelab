@@ -21,7 +21,7 @@ jobs:
           fetch-depth: 0
 
       - name: Install dependencies
-        uses: jdx/mise-action@v3.4.0
+        uses: jdx/mise-action@v3.4.1
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           install: true
