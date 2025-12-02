@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: alloy
     app.kubernetes.io/part-of: alloy
-    app.kubernetes.io/version: v1.11.3
-    helm.sh/chart: alloy-1.4.0
+    app.kubernetes.io/version: v1.12.0
+    helm.sh/chart: alloy-1.5.0
   name: alloy
   namespace: core-grafana-alloy
 spec:
@@ -61,7 +61,7 @@ spec:
                 secretKeyRef:
                   key: user
                   name: prometheus
-          image: docker.io/grafana/alloy:v1.11.3
+          image: docker.io/grafana/alloy:v1.12.0
           imagePullPolicy: IfNotPresent
           name: alloy
           ports:
