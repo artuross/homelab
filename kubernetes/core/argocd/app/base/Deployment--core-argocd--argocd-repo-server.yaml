@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.2.0
-    helm.sh/chart: argo-cd-9.1.4
+    app.kubernetes.io/version: v3.2.1
+    helm.sh/chart: argo-cd-9.1.6
   name: argocd-repo-server
   namespace: core-argocd
 spec:
@@ -21,16 +21,16 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: 039aaf9da6ad745898c9e701ae61abac201d4975b9cdc090295f8c46eae204ec
-        checksum/cmd-params: 212664fa08dfc1d94457fe7a16226b5d124bfb9f601dfc33150ca2966be26f42
+        checksum/cm: d8e8d02576e1a7e5684b5f80577ca3bbfc6dead71da45cd5c3d17752e98669c5
+        checksum/cmd-params: bf149fc16c2b5951a0b9c8a53976c48c03731fa50be376454882f9a28319cd63
       labels:
         app.kubernetes.io/component: repo-server
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-repo-server
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.2.0
-        helm.sh/chart: argo-cd-9.1.4
+        app.kubernetes.io/version: v3.2.1
+        helm.sh/chart: argo-cd-9.1.6
     spec:
       affinity:
         podAntiAffinity:
@@ -284,6 +284,18 @@ spec:
                   key: reposerver.revision.cache.lock.timeout
                   name: argocd-cmd-params-cm
                   optional: true
+            - name: ARGOCD_REPO_SERVER_ENABLE_BUILTIN_GIT_CONFIG
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.enable.builtin.git.config
+                  name: argocd-cmd-params-cm
+                  optional: true
+            - name: ARGOCD_GRPC_MAX_SIZE_MB
+              valueFrom:
+                configMapKeyRef:
+                  key: reposerver.grpc.max.size
+                  name: argocd-cmd-params-cm
+                  optional: true
             - name: ARGOCD_REPO_SERVER_INCLUDE_HIDDEN_DIRECTORIES
               valueFrom:
                 configMapKeyRef:
@@ -296,7 +308,7 @@ spec:
               value: /helm-working-dir
             - name: HELM_DATA_HOME
               value: /helm-working-dir
-          image: quay.io/argoproj/argocd:v3.2.0
+          image: quay.io/argoproj/argocd:v3.2.1
           imagePullPolicy: IfNotPresent
           livenessProbe:
             failureThreshold: 3
@@ -358,7 +370,7 @@ spec:
             - -n
             - /usr/local/bin/argocd
             - /var/run/argocd/argocd-cmp-server
-          image: quay.io/argoproj/argocd:v3.2.0
+          image: quay.io/argoproj/argocd:v3.2.1
           imagePullPolicy: IfNotPresent
           name: copyutil
           resources: {}
