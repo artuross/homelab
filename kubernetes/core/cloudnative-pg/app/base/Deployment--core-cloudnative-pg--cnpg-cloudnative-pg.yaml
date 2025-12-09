@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: cnpg
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cloudnative-pg
-    app.kubernetes.io/version: 1.27.1
-    helm.sh/chart: cloudnative-pg-0.26.1
+    app.kubernetes.io/version: 1.28.0
+    helm.sh/chart: cloudnative-pg-0.27.0
   name: cnpg-cloudnative-pg
   namespace: core-cloudnative-pg
 spec:
@@ -18,9 +18,9 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/config: cbfbb205234a2f1368da97801bebd9557a85be0d54bb05278e16eb5d237d065d
-        checksum/monitoring-config: 921458ef72f5564062d4d2319b3a78ceb45c26f8eb3396cda4eefdc00ec12b9e
-        checksum/rbac: 60a4da32a2f6489b08d3ff751e36d409bc18157aa1eee7ff9638ddf96b6f9f3e
+        checksum/config: df009422e0b5f1e45c36d9768bb4e10f28ea1790ffc41a6450a67e1d0c243ea6
+        checksum/monitoring-config: ebcd685f0cfda1a4358069889c7d7ede23ba6f9421642d66d719f446bbb0cdd1
+        checksum/rbac: 28943c455f5f5419621d6bce7a164525dc9dd0f2fc273638d86701489be0cd61
       labels:
         app.kubernetes.io/instance: cnpg
         app.kubernetes.io/name: cloudnative-pg
@@ -36,14 +36,14 @@ spec:
             - /manager
           env:
             - name: OPERATOR_IMAGE_NAME
-              value: ghcr.io/cloudnative-pg/cloudnative-pg:1.27.1
+              value: ghcr.io/cloudnative-pg/cloudnative-pg:1.28.0
             - name: OPERATOR_NAMESPACE
               valueFrom:
                 fieldRef:
                   fieldPath: metadata.namespace
             - name: MONITORING_QUERIES_CONFIGMAP
               value: cnpg-default-monitoring
-          image: ghcr.io/cloudnative-pg/cloudnative-pg:1.27.1
+          image: ghcr.io/cloudnative-pg/cloudnative-pg:1.28.0
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
