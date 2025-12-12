@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: kite
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kite
-    app.kubernetes.io/version: v0.7.3
-    helm.sh/chart: kite-0.7.3
+    app.kubernetes.io/version: v0.7.5
+    helm.sh/chart: kite-0.7.5
   name: kite
   namespace: core-kite
 spec:
