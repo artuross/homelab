@@ -7,5 +7,5 @@ helmCharts:
     repo: https://helm.vector.dev
     releaseName: vector
     includeCRDs: true
-    version: 0.48.0
+    version: 0.49.0
     valuesFile: values.yaml
