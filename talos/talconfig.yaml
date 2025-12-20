@@ -63,6 +63,16 @@ patches:
       proxy:
         disabled: true
 
+  # configure GitHub Container Registry authentication
+  - |
+    machine:
+      registries:
+        config:
+          ghcr.io:
+            auth:
+              username: artuross
+              password: ${GITHUB_REGISTRY_TOKEN}
+
   # send logs to Vector
   - |-
     machine:
