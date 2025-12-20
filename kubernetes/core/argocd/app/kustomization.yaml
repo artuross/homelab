@@ -7,5 +7,6 @@ resources:
   - resources/DNSEndpoint--core-argocd--argocd.yaml
   - resources/External-Secret--core-argocd--argocd-redis.yaml
   - resources/External-Secret--core-argocd--argocd-secret.yaml
-  - resources/External-Secret--core-argocd--github-credentials.yaml
+  - resources/External-Secret--core-argocd--credentials-artuross-homelab-internal.yaml
+  - resources/External-Secret--core-argocd--credentials-artuross-homelab.yaml
   - resources/IngressRoute--core-argocd--argocd.yaml
