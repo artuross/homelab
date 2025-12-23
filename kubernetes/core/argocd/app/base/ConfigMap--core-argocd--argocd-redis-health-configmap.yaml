@@ -14,6 +14,6 @@ metadata:
     app.kubernetes.io/name: argocd-redis
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.2.2
-    helm.sh/chart: argo-cd-9.1.9
+    helm.sh/chart: argo-cd-9.1.10
   name: argocd-redis-health-configmap
   namespace: core-argocd
