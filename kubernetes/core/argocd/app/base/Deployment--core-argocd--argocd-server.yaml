@@ -8,7 +8,7 @@ metadata:
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
     app.kubernetes.io/version: v3.2.3
-    helm.sh/chart: argo-cd-9.2.2
+    helm.sh/chart: argo-cd-9.2.3
   name: argocd-server
   namespace: core-argocd
 spec:
@@ -21,8 +21,8 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cm: dfbeef9fe7d30029fb0cd0a226e67f501d9aa77f781c02e9002a4600d0d2225a
-        checksum/cmd-params: 5970539a8ec4286329a153250b32d42e8d50acd0601e4f355b8507658ff7f34f
+        checksum/cm: d12af9185fc0d7d502a2f3b8bc19ca9442ad8d40a3dde2d5fc071cf0a1e56e1c
+        checksum/cmd-params: 033264ffb4d69e42afd9fb9e9d4f38bf4b45fb1b4610df6b1b2fe7e6b562a1c9
       labels:
         app.kubernetes.io/component: server
         app.kubernetes.io/instance: argocd
@@ -30,7 +30,7 @@ spec:
         app.kubernetes.io/name: argocd-server
         app.kubernetes.io/part-of: argocd
         app.kubernetes.io/version: v3.2.3
-        helm.sh/chart: argo-cd-9.2.2
+        helm.sh/chart: argo-cd-9.2.3
     spec:
       affinity:
         podAntiAffinity:
@@ -358,6 +358,15 @@ spec:
                   optional: true
           image: quay.io/argoproj/argocd:v3.2.3
           imagePullPolicy: IfNotPresent
+          livenessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz?full=true
+              port: server
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
           name: server
           ports:
             - containerPort: 8080
@@ -366,6 +375,15 @@ spec:
             - containerPort: 8083
               name: metrics
               protocol: TCP
+          readinessProbe:
+            failureThreshold: 3
+            httpGet:
+              path: /healthz
+              port: server
+            initialDelaySeconds: 10
+            periodSeconds: 10
+            successThreshold: 1
+            timeoutSeconds: 1
           resources: {}
           securityContext:
             allowPrivilegeEscalation: false
