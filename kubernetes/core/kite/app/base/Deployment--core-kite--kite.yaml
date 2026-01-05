@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: kite
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: kite
-    app.kubernetes.io/version: v0.7.6
-    helm.sh/chart: kite-0.7.6
+    app.kubernetes.io/version: v0.7.7
+    helm.sh/chart: kite-0.7.7
   name: kite
   namespace: core-kite
 spec:
@@ -21,8 +21,8 @@ spec:
         app.kubernetes.io/instance: kite
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: kite
-        app.kubernetes.io/version: v0.7.6
-        helm.sh/chart: kite-0.7.6
+        app.kubernetes.io/version: v0.7.7
+        helm.sh/chart: kite-0.7.7
     spec:
       containers:
         - command:
@@ -31,7 +31,7 @@ spec:
           envFrom:
             - secretRef:
                 name: kite-secret
-          image: ghcr.io/zxh326/kite:v0.7.6
+          image: ghcr.io/zxh326/kite:v0.7.7
           imagePullPolicy: IfNotPresent
           livenessProbe:
             httpGet:
