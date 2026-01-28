@@ -6,8 +6,8 @@ metadata:
     app.kubernetes.io/instance: vector
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: vector
-    app.kubernetes.io/version: 0.52.0-distroless-libc
-    helm.sh/chart: vector-0.49.0
+    app.kubernetes.io/version: 0.53.0-distroless-libc
+    helm.sh/chart: vector-0.50.0
   name: vector
 roleRef:
   apiGroup: rbac.authorization.k8s.io
