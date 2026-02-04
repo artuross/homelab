@@ -12,9 +12,11 @@ resources:
   - Deployment--core-cilium--cilium-operator.yaml
   - Role--core-cilium--cilium-config-agent.yaml
   - Role--core-cilium--cilium-operator-tlsinterception-secrets.yaml
+  - Role--core-cilium--cilium-operator-ztunnel.yaml
   - Role--core-cilium--cilium-tlsinterception-secrets.yaml
   - RoleBinding--core-cilium--cilium-config-agent.yaml
   - RoleBinding--core-cilium--cilium-operator-tlsinterception-secrets.yaml
+  - RoleBinding--core-cilium--cilium-operator-ztunnel.yaml
   - RoleBinding--core-cilium--cilium-tlsinterception-secrets.yaml
   - Service--core-cilium--cilium-envoy.yaml
   - Service--core-cilium--hubble-peer.yaml
