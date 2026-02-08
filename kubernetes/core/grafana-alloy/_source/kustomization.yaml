@@ -7,7 +7,7 @@ helmCharts:
     repo: https://grafana.github.io/helm-charts
     releaseName: alloy
     includeCRDs: false
-    version: 1.5.3
+    version: 1.6.0
     valuesFile: values.yaml
   - name: prometheus-operator-crds
     namespace: core-grafana-alloy
