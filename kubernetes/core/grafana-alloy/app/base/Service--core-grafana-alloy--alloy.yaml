@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: alloy
     app.kubernetes.io/part-of: alloy
-    app.kubernetes.io/version: v1.12.2
-    helm.sh/chart: alloy-1.5.3
+    app.kubernetes.io/version: v1.13.0
+    helm.sh/chart: alloy-1.6.0
   name: alloy
   namespace: core-grafana-alloy
 spec:
