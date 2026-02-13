@@ -8,7 +8,7 @@ fd = "latest"
 go = "latest"
 just = "latest"
 talhelper = "latest"
-talosctl = "1.10.7"
+talosctl = "1.12.4"
 
 [settings]
 experimental = true
