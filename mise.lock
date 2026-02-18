@@ -1,29 +1,17 @@
 [[tools."aqua:nushell/nushell"]]
 version = "0.108.0"
 backend = "aqua:nushell/nushell"
-
-[tools."aqua:nushell/nushell".platforms.macos-arm64]
-checksum = "blake3:d13cd5d6c537a31ebf3619cdb3ecb6116e03cf145c20393c2a70fc69648bf401"
-size = 58025942
-url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-aarch64-apple-darwin.tar.gz"
+"platforms.macos-arm64" = { checksum = "blake3:d13cd5d6c537a31ebf3619cdb3ecb6116e03cf145c20393c2a70fc69648bf401", url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-aarch64-apple-darwin.tar.gz"}
 
 [[tools.crane]]
 version = "0.20.6"
 backend = "aqua:google/go-containerregistry"
-
-[tools.crane.platforms.macos-arm64]
-checksum = "sha256:ae30b28498de3e1ac51a37042eab46116ec70d86aa9d10431a1fbde35b9918b9"
-size = 15181073
-url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Darwin_arm64.tar.gz"
+"platforms.macos-arm64" = { checksum = "sha256:ae30b28498de3e1ac51a37042eab46116ec70d86aa9d10431a1fbde35b9918b9", url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Darwin_arm64.tar.gz"}
 
 [[tools.fd]]
 version = "10.3.0"
 backend = "aqua:sharkdp/fd"
-
-[tools.fd.platforms.macos-arm64]
-checksum = "blake3:e7a554aed4fea189f2aa297e82087ceaebb844eac55a2503e5321cce88fbb636"
-size = 1337349
-url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-aarch64-apple-darwin.tar.gz"
+"platforms.macos-arm64" = { checksum = "blake3:e7a554aed4fea189f2aa297e82087ceaebb844eac55a2503e5321cce88fbb636", url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-aarch64-apple-darwin.tar.gz"}
 
 [[tools.go]]
 version = "1.25.1"
@@ -46,5 +34,5 @@ version = "3.0.36"
 backend = "aqua:budimanjojo/talhelper"
 
 [[tools.talosctl]]
-version = "1.10.7"
+version = "1.12.4"
 backend = "aqua:siderolabs/talos"
