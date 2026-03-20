@@ -7,4 +7,4 @@ helmCharts:
     repo: https://charts.external-secrets.io
     releaseName: external-secrets
     includeCRDs: true
-    version: 2.1.0
+    version: 2.2.0
