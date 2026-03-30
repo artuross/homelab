@@ -45,5 +45,5 @@ version = "3.0.36"
 backend = "aqua:budimanjojo/talhelper"
 
 [[tools.talosctl]]
-version = "1.10.7"
+version = "1.12.6"
 backend = "aqua:siderolabs/talos"
