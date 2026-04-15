@@ -4,5 +4,7 @@ resources:
   - CustomResourceDefinition--connectors.tailscale.com.yaml
   - CustomResourceDefinition--dnsconfigs.tailscale.com.yaml
   - CustomResourceDefinition--proxyclasses.tailscale.com.yaml
+  - CustomResourceDefinition--proxygrouppolicies.tailscale.com.yaml
   - CustomResourceDefinition--proxygroups.tailscale.com.yaml
   - CustomResourceDefinition--recorders.tailscale.com.yaml
+  - CustomResourceDefinition--tailnets.tailscale.com.yaml
