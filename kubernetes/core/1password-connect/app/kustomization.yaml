@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - base
   - resources/External-Secret--core-1password-connect--op-credentials.yaml
+  - resources/VerticalPodAutoscaler--core-1password-connect--onepassword-connect.yaml
 patches:
   - path: patches/Deployment--core-1password-connect--onepassword-connect.yaml

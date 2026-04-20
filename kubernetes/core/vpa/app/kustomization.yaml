@@ -9,6 +9,9 @@ resources:
   - resources/ExternalSecret--core-vpa--prometheus.yaml
   - resources/Issuer--core-vpa--vpa-webhook-ca.yaml
   - resources/Issuer--core-vpa--vpa-webhook-selfsigned.yaml
+  - resources/VerticalPodAutoscaler--core-vpa--vpa-admission-controller.yaml
+  - resources/VerticalPodAutoscaler--core-vpa--vpa-recommender.yaml
+  - resources/VerticalPodAutoscaler--core-vpa--vpa-updater.yaml
 patches:
   - path: patches/Deployment--core-vpa--vpa-admission-controller.yaml
   - path: patches/Deployment--core-vpa--vpa-recommender.yaml

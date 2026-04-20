@@ -9,6 +9,7 @@ resources:
   - resources/ExternalSecret--core-kite--admin.yaml
   - resources/ExternalSecret--core-kite--secrets.yaml
   - resources/IngressRoute--core-kite--kite.yaml
+  - resources/VerticalPodAutoscaler--core-kite--kite.yaml
 
 patches:
   - path: patches/Deployment--core-kite--kite.yaml

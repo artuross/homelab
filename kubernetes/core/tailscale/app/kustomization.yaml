@@ -5,3 +5,4 @@ resources:
   - base
   - resources/Connector--core-tailscale--exit-node-home.yaml
   - resources/ExternalSecret--core-tailscale--operator-oauth.yaml
+  - resources/VerticalPodAutoscaler--core-tailscale--operator.yaml

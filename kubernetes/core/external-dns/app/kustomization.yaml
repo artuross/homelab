@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - base
   - resources/ExternalSecret--core-external-dns--cloudflare.yaml
+  - resources/VerticalPodAutoscaler--core-external-dns--external-dns.yaml

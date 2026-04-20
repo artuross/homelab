@@ -1,0 +1,12 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: alloy
+  namespace: core-grafana-alloy
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: alloy
+  updatePolicy:
+    updateMode: "Off"

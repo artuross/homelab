@@ -9,3 +9,4 @@ resources:
   - resources/PersistentVolumeClaim--core-pocket-id--pocket-id.yaml
   - resources/Service--core-pocket-id--pocket-id.yaml
   - resources/Cluster--core-pocket-id--pocket-id.yaml
+  - resources/VerticalPodAutoscaler--core-pocket-id--pocket-id.yaml

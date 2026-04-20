@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - base
   - resources/ExternalSecret--core-vector--loki.yaml
+  - resources/VerticalPodAutoscaler--core-vector--vector.yaml
 
 configMapGenerator:
   - name: vector

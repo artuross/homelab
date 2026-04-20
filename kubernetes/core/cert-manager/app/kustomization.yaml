@@ -6,3 +6,6 @@ resources:
   - resources/ClusterIssuer--lets-encrypt.yaml
   - resources/ExternalSecret--core-cert-manager--cloudflare.yaml
   - resources/ExternalSecret--core-cert-manager--lets-encrypt.yaml
+  - resources/VerticalPodAutoscaler--core-cert-manager--cert-manager-cainjector.yaml
+  - resources/VerticalPodAutoscaler--core-cert-manager--cert-manager-webhook.yaml
+  - resources/VerticalPodAutoscaler--core-cert-manager--cert-manager.yaml

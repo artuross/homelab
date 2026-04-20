@@ -1,0 +1,12 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: vector
+  namespace: core-vector
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: DaemonSet
+    name: vector
+  updatePolicy:
+    updateMode: "Off"

@@ -8,3 +8,6 @@ resources:
   - resources/ExternalSecret--core-longhorn--oidc.yaml
   - resources/IngressRoute--core-longhorn--longhorn.yaml
   - resources/Middleware--core-longhorn--oidc.yaml
+  - resources/VerticalPodAutoscaler--core-longhorn--longhorn-driver-deployer.yaml
+  - resources/VerticalPodAutoscaler--core-longhorn--longhorn-manager.yaml
+  - resources/VerticalPodAutoscaler--core-longhorn--longhorn-ui.yaml

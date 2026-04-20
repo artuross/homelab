@@ -7,6 +7,7 @@ resources:
   - resources/PersistentVolumeClaim--home-media--gluetun.yaml
   - resources/PersistentVolumeClaim--home-media--qbittorrent.yaml
   - resources/Service--home-media--qbittorrent.yaml
+  - resources/VerticalPodAutoscaler--home-media--qbittorrent.yaml
 
 configMapGenerator:
   - name: qbittorrent-config

@@ -1,0 +1,12 @@
+apiVersion: autoscaling.k8s.io/v1
+kind: VerticalPodAutoscaler
+metadata:
+  name: pocket-id
+  namespace: core-pocket-id
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: pocket-id
+  updatePolicy:
+    updateMode: "Off"

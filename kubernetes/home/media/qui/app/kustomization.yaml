@@ -9,6 +9,7 @@ resources:
   - resources/IngressRoute--home-media--qui.yaml
   - resources/PersistentVolumeClaim--home-media--qui.yaml
   - resources/Service--home-media--qui.yaml
+  - resources/VerticalPodAutoscaler--home-media--qui.yaml
 
 configMapGenerator:
   - name: qui

@@ -8,6 +8,7 @@ resources:
   - resources/ExternalSecret--core-traefik--oidc.yaml
   - resources/IngressRoute--core-traefik--dashboard.yaml
   - resources/Middleware--core-traefik--oidc.yaml
+  - resources/VerticalPodAutoscaler--core-traefik--traefik.yaml
 
 patches:
   - path: patches/Deployment--core-traefik--traefik.yaml
