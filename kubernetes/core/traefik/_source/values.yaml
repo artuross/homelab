@@ -7,13 +7,9 @@ experimental:
 
 ports:
   websecure:
-    tls:
-      enabled: false
-
-providers:
-  kubernetesIngress:
-    ingressEndpoint:
-      publishedService: core-traefik/traefik
+    http:
+      tls:
+        enabled: false
 
 service:
   annotations:
