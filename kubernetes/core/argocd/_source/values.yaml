@@ -6,11 +6,66 @@ configs:
   secret:
     createSecret: false
 
+controller:
+  resources:
+    requests:
+      cpu: 20m
+      memory: 512Mi
+    limits:
+      memory: 512Mi
+  vpa:
+    enabled: true
+    updateMode: "Off"
+
 dex:
   enabled: false
 
 notifications:
   enabled: false
 
+redis:
+  resources:
+    requests:
+      cpu: 20m
+      memory: 96Mi
+    limits:
+      memory: 96Mi
+  vpa:
+    enabled: true
+    updateMode: "Off"
+
 redisSecretInit:
   enabled: false
+
+repoServer:
+  resources:
+    requests:
+      cpu: 20m
+      memory: 128Mi
+    limits:
+      memory: 128Mi
+  vpa:
+    enabled: true
+    updateMode: "Off"
+
+server:
+  resources:
+    requests:
+      cpu: 20m
+      memory: 192Mi
+    limits:
+      memory: 192Mi
+  vpa:
+    enabled: true
+    updateMode: "Off"
+
+applicationSet:
+  resources:
+    requests:
+      cpu: 25m
+      memory: 128Mi
+    limits:
+      memory: 128Mi
+  vpa:
+    enabled: true
+    updateMode: "Off"

@@ -5,3 +5,9 @@ reloader:
       capabilities:
         drop:
           - "ALL"
+    resources:
+      requests:
+        cpu: 20m
+        memory: 96Mi
+      limits:
+        memory: 96Mi

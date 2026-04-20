@@ -76,6 +76,12 @@ spec:
               path: /v1/healthz
               port: 9502
               scheme: HTTPS
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 25m
+              memory: 256Mi
           securityContext:
             privileged: true
           volumeMounts:

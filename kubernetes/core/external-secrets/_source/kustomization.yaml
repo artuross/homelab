@@ -8,3 +8,4 @@ helmCharts:
     releaseName: external-secrets
     includeCRDs: true
     version: 2.3.0
+    valuesFile: values.yaml

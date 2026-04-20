@@ -33,3 +33,8 @@ resources:
   - ServiceAccount--core-argocd--argocd-repo-server.yaml
   - ServiceAccount--core-argocd--argocd-server.yaml
   - StatefulSet--core-argocd--argocd-application-controller.yaml
+  - VerticalPodAutoscaler--core-argocd--argocd-application-controller.yaml
+  - VerticalPodAutoscaler--core-argocd--argocd-applicationset-controller.yaml
+  - VerticalPodAutoscaler--core-argocd--argocd-redis.yaml
+  - VerticalPodAutoscaler--core-argocd--argocd-repo-server.yaml
+  - VerticalPodAutoscaler--core-argocd--argocd-server.yaml

@@ -80,6 +80,12 @@ spec:
             periodSeconds: 5
             successThreshold: 1
             timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 96Mi
+            requests:
+              cpu: 20m
+              memory: 96Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

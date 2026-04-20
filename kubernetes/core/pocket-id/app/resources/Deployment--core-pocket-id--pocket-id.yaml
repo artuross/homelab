@@ -40,10 +40,10 @@ spec:
               mountPath: /app/data
           resources:
             requests:
-              cpu: "10m"
-              memory: "128Mi"
+              cpu: "20m"
+              memory: "96Mi"
             limits:
-              memory: "128Mi"
+              memory: "96Mi"
           securityContext:
             runAsNonRoot: true
             runAsUser: 65532

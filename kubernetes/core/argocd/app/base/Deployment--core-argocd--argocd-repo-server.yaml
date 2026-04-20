@@ -336,7 +336,12 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 1
-          resources: {}
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 20m
+              memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -373,7 +378,12 @@ spec:
           image: quay.io/argoproj/argocd:v3.3.7
           imagePullPolicy: IfNotPresent
           name: copyutil
-          resources: {}
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 20m
+              memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

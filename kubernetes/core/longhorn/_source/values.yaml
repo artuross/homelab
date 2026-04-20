@@ -5,6 +5,14 @@ defaultSettings:
 longhornUI:
   replicas: 1
 
+longhornManager:
+  resources:
+    requests:
+      cpu: 25m
+      memory: 256Mi
+    limits:
+      memory: 256Mi
+
 preUpgradeChecker:
   jobEnabled: false
 

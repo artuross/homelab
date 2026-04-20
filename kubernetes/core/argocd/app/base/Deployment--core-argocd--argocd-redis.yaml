@@ -58,7 +58,12 @@ spec:
             - containerPort: 6379
               name: redis
               protocol: TCP
-          resources: {}
+          resources:
+            limits:
+              memory: 96Mi
+            requests:
+              cpu: 20m
+              memory: 96Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

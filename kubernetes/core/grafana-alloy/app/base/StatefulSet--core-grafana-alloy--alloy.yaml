@@ -78,6 +78,12 @@ spec:
               scheme: HTTP
             initialDelaySeconds: 10
             timeoutSeconds: 1
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 25m
+              memory: 256Mi
           volumeMounts:
             - mountPath: /etc/alloy
               name: config

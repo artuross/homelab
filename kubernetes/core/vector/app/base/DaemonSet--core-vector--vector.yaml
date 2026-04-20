@@ -72,6 +72,12 @@ spec:
             - containerPort: 9090
               name: prom-exporter
               protocol: TCP
+          resources:
+            limits:
+              memory: 256Mi
+            requests:
+              cpu: 35m
+              memory: 256Mi
           volumeMounts:
             - mountPath: /vector-data-dir
               name: data

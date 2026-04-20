@@ -65,7 +65,12 @@ spec:
               port: webhook-server
               scheme: HTTPS
             initialDelaySeconds: 3
-          resources: {}
+          resources:
+            limits:
+              memory: 96Mi
+            requests:
+              cpu: 20m
+              memory: 96Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

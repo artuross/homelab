@@ -2,6 +2,12 @@ alloy:
   configMap:
     create: false
   enableReporting: false
+  resources:
+    requests:
+      cpu: 25m
+      memory: 256Mi
+    limits:
+      memory: 256Mi
   extraEnv:
     - name: PROMETHEUS_ENDPOINT
       valueFrom:

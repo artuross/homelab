@@ -3,3 +3,19 @@ acceptanceTests:
   enabled: false
   healthCheck:
     enabled: false
+
+connect:
+  api:
+    resources:
+      requests:
+        cpu: 20m
+        memory: 64Mi
+      limits:
+        memory: 64Mi
+  sync:
+    resources:
+      requests:
+        cpu: 20m
+        memory: 64Mi
+      limits:
+        memory: 64Mi

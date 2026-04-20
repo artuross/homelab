@@ -62,6 +62,8 @@ spec:
                   fieldPath: metadata.namespace
             - name: USER
               value: traefik
+            - name: GOMEMLIMIT
+              value: 115MiB
           image: docker.io/traefik:v3.6.13
           imagePullPolicy: IfNotPresent
           lifecycle: null
@@ -99,7 +101,12 @@ spec:
             periodSeconds: 10
             successThreshold: 1
             timeoutSeconds: 2
-          resources: null
+          resources:
+            limits:
+              memory: 128Mi
+            requests:
+              cpu: 20m
+              memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
