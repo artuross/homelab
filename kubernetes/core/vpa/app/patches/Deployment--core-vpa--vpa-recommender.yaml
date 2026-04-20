@@ -20,6 +20,8 @@ spec:
             - --prometheus-cadvisor-job-name=node_kubelet_cadvisor
             - --history-length=8d
             - --history-resolution=1h
+            - --pod-recommendation-min-memory-mb=96
+            - --pod-recommendation-min-cpu-millicores=20
           env:
             - name: PROMETHEUS_ENDPOINT
               valueFrom:
