@@ -4,10 +4,10 @@ metadata:
   annotations:
     ingressclass.kubernetes.io/is-default-class: "true"
   labels:
-    app.kubernetes.io/instance: traefik-core-traefik
-    app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
-    helm.sh/chart: traefik-37.4.0
+    app.kubernetes.io/instance: traefik-core-traefik
+    helm.sh/chart: traefik-39.0.8
+    app.kubernetes.io/managed-by: Helm
   name: traefik
 spec:
   controller: traefik.io/ingress-controller
