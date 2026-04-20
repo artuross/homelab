@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpa-admission-controller
+  namespace: kube-system
+spec:
+  template:
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: admission-controller
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+      volumes:
+        - name: tls-certs
+          projected:
+            sources:
+              - secret:
+                  name: vpa-webhook-ca
+                  items:
+                    - key: tls.crt
+                      path: caCert.pem
+              - secret:
+                  name: vpa-webhook-serving
+                  items:
+                    - key: tls.crt
+                      path: serverCert.pem
+                    - key: tls.key
+                      path: serverKey.pem

@@ -1,0 +1,32 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ClusterRole--system:evictioner.yaml
+  - ClusterRole--system:metrics-reader.yaml
+  - ClusterRole--system:vpa-actor.yaml
+  - ClusterRole--system:vpa-admission-controller.yaml
+  - ClusterRole--system:vpa-checkpoint-actor.yaml
+  - ClusterRole--system:vpa-status-actor.yaml
+  - ClusterRole--system:vpa-status-reader.yaml
+  - ClusterRole--system:vpa-target-reader.yaml
+  - ClusterRole--system:vpa-updater-in-place.yaml
+  - ClusterRoleBinding--system:metrics-reader.yaml
+  - ClusterRoleBinding--system:vpa-actor.yaml
+  - ClusterRoleBinding--system:vpa-admission-controller.yaml
+  - ClusterRoleBinding--system:vpa-checkpoint-actor.yaml
+  - ClusterRoleBinding--system:vpa-evictioner-binding.yaml
+  - ClusterRoleBinding--system:vpa-status-actor.yaml
+  - ClusterRoleBinding--system:vpa-status-reader-binding.yaml
+  - ClusterRoleBinding--system:vpa-target-reader-binding.yaml
+  - ClusterRoleBinding--system:vpa-updater-in-place-binding.yaml
+  - Deployment--kube-system--vpa-admission-controller.yaml
+  - Deployment--kube-system--vpa-recommender.yaml
+  - Deployment--kube-system--vpa-updater.yaml
+  - Role--kube-system--system:leader-locking-vpa-recommender.yaml
+  - Role--kube-system--system:leader-locking-vpa-updater.yaml
+  - RoleBinding--kube-system--system:leader-locking-vpa-recommender.yaml
+  - RoleBinding--kube-system--system:leader-locking-vpa-updater.yaml
+  - Service--kube-system--vpa-webhook.yaml
+  - ServiceAccount--kube-system--vpa-admission-controller.yaml
+  - ServiceAccount--kube-system--vpa-recommender.yaml
+  - ServiceAccount--kube-system--vpa-updater.yaml

@@ -1,0 +1,8 @@
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: vpa-webhook-ca
+  namespace: core-vpa
+spec:
+  ca:
+    secretName: vpa-webhook-ca

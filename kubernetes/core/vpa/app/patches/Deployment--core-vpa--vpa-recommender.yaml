@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpa-recommender
+  namespace: kube-system
+  annotations:
+    reloader.stakater.com/auto: "true"
+    reloader.stakater.com/rollout-strategy: "restart"
+spec:
+  template:
+    spec:
+      securityContext:
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: recommender
+          args:
+            - --storage=prometheus
+            - --prometheus-address=$(PROMETHEUS_ENDPOINT)/api/prom
+            - --prometheus-cadvisor-job-name=node_kubelet_cadvisor
+            - --history-length=8d
+            - --history-resolution=1h
+          env:
+            - name: PROMETHEUS_ENDPOINT
+              valueFrom:
+                secretKeyRef:
+                  name: prometheus
+                  key: endpoint
+            - name: PROMETHEUS_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: prometheus
+                  key: user
+            - name: PROMETHEUS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: prometheus
+                  key: password
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL

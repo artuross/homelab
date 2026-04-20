@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: vpa-webhook-ca
+  namespace: core-vpa
+spec:
+  commonName: vpa-webhook-ca
+  isCA: true
+  secretName: vpa-webhook-ca
+  issuerRef:
+    kind: Issuer
+    name: vpa-webhook-selfsigned

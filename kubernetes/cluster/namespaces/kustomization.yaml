@@ -19,4 +19,5 @@ resources:
   - resources/core-talos.yaml
   - resources/core-traefik.yaml
   - resources/core-vector.yaml
+  - resources/core-vpa.yaml
   - resources/home-media.yaml

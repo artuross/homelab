@@ -136,6 +136,10 @@ backend = "go:github.com/artuross/kubesource/cmd/kubesource"
 version = "latest"
 backend = "go:github.com/google/yamlfmt/cmd/yamlfmt"
 
+[[tools.helm]]
+version = "3.17.3"
+backend = "aqua:helm/helm"
+
 [[tools.just]]
 version = "1.42.4"
 backend = "aqua:casey/just"

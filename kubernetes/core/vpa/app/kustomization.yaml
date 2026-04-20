@@ -1,0 +1,112 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: core-vpa
+resources:
+  - base
+  - resources/Certificate--core-vpa--vpa-webhook-ca.yaml
+  - resources/Certificate--core-vpa--vpa-webhook-serving.yaml
+  - resources/ExternalSecret--core-vpa--prometheus.yaml
+  - resources/Issuer--core-vpa--vpa-webhook-ca.yaml
+  - resources/Issuer--core-vpa--vpa-webhook-selfsigned.yaml
+patches:
+  - path: patches/Deployment--core-vpa--vpa-admission-controller.yaml
+  - path: patches/Deployment--core-vpa--vpa-recommender.yaml
+  - path: patches/Deployment--core-vpa--vpa-updater.yaml
+
+  - target:
+      kind: ClusterRoleBinding
+      name: system:vpa-updater-in-place-binding
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
+
+  - target:
+      kind: ClusterRoleBinding
+      name: system:metrics-reader
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
+
+  - target:
+      kind: ClusterRoleBinding
+      name: system:vpa-actor
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
+      - op: replace
+        path: /subjects/1/namespace
+        value: core-vpa
+
+  - target:
+      kind: ClusterRoleBinding
+      name: system:vpa-status-actor
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
+
+  - target:
+      kind: ClusterRoleBinding
+      name: system:vpa-checkpoint-actor
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
+
+  - target:
+      kind: ClusterRoleBinding
+      name: system:vpa-target-reader-binding
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
+      - op: replace
+        path: /subjects/1/namespace
+        value: core-vpa
+      - op: replace
+        path: /subjects/2/namespace
+        value: core-vpa
+
+  - target:
+      kind: ClusterRoleBinding
+      name: system:vpa-evictioner-binding
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
+
+  - target:
+      kind: ClusterRoleBinding
+      name: system:vpa-admission-controller
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
+
+  - target:
+      kind: ClusterRoleBinding
+      name: system:vpa-status-reader-binding
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
+
+  - target:
+      kind: RoleBinding
+      name: system:leader-locking-vpa-updater
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
+
+  - target:
+      kind: RoleBinding
+      name: system:leader-locking-vpa-recommender
+    patch: |-
+      - op: replace
+        path: /subjects/0/namespace
+        value: core-vpa
