@@ -15,6 +15,29 @@ patches:
   - path: patches/Deployment--core-vpa--vpa-updater.yaml
 
   - target:
+      kind: Deployment
+      name: vpa-admission-controller
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/volumes/0
+        value:
+          name: tls-certs
+          projected:
+            sources:
+              - secret:
+                  name: vpa-webhook-ca
+                  items:
+                    - key: tls.crt
+                      path: caCert.pem
+              - secret:
+                  name: vpa-webhook-serving
+                  items:
+                    - key: tls.crt
+                      path: serverCert.pem
+                    - key: tls.key
+                      path: serverKey.pem
+
+  - target:
       kind: ClusterRoleBinding
       name: system:vpa-updater-in-place-binding
     patch: |-
