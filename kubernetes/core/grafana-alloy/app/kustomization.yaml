@@ -12,6 +12,10 @@ resources:
 
 patches:
   - path: patches/StatefulSet--core-grafana-alloy--alloy.yaml
+  - path: patches/ClusterRole--alloy.yaml
+    target:
+      kind: ClusterRole
+      name: alloy
 
 configMapGenerator:
   - name: alloy
