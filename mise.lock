@@ -4,46 +4,230 @@
 version = "0.108.0"
 backend = "aqua:nushell/nushell"
 
+[tools."aqua:nushell/nushell"."platforms.linux-arm64"]
+checksum = "sha256:adbe9a5b438eb258d43a40442f87cfac31a88a0c5a5ec2363cb5dcd3d807dbd2"
+url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-aarch64-unknown-linux-gnu.tar.gz"
+
+[tools."aqua:nushell/nushell"."platforms.linux-arm64-musl"]
+checksum = "sha256:adbe9a5b438eb258d43a40442f87cfac31a88a0c5a5ec2363cb5dcd3d807dbd2"
+url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-aarch64-unknown-linux-gnu.tar.gz"
+
+[tools."aqua:nushell/nushell"."platforms.linux-x64"]
+checksum = "sha256:3a3695d3fbaae1553229e263143ee02359f703efbc982bb1b475d2769d4ff6d9"
+url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-x86_64-unknown-linux-musl.tar.gz"
+
+[tools."aqua:nushell/nushell"."platforms.linux-x64-musl"]
+checksum = "sha256:3a3695d3fbaae1553229e263143ee02359f703efbc982bb1b475d2769d4ff6d9"
+url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-x86_64-unknown-linux-musl.tar.gz"
+
 [tools."aqua:nushell/nushell"."platforms.macos-arm64"]
 checksum = "blake3:d13cd5d6c537a31ebf3619cdb3ecb6116e03cf145c20393c2a70fc69648bf401"
 url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-aarch64-apple-darwin.tar.gz"
+
+[tools."aqua:nushell/nushell"."platforms.macos-x64"]
+checksum = "sha256:7f5fb53a5208b36b8b0276f53ab78ca61e7f5fa4f122d0efd8a94f8db83bccb4"
+url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-x86_64-apple-darwin.tar.gz"
+
+[tools."aqua:nushell/nushell"."platforms.windows-x64"]
+checksum = "sha256:425a423950bbbec95f1e879fe036fd861cbbcbba9bef03398a4057f9febe7de8"
+url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-x86_64-pc-windows-msvc.zip"
 
 [[tools.crane]]
 version = "0.20.6"
 backend = "aqua:google/go-containerregistry"
 
+[tools.crane."platforms.linux-arm64"]
+checksum = "sha256:fc0515857bc38e4ddd2d37a5ab03fb5959449c7b2d4ad759bcc1174ac0cad91b"
+url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Linux_arm64.tar.gz"
+
+[tools.crane."platforms.linux-arm64-musl"]
+checksum = "sha256:fc0515857bc38e4ddd2d37a5ab03fb5959449c7b2d4ad759bcc1174ac0cad91b"
+url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Linux_arm64.tar.gz"
+
+[tools.crane."platforms.linux-x64"]
+checksum = "sha256:c1d593d01551f2c9a3df5ca0a0be4385a839bd9b86d4a76e18d7b17d16559127"
+url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Linux_x86_64.tar.gz"
+
+[tools.crane."platforms.linux-x64-musl"]
+checksum = "sha256:c1d593d01551f2c9a3df5ca0a0be4385a839bd9b86d4a76e18d7b17d16559127"
+url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Linux_x86_64.tar.gz"
+
 [tools.crane."platforms.macos-arm64"]
 checksum = "sha256:ae30b28498de3e1ac51a37042eab46116ec70d86aa9d10431a1fbde35b9918b9"
 url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Darwin_arm64.tar.gz"
+
+[tools.crane."platforms.macos-x64"]
+checksum = "sha256:5c9ad72fff8e92466e6162274fda18a59d16629025c3f1eb43cb3de494cbddc5"
+url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Darwin_x86_64.tar.gz"
+
+[tools.crane."platforms.windows-x64"]
+checksum = "sha256:399491efa1d88d1ee18c6642d025aa0c67a49bfe8297033fb485b1272ad70c9d"
+url = "https://github.com/google/go-containerregistry/releases/download/v0.20.6/go-containerregistry_Windows_x86_64.tar.gz"
 
 [[tools.fd]]
 version = "10.3.0"
 backend = "aqua:sharkdp/fd"
 
+[tools.fd."platforms.linux-arm64"]
+checksum = "sha256:996b9b1366433b211cb3bbedba91c9dbce2431842144d925428ead0adf32020b"
+url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-aarch64-unknown-linux-musl.tar.gz"
+
+[tools.fd."platforms.linux-arm64-musl"]
+checksum = "sha256:996b9b1366433b211cb3bbedba91c9dbce2431842144d925428ead0adf32020b"
+url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-aarch64-unknown-linux-musl.tar.gz"
+
+[tools.fd."platforms.linux-x64"]
+checksum = "sha256:2b6bfaae8c48f12050813c2ffe1884c61ea26e750d803df9c9114550a314cd14"
+url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-x86_64-unknown-linux-musl.tar.gz"
+
+[tools.fd."platforms.linux-x64-musl"]
+checksum = "sha256:2b6bfaae8c48f12050813c2ffe1884c61ea26e750d803df9c9114550a314cd14"
+url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-x86_64-unknown-linux-musl.tar.gz"
+
 [tools.fd."platforms.macos-arm64"]
 checksum = "blake3:e7a554aed4fea189f2aa297e82087ceaebb844eac55a2503e5321cce88fbb636"
 url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-aarch64-apple-darwin.tar.gz"
+
+[tools.fd."platforms.macos-x64"]
+checksum = "sha256:50d30f13fe3d5914b14c4fff5abcbd4d0cdab4b855970a6956f4f006c17117a3"
+url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-x86_64-apple-darwin.tar.gz"
+
+[tools.fd."platforms.windows-x64"]
+checksum = "sha256:318aa2a6fa664325933e81fda60d523fff29444129e91ebf0726b5b3bcd8b059"
+url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-x86_64-pc-windows-msvc.zip"
 
 [[tools.go]]
 version = "1.25.1"
 backend = "core:go"
 
+[tools.go."platforms.linux-arm64"]
+checksum = "sha256:65a3e34fb2126f55b34e1edfc709121660e1be2dee6bdf405fc399a63a95a87d"
+url = "https://dl.google.com/go/go1.25.1.linux-arm64.tar.gz"
+
+[tools.go."platforms.linux-arm64-musl"]
+checksum = "sha256:65a3e34fb2126f55b34e1edfc709121660e1be2dee6bdf405fc399a63a95a87d"
+url = "https://dl.google.com/go/go1.25.1.linux-arm64.tar.gz"
+
+[tools.go."platforms.linux-x64"]
+checksum = "sha256:7716a0d940a0f6ae8e1f3b3f4f36299dc53e31b16840dbd171254312c41ca12e"
+url = "https://dl.google.com/go/go1.25.1.linux-amd64.tar.gz"
+
+[tools.go."platforms.linux-x64-musl"]
+checksum = "sha256:7716a0d940a0f6ae8e1f3b3f4f36299dc53e31b16840dbd171254312c41ca12e"
+url = "https://dl.google.com/go/go1.25.1.linux-amd64.tar.gz"
+
+[tools.go."platforms.macos-arm64"]
+checksum = "sha256:68deebb214f39d542e518ebb0598a406ab1b5a22bba8ec9ade9f55fb4dd94a6c"
+url = "https://dl.google.com/go/go1.25.1.darwin-arm64.tar.gz"
+
+[tools.go."platforms.macos-x64"]
+checksum = "sha256:1d622468f767a1b9fe1e1e67bd6ce6744d04e0c68712adc689748bbeccb126bb"
+url = "https://dl.google.com/go/go1.25.1.darwin-amd64.tar.gz"
+
+[tools.go."platforms.windows-x64"]
+checksum = "sha256:4a974de310e7ee1d523d2fcedb114ba5fa75408c98eb3652023e55ccf3fa7cab"
+url = "https://dl.google.com/go/go1.25.1.windows-amd64.zip"
+
 [[tools."go:github.com/artuross/kubesource/cmd/kubesource"]]
-version = "0.2.0"
+version = "latest"
 backend = "go:github.com/artuross/kubesource/cmd/kubesource"
 
 [[tools."go:github.com/google/yamlfmt/cmd/yamlfmt"]]
-version = "0.17.2"
+version = "latest"
 backend = "go:github.com/google/yamlfmt/cmd/yamlfmt"
 
 [[tools.just]]
 version = "1.42.4"
 backend = "aqua:casey/just"
 
+[tools.just."platforms.linux-arm64"]
+checksum = "sha256:beb35a4ed1208ffbb0fef26042c65875759a5358b9ee1a7856dec8490dfd4aca"
+url = "https://github.com/casey/just/releases/download/1.42.4/just-1.42.4-aarch64-unknown-linux-musl.tar.gz"
+
+[tools.just."platforms.linux-arm64-musl"]
+checksum = "sha256:beb35a4ed1208ffbb0fef26042c65875759a5358b9ee1a7856dec8490dfd4aca"
+url = "https://github.com/casey/just/releases/download/1.42.4/just-1.42.4-aarch64-unknown-linux-musl.tar.gz"
+
+[tools.just."platforms.linux-x64"]
+checksum = "sha256:678efc1cfbd5fa5a88375daa7e2f3864a049d6d63a0296df925a2ae5f516cb56"
+url = "https://github.com/casey/just/releases/download/1.42.4/just-1.42.4-x86_64-unknown-linux-musl.tar.gz"
+
+[tools.just."platforms.linux-x64-musl"]
+checksum = "sha256:678efc1cfbd5fa5a88375daa7e2f3864a049d6d63a0296df925a2ae5f516cb56"
+url = "https://github.com/casey/just/releases/download/1.42.4/just-1.42.4-x86_64-unknown-linux-musl.tar.gz"
+
+[tools.just."platforms.macos-arm64"]
+checksum = "sha256:9bea24da39a54f1517ebc8d050789e9631eaf9bcec76a94866a9955a3a1a663f"
+url = "https://github.com/casey/just/releases/download/1.42.4/just-1.42.4-aarch64-apple-darwin.tar.gz"
+
+[tools.just."platforms.macos-x64"]
+checksum = "sha256:ec8781b4341552877a432a922818f1656bcee6ec51155dbbdba490d9bd8f8dd2"
+url = "https://github.com/casey/just/releases/download/1.42.4/just-1.42.4-x86_64-apple-darwin.tar.gz"
+
+[tools.just."platforms.windows-x64"]
+checksum = "sha256:238cb448eb2ced3f7ac2f32872cf08244179b10b2d3f67e9069087ccbdc3d7f6"
+url = "https://github.com/casey/just/releases/download/1.42.4/just-1.42.4-x86_64-pc-windows-msvc.zip"
+
 [[tools.talhelper]]
 version = "3.0.36"
 backend = "aqua:budimanjojo/talhelper"
 
+[tools.talhelper."platforms.linux-arm64"]
+checksum = "sha256:f2c06bbb273f0c0df762656a2d7ba73306277ff9adbdb62bcdf697de678fd4e7"
+url = "https://github.com/budimanjojo/talhelper/releases/download/v3.0.36/talhelper_linux_arm64.tar.gz"
+
+[tools.talhelper."platforms.linux-arm64-musl"]
+checksum = "sha256:f2c06bbb273f0c0df762656a2d7ba73306277ff9adbdb62bcdf697de678fd4e7"
+url = "https://github.com/budimanjojo/talhelper/releases/download/v3.0.36/talhelper_linux_arm64.tar.gz"
+
+[tools.talhelper."platforms.linux-x64"]
+checksum = "sha256:5eeeefea6065d90cdc18cbddceaf72a32ee6211659f96b77588565ae03ce919c"
+url = "https://github.com/budimanjojo/talhelper/releases/download/v3.0.36/talhelper_linux_amd64.tar.gz"
+
+[tools.talhelper."platforms.linux-x64-musl"]
+checksum = "sha256:5eeeefea6065d90cdc18cbddceaf72a32ee6211659f96b77588565ae03ce919c"
+url = "https://github.com/budimanjojo/talhelper/releases/download/v3.0.36/talhelper_linux_amd64.tar.gz"
+
+[tools.talhelper."platforms.macos-arm64"]
+checksum = "sha256:f2f57a5b952e5a2e8d03eeb6478b9d22776aba923cfd090fd1250f0aedd68669"
+url = "https://github.com/budimanjojo/talhelper/releases/download/v3.0.36/talhelper_darwin_arm64.tar.gz"
+
+[tools.talhelper."platforms.macos-x64"]
+checksum = "sha256:1c6c8da51aefd2f309501494f54afd09ef5ee35436aa77dabfcd537e4136e7af"
+url = "https://github.com/budimanjojo/talhelper/releases/download/v3.0.36/talhelper_darwin_amd64.tar.gz"
+
+[tools.talhelper."platforms.windows-x64"]
+checksum = "sha256:4cd3e3604b9dbb95b736df4900a4c9df3c3741468e05098cf38c3aceb98a2ff2"
+url = "https://github.com/budimanjojo/talhelper/releases/download/v3.0.36/talhelper_windows_amd64.tar.gz"
+
 [[tools.talosctl]]
 version = "1.10.7"
 backend = "aqua:siderolabs/talos"
+
+[tools.talosctl."platforms.linux-arm64"]
+checksum = "sha256:27108265ed5797a5d59c4d4833c13de6fb200602df5b440bff6890a6a4f2f11f"
+url = "https://github.com/siderolabs/talos/releases/download/v1.10.7/talosctl-linux-arm64"
+
+[tools.talosctl."platforms.linux-arm64-musl"]
+checksum = "sha256:27108265ed5797a5d59c4d4833c13de6fb200602df5b440bff6890a6a4f2f11f"
+url = "https://github.com/siderolabs/talos/releases/download/v1.10.7/talosctl-linux-arm64"
+
+[tools.talosctl."platforms.linux-x64"]
+checksum = "sha256:0fe8a207b7ae925863b4af624bb1e716a28d999f32eb7aba09de4bbf60c2a9ac"
+url = "https://github.com/siderolabs/talos/releases/download/v1.10.7/talosctl-linux-amd64"
+
+[tools.talosctl."platforms.linux-x64-musl"]
+checksum = "sha256:0fe8a207b7ae925863b4af624bb1e716a28d999f32eb7aba09de4bbf60c2a9ac"
+url = "https://github.com/siderolabs/talos/releases/download/v1.10.7/talosctl-linux-amd64"
+
+[tools.talosctl."platforms.macos-arm64"]
+checksum = "sha256:8eff248a1619a79208f00e96f2b3033b32ec8ba57c6dde191ee5416a5e81f535"
+url = "https://github.com/siderolabs/talos/releases/download/v1.10.7/talosctl-darwin-arm64"
+
+[tools.talosctl."platforms.macos-x64"]
+checksum = "sha256:3ec721f593a659d37c94301944e7896551cf6f7ee016df246550611b7c5cc3cd"
+url = "https://github.com/siderolabs/talos/releases/download/v1.10.7/talosctl-darwin-amd64"
+
+[tools.talosctl."platforms.windows-x64"]
+checksum = "sha256:7f92e40eb74979280bb2fc21ad893c8910e71a2603c9c069615d35035e4776f1"
+url = "https://github.com/siderolabs/talos/releases/download/v1.10.7/talosctl-windows-amd64.exe"
