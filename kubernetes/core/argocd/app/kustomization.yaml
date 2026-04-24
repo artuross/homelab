@@ -10,8 +10,3 @@ resources:
   - resources/External-Secret--core-argocd--credentials-artuross-homelab-internal.yaml
   - resources/External-Secret--core-argocd--credentials-artuross-homelab.yaml
   - resources/IngressRoute--core-argocd--argocd.yaml
-  - resources/VerticalPodAutoscaler--core-argocd--argocd-application-controller.yaml
-  - resources/VerticalPodAutoscaler--core-argocd--argocd-applicationset-controller.yaml
-  - resources/VerticalPodAutoscaler--core-argocd--argocd-redis.yaml
-  - resources/VerticalPodAutoscaler--core-argocd--argocd-repo-server.yaml
-  - resources/VerticalPodAutoscaler--core-argocd--argocd-server.yaml
