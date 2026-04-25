@@ -6,7 +6,7 @@
 crane = "latest"
 fd = "latest"
 go = "latest"
-helm = "3.17.3"
+helm = "3.20.2"
 just = "latest"
 talhelper = "latest"
 talosctl = "1.10.7"
