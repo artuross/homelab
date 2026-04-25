@@ -137,7 +137,7 @@ version = "latest"
 backend = "go:github.com/google/yamlfmt/cmd/yamlfmt"
 
 [[tools.helm]]
-version = "3.17.3"
+version = "3.20.2"
 backend = "aqua:helm/helm"
 
 [[tools.just]]
