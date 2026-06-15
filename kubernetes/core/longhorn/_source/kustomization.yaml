@@ -8,5 +8,5 @@ helmCharts:
     releaseName: longhorn
     includeCRDs: true
     skipHooks: true
-    version: 1.11.2
+    version: 1.12.0
     valuesFile: values.yaml
