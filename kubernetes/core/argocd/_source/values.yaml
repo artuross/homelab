@@ -41,9 +41,9 @@ repoServer:
   resources:
     requests:
       cpu: 20m
-      memory: 128Mi
+      memory: 512Mi
     limits:
-      memory: 128Mi
+      memory: 512Mi
   vpa:
     enabled: true
     updateMode: "Off"
