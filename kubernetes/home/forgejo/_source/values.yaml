@@ -1,0 +1,93 @@
+redis-cluster:
+  enabled: false
+
+postgresql:
+  enabled: false
+
+postgresql-ha:
+  enabled: false
+
+persistence:
+  enabled: true
+  storageClass: longhorn
+  size: 50Gi
+
+strategy:
+  type: Recreate
+
+test:
+  enabled: false
+
+gitea:
+  admin:
+    existingSecret: forgejo-admin
+
+  oauth:
+    - name: PocketID
+      provider: openidConnect
+      existingSecret: forgejo-oidc
+      autoDiscoverUrl: https://pocketid.rcwz.pl/.well-known/openid-configuration
+
+  config:
+    database:
+      DB_TYPE: postgres
+    server:
+      DOMAIN: forgejo.rcwz.pl
+      ROOT_URL: https://forgejo.rcwz.pl/
+      SSH_DOMAIN: forgejo-ssh.pigeon-vibe.ts.net
+    service:
+      DISABLE_REGISTRATION: true
+      ALLOW_ONLY_EXTERNAL_REGISTRATION: true
+    oauth2_client:
+      ENABLE_AUTO_REGISTRATION: true
+      ACCOUNT_LINKING: auto
+      USERNAME: email
+    session:
+      PROVIDER: db
+    cache:
+      ADAPTER: memory
+    queue:
+      TYPE: level
+
+  additionalConfigFromEnvs:
+    - name: FORGEJO__database__HOST
+      valueFrom:
+        secretKeyRef:
+          name: postgres-app
+          key: host
+    - name: FORGEJO__database__NAME
+      valueFrom:
+        secretKeyRef:
+          name: postgres-app
+          key: dbname
+    - name: FORGEJO__database__USER
+      valueFrom:
+        secretKeyRef:
+          name: postgres-app
+          key: username
+    - name: FORGEJO__database__PASSWD
+      valueFrom:
+        secretKeyRef:
+          name: postgres-app
+          key: password
+
+podSecurityContext:
+  fsGroup: 1000
+
+containerSecurityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  runAsNonRoot: true
+  runAsUser: 1000
+  runAsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
+
+resources:
+  requests:
+    cpu: 20m
+    memory: 256Mi
+  limits:
+    memory: 512Mi

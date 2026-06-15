@@ -1,0 +1,15 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: forgejo
+  namespace: home-forgejo
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`forgejo.rcwz.pl`)
+      services:
+        - kind: Service
+          name: forgejo-http
+          port: 3000
+  tls:
+    secretName: certificate-forgejo

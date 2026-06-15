@@ -1,0 +1,13 @@
+# yaml-language-server: $schema=https://json.schemastore.org/kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - base
+  - resources/Certificate--home-forgejo--forgejo.yaml
+  - resources/Cluster--home-forgejo--postgres.yaml
+  - resources/DNSEndpoint--home-forgejo--forgejo.yaml
+  - resources/ExternalSecret--home-forgejo--forgejo-admin.yaml
+  - resources/ExternalSecret--home-forgejo--forgejo-oidc.yaml
+  - resources/IngressRoute--home-forgejo--forgejo.yaml
+  - resources/Service--home-forgejo--forgejo-ssh-tailscale.yaml
+  - resources/VerticalPodAutoscaler--home-forgejo--forgejo.yaml
