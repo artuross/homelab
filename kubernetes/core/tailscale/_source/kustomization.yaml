@@ -7,5 +7,5 @@ helmCharts:
     repo: https://pkgs.tailscale.com/helmcharts
     releaseName: tailscale-operator
     includeCRDs: true
-    version: 1.98.3
+    version: 1.98.4
     valuesFile: values.yaml
