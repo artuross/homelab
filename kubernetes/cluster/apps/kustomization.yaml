@@ -7,4 +7,5 @@ resources:
   - resources/ApplicationSet--core-argocd--core-app-single.yaml
   - resources/ApplicationSet--core-argocd--core-crds.yaml
   - resources/ApplicationSet--core-argocd--core-usage.yaml
+  - resources/ApplicationSet--core-argocd--home-app.yaml
   - resources/ApplicationSet--core-argocd--home-media.yaml
