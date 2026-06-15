@@ -338,10 +338,10 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              memory: 128Mi
+              memory: 512Mi
             requests:
               cpu: 20m
-              memory: 128Mi
+              memory: 512Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -380,10 +380,10 @@ spec:
           name: copyutil
           resources:
             limits:
-              memory: 128Mi
+              memory: 512Mi
             requests:
               cpu: 20m
-              memory: 128Mi
+              memory: 512Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
