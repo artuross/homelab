@@ -9,8 +9,8 @@ checksum = "sha256:adbe9a5b438eb258d43a40442f87cfac31a88a0c5a5ec2363cb5dcd3d807d
 url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-aarch64-unknown-linux-gnu.tar.gz"
 
 [tools."aqua:nushell/nushell"."platforms.linux-arm64-musl"]
-checksum = "sha256:adbe9a5b438eb258d43a40442f87cfac31a88a0c5a5ec2363cb5dcd3d807dbd2"
-url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-aarch64-unknown-linux-gnu.tar.gz"
+checksum = "sha256:c9805f2f3115ca867368e67cce0dc3b5a13ca165a25372627d31c8bc7dee777a"
+url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-aarch64-unknown-linux-musl.tar.gz"
 
 [tools."aqua:nushell/nushell"."platforms.linux-x64"]
 checksum = "sha256:3a3695d3fbaae1553229e263143ee02359f703efbc982bb1b475d2769d4ff6d9"
@@ -21,7 +21,7 @@ checksum = "sha256:3a3695d3fbaae1553229e263143ee02359f703efbc982bb1b475d2769d4ff
 url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-x86_64-unknown-linux-musl.tar.gz"
 
 [tools."aqua:nushell/nushell"."platforms.macos-arm64"]
-checksum = "blake3:d13cd5d6c537a31ebf3619cdb3ecb6116e03cf145c20393c2a70fc69648bf401"
+checksum = "sha256:21a11b4eb804f4bb7ce67bb18d90d227824d271e19e9f88da15733691888b916"
 url = "https://github.com/nushell/nushell/releases/download/0.108.0/nu-0.108.0-aarch64-apple-darwin.tar.gz"
 
 [tools."aqua:nushell/nushell"."platforms.macos-x64"]
@@ -85,7 +85,7 @@ checksum = "sha256:2b6bfaae8c48f12050813c2ffe1884c61ea26e750d803df9c9114550a314c
 url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-x86_64-unknown-linux-musl.tar.gz"
 
 [tools.fd."platforms.macos-arm64"]
-checksum = "blake3:e7a554aed4fea189f2aa297e82087ceaebb844eac55a2503e5321cce88fbb636"
+checksum = "sha256:0570263812089120bc2a5d84f9e65cd0c25e4a4d724c80075c357239c74ae904"
 url = "https://github.com/sharkdp/fd/releases/download/v10.3.0/fd-v10.3.0-aarch64-apple-darwin.tar.gz"
 
 [tools.fd."platforms.macos-x64"]
@@ -129,11 +129,11 @@ checksum = "sha256:4a974de310e7ee1d523d2fcedb114ba5fa75408c98eb3652023e55ccf3fa7
 url = "https://dl.google.com/go/go1.25.1.windows-amd64.zip"
 
 [[tools."go:github.com/artuross/kubesource/cmd/kubesource"]]
-version = "latest"
+version = "0.2.0"
 backend = "go:github.com/artuross/kubesource/cmd/kubesource"
 
 [[tools."go:github.com/google/yamlfmt/cmd/yamlfmt"]]
-version = "latest"
+version = "0.21.0"
 backend = "go:github.com/google/yamlfmt/cmd/yamlfmt"
 
 [[tools.helm]]
@@ -141,26 +141,32 @@ version = "3.20.2"
 backend = "aqua:helm/helm"
 
 [tools.helm."platforms.linux-arm64"]
-url = "https://get.helm.sh/helm-3.20.2-linux-arm64.tar.gz"
+checksum = "sha256:5ea2d6bc2cda3f8edf985e028809f5a9278f404fb8ab24044de9b7cb9b79a691"
+url = "https://get.helm.sh/helm-v3.20.2-linux-arm64.tar.gz"
 
 [tools.helm."platforms.linux-arm64-musl"]
-url = "https://get.helm.sh/helm-3.20.2-linux-arm64.tar.gz"
+checksum = "sha256:5ea2d6bc2cda3f8edf985e028809f5a9278f404fb8ab24044de9b7cb9b79a691"
+url = "https://get.helm.sh/helm-v3.20.2-linux-arm64.tar.gz"
 
 [tools.helm."platforms.linux-x64"]
-url = "https://get.helm.sh/helm-3.20.2-linux-amd64.tar.gz"
+checksum = "sha256:258e830a9e613c8a7a302d6059b4bb3b9758f2f3e1bb8ea0d707ce10a9a72fea"
+url = "https://get.helm.sh/helm-v3.20.2-linux-amd64.tar.gz"
 
 [tools.helm."platforms.linux-x64-musl"]
-url = "https://get.helm.sh/helm-3.20.2-linux-amd64.tar.gz"
+checksum = "sha256:258e830a9e613c8a7a302d6059b4bb3b9758f2f3e1bb8ea0d707ce10a9a72fea"
+url = "https://get.helm.sh/helm-v3.20.2-linux-amd64.tar.gz"
 
 [tools.helm."platforms.macos-arm64"]
-checksum = "sha256:89aec43ce07b06239f1bba4a6507236bb48ae487bc5065a8e254d3ce58a16997"
-url = "https://get.helm.sh/helm-v3.17.3-darwin-arm64.tar.gz"
+checksum = "sha256:139c794c22f16b579d08ddd3008c8038b9bb2814f35b5bcca91f50a1f458978d"
+url = "https://get.helm.sh/helm-v3.20.2-darwin-arm64.tar.gz"
 
 [tools.helm."platforms.macos-x64"]
-url = "https://get.helm.sh/helm-3.20.2-darwin-amd64.tar.gz"
+checksum = "sha256:7de04301f28b902a74f6286ed941cadc86ee5e6a9086a18f2ccf1f548e99d618"
+url = "https://get.helm.sh/helm-v3.20.2-darwin-amd64.tar.gz"
 
 [tools.helm."platforms.windows-x64"]
-url = "https://get.helm.sh/helm-3.20.2-windows-amd64.tar.gz"
+checksum = "sha256:b3cddfa337723d47422247b503aaefbb3823f1c6d40140ffa9a45a31043e1401"
+url = "https://get.helm.sh/helm-v3.20.2-windows-amd64.tar.gz"
 
 [[tools.just]]
 version = "1.42.4"
