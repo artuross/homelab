@@ -9,8 +9,8 @@ metadata:
     app.kubernetes.io/instance: cert-manager
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: cert-manager
-    app.kubernetes.io/version: v1.20.2
-    helm.sh/chart: cert-manager-v1.20.2
+    app.kubernetes.io/version: v1.21.1
+    helm.sh/chart: cert-manager-v1.21.1
   name: challenges.acme.cert-manager.io
 spec:
   group: acme.cert-manager.io
@@ -3138,6 +3138,17 @@ spec:
                             this challenge solver will apply to.
                           type: object
                       type: object
+                    waitInsteadOfSelfCheck:
+                      description: "WaitInsteadOfSelfCheck, if set, skips cert-manager's self-check and\ninstead waits this
+                        long after presentation before asking the ACME server\nto validate the challenge.\n\nThis is an advanced
+                        escape hatch for environments where cert-manager's\nself-check cannot succeed from its own network
+                        or DNS viewpoint even\nthough the ACME server can still validate successfully, for example due\nto
+                        split-horizon DNS or NAT hairpinning.\n\nA value of 0 skips the self-check and asks the ACME server
+                        to validate\nimmediately after presentation, relying on the ACME server's own\nvalidation retries
+                        (RFC 8555 section 8.2) to succeed once the challenge\nhas propagated. A negative duration is rejected.\nValue
+                        must be in units accepted by Go time.ParseDuration https://golang.org/pkg/time/#ParseDuration,\nfor
+                        example `30s` or `2m`."
+                      type: string
                   type: object
                 token:
                   description: |-
@@ -3176,13 +3187,21 @@ spec:
               properties:
                 presented:
                   description: |-
-                    presented will be set to true if the challenge values for this challenge
-                    are currently 'presented'.
-                    This *does not* imply the self check is passing. Only that the values
-                    have been 'submitted' for the appropriate challenge mechanism (i.e. the
-                    DNS01 TXT record has been presented, or the HTTP01 configuration has been
-                    configured).
+                    Presented is true once cert-manager has configured the solver resources
+                    needed to expose this challenge's validation material.
+                    For example, the DNS01 TXT record has been created, or the HTTP01 solver
+                    has been configured to serve the challenge token.
+                    This does not imply the self check is passing, that the ACME server has
+                    validated the challenge, or that cert-manager has already accepted the
+                    challenge with the ACME server.
                   type: boolean
+                presentedAt:
+                  description: |-
+                    PresentedAt records when cert-manager first configured the solver
+                    resources for this challenge. This is used by the optional delay-based
+                    readiness logic.
+                  format: date-time
+                  type: string
                 processing:
                   description: |-
                     Used to denote whether this challenge should be processed or not.
