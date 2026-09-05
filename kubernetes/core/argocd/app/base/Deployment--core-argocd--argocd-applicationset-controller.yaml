@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.4.4
-    helm.sh/chart: argo-cd-9.7.1
+    app.kubernetes.io/version: v3.5.2
+    helm.sh/chart: argo-cd-10.8.0
   name: argocd-applicationset-controller
   namespace: core-argocd
 spec:
@@ -21,15 +21,15 @@ spec:
   template:
     metadata:
       annotations:
-        checksum/cmd-params: 80734c6e7e6fbcd74f9184b884aa34d0480171fc52bfdab4329dddd53341a9fe
+        checksum/cmd-params: 66ef9f8f4214a98c0363679ed8583e8ab14a8cbdf9e3a8bc0f60634fd0b63329
       labels:
         app.kubernetes.io/component: applicationset-controller
         app.kubernetes.io/instance: argocd
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/name: argocd-applicationset-controller
         app.kubernetes.io/part-of: argocd
-        app.kubernetes.io/version: v3.4.4
-        helm.sh/chart: argo-cd-9.7.1
+        app.kubernetes.io/version: v3.5.2
+        helm.sh/chart: argo-cd-10.8.0
     spec:
       affinity:
         podAntiAffinity:
@@ -214,7 +214,7 @@ spec:
                   key: applicationsetcontroller.status.max.resources.count
                   name: argocd-cmd-params-cm
                   optional: true
-          image: quay.io/argoproj/argocd:v3.4.4
+          image: quay.io/argoproj/argocd:v3.5.2
           imagePullPolicy: IfNotPresent
           name: applicationset-controller
           ports:
@@ -268,6 +268,7 @@ spec:
           name: ssh-known-hosts
         - configMap:
             name: argocd-tls-certs-cm
+            optional: true
           name: tls-certs
         - configMap:
             name: argocd-gpg-keys-cm
