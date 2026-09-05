@@ -11,3 +11,7 @@ resources:
   - resources/VerticalPodAutoscaler--core-longhorn--longhorn-driver-deployer.yaml
   - resources/VerticalPodAutoscaler--core-longhorn--longhorn-manager.yaml
   - resources/VerticalPodAutoscaler--core-longhorn--longhorn-ui.yaml
+patches:
+  - path: resources/DaemonSet--core-longhorn--longhorn-manager-resources-patch.yaml
+  - path: resources/Deployment--core-longhorn--longhorn-resources-patch.yaml
+  - path: resources/Deployment--core-longhorn--longhorn-ui-resources-patch.yaml

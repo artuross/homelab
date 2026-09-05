@@ -8,3 +8,5 @@ resources:
   - resources/VerticalPodAutoscaler--core-cilium--cilium-envoy.yaml
   - resources/VerticalPodAutoscaler--core-cilium--cilium-operator.yaml
   - resources/VerticalPodAutoscaler--core-cilium--cilium.yaml
+patches:
+  - path: resources/DaemonSet--core-cilium--cilium-resources-patch.yaml

@@ -9,9 +9,9 @@ longhornManager:
   resources:
     requests:
       cpu: 25m
-      memory: 256Mi
+      memory: 320Mi
     limits:
-      memory: 256Mi
+      memory: 320Mi
 
 preUpgradeChecker:
   jobEnabled: false

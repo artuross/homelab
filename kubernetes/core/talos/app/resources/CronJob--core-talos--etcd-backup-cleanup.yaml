@@ -21,6 +21,12 @@ spec:
                 - /backup-cleanup.nu
               workingDir: /tmp
               imagePullPolicy: IfNotPresent
+              resources:
+                requests:
+                  cpu: 20m
+                  memory: 96Mi
+                limits:
+                  memory: 96Mi
               env:
                 - name: AWS_ACCESS_KEY_ID
                   valueFrom:

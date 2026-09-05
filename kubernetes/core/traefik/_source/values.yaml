@@ -15,6 +15,8 @@ service:
   annotations:
     external-dns.alpha.kubernetes.io/hostname: ingress.k8s.rcwz.pl
     external-dns.alpha.kubernetes.io/ttl: "60"
+  labels:
+    tailscale.com/proxy-class: tailscale-proxy-resources
   loadBalancerClass: tailscale
 
 resources:

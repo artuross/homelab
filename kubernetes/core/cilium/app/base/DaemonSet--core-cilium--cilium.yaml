@@ -119,10 +119,10 @@ spec:
             timeoutSeconds: 5
           resources:
             limits:
-              memory: 256Mi
+              memory: 320Mi
             requests:
               cpu: 50m
-              memory: 256Mi
+              memory: 320Mi
           securityContext:
             capabilities:
               add:
@@ -324,10 +324,10 @@ spec:
           resources:
             limits:
               cpu: 1
-              memory: 1Gi
+              memory: 64Mi
             requests:
               cpu: 100m
-              memory: 10Mi
+              memory: 64Mi
           securityContext:
             capabilities:
               drop:

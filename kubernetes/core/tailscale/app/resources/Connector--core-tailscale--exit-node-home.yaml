@@ -4,6 +4,7 @@ metadata:
   name: exit-node-home
   namespace: core-tailscale
 spec:
+  proxyClass: tailscale-proxy-resources
   replicas: 1
   hostnamePrefix: exit-node-home
   exitNode: true

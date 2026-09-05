@@ -3,6 +3,8 @@ kind: Service
 metadata:
   name: forgejo-ssh-tailscale
   namespace: home-forgejo
+  labels:
+    tailscale.com/proxy-class: tailscale-proxy-resources
   annotations:
     tailscale.com/expose: "true"
     tailscale.com/hostname: forgejo-ssh

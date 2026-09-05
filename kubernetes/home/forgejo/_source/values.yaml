@@ -74,6 +74,14 @@ gitea:
 podSecurityContext:
   fsGroup: 1000
 
+initContainers:
+  resources:
+    requests:
+      cpu: 20m
+      memory: 128Mi
+    limits:
+      memory: 128Mi
+
 containerSecurityContext:
   allowPrivilegeEscalation: false
   capabilities:
@@ -88,6 +96,6 @@ containerSecurityContext:
 resources:
   requests:
     cpu: 20m
-    memory: 256Mi
+    memory: 192Mi
   limits:
-    memory: 512Mi
+    memory: 192Mi

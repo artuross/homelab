@@ -36,6 +36,12 @@ spec:
               value: "568"
             - name: PUID
               value: "568"
+          resources:
+            requests:
+              cpu: 20m
+              memory: 128Mi
+            limits:
+              memory: 128Mi
           volumeMounts:
             - name: config-dir
               mountPath: /config
@@ -78,6 +84,12 @@ spec:
                 http://localhost:8080/api/v2/app/setPreferences'''
             - name: VPN_SERVICE_PROVIDER
               value: "protonvpn"
+          resources:
+            requests:
+              cpu: 20m
+              memory: 96Mi
+            limits:
+              memory: 96Mi
           volumeMounts:
             - mountPath: /gluetun
               name: gluetun-conf
@@ -93,6 +105,12 @@ spec:
               value: "8080"
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              cpu: 20m
+              memory: 672Mi
+            limits:
+              memory: 672Mi
           securityContext:
             allowPrivilegeEscalation: false
             readOnlyRootFilesystem: true

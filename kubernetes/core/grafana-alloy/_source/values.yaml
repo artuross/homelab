@@ -5,9 +5,9 @@ alloy:
   resources:
     requests:
       cpu: 25m
-      memory: 256Mi
+      memory: 320Mi
     limits:
-      memory: 256Mi
+      memory: 320Mi
   extraEnv:
     - name: PROMETHEUS_ENDPOINT
       valueFrom:

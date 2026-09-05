@@ -9,6 +9,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: traefik
     helm.sh/chart: traefik-39.0.9
+    tailscale.com/proxy-class: tailscale-proxy-resources
   name: traefik
   namespace: core-traefik
 spec:

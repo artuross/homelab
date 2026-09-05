@@ -14,6 +14,14 @@ kubeProxyReplacement: true
 socketLB:
   hostNamespaceOnly: true
 
+cni:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 64Mi
+    limits:
+      memory: 64Mi
+
 # run only 1 replica
 operator:
   replicas: 1
@@ -27,9 +35,9 @@ operator:
 resources:
   requests:
     cpu: 50m
-    memory: 256Mi
+    memory: 320Mi
   limits:
-    memory: 256Mi
+    memory: 320Mi
 
 envoy:
   resources:

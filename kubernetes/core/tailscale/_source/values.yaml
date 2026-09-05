@@ -1,13 +1,13 @@
 operatorConfig:
   defaultTags:
     - "tag:homelab-k8s-operator"
+  resources:
+    requests:
+      cpu: 20m
+      memory: 96Mi
+    limits:
+      memory: 96Mi
 
 proxyConfig:
   defaultTags: "tag:homelab-k8s-service"
 
-resources:
-  requests:
-    cpu: 20m
-    memory: 96Mi
-  limits:
-    memory: 96Mi

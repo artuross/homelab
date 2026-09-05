@@ -78,10 +78,10 @@ spec:
             timeoutSeconds: 1
           resources:
             limits:
-              memory: 512Mi
+              memory: 192Mi
             requests:
               cpu: 20m
-              memory: 256Mi
+              memory: 192Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:
@@ -113,9 +113,10 @@ spec:
           imagePullPolicy: IfNotPresent
           name: init-directories
           resources:
-            limits: {}
+            limits:
+              memory: 128Mi
             requests:
-              cpu: 100m
+              cpu: 20m
               memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
@@ -169,9 +170,10 @@ spec:
           imagePullPolicy: IfNotPresent
           name: init-app-ini
           resources:
-            limits: {}
+            limits:
+              memory: 128Mi
             requests:
-              cpu: 100m
+              cpu: 20m
               memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false
@@ -231,9 +233,10 @@ spec:
           imagePullPolicy: IfNotPresent
           name: configure-gitea
           resources:
-            limits: {}
+            limits:
+              memory: 128Mi
             requests:
-              cpu: 100m
+              cpu: 20m
               memory: 128Mi
           securityContext:
             allowPrivilegeEscalation: false

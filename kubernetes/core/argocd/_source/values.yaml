@@ -10,9 +10,9 @@ controller:
   resources:
     requests:
       cpu: 20m
-      memory: 512Mi
+      memory: 768Mi
     limits:
-      memory: 512Mi
+      memory: 768Mi
   vpa:
     enabled: true
     updateMode: "Off"
@@ -41,9 +41,9 @@ repoServer:
   resources:
     requests:
       cpu: 20m
-      memory: 512Mi
+      memory: 128Mi
     limits:
-      memory: 512Mi
+      memory: 128Mi
   vpa:
     enabled: true
     updateMode: "Off"
@@ -52,9 +52,9 @@ server:
   resources:
     requests:
       cpu: 20m
-      memory: 192Mi
+      memory: 128Mi
     limits:
-      memory: 192Mi
+      memory: 128Mi
   vpa:
     enabled: true
     updateMode: "Off"
