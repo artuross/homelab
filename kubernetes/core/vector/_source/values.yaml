@@ -1,4 +1,8 @@
 env:
+  # Vector 0.57+ disables environment interpolation by default.
+  - name: VECTOR_DANGEROUSLY_ALLOW_ENV_VAR_INTERPOLATION
+    value: "true"
+
   - name: LOKI_ENDPOINT
     valueFrom:
       secretKeyRef:

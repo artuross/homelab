@@ -34,6 +34,8 @@ spec:
           env:
             - name: VECTOR_LOG
               value: info
+            - name: VECTOR_DANGEROUSLY_ALLOW_ENV_VAR_INTERPOLATION
+              value: "true"
             - name: LOKI_ENDPOINT
               valueFrom:
                 secretKeyRef:
