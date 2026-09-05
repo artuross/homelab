@@ -16,6 +16,10 @@ resources:
   - Deployment--core-argocd--argocd-redis.yaml
   - Deployment--core-argocd--argocd-repo-server.yaml
   - Deployment--core-argocd--argocd-server.yaml
+  - NetworkPolicy--core-argocd--argocd-application-controller.yaml
+  - NetworkPolicy--core-argocd--argocd-redis.yaml
+  - NetworkPolicy--core-argocd--argocd-repo-server.yaml
+  - NetworkPolicy--core-argocd--argocd-server.yaml
   - Role--core-argocd--argocd-application-controller.yaml
   - Role--core-argocd--argocd-applicationset-controller.yaml
   - Role--core-argocd--argocd-repo-server.yaml
