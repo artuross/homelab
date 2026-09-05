@@ -137,36 +137,36 @@ version = "0.21.0"
 backend = "go:github.com/google/yamlfmt/cmd/yamlfmt"
 
 [[tools.helm]]
-version = "3.20.2"
+version = "3.21.4"
 backend = "aqua:helm/helm"
 
 [tools.helm."platforms.linux-arm64"]
-checksum = "sha256:5ea2d6bc2cda3f8edf985e028809f5a9278f404fb8ab24044de9b7cb9b79a691"
-url = "https://get.helm.sh/helm-v3.20.2-linux-arm64.tar.gz"
+checksum = "sha256:b54c04b4e0b2540bbdc08c17a121dab70e9a2ed0de5705528fec68a5fd3b85a7"
+url = "https://get.helm.sh/helm-v3.21.4-linux-arm64.tar.gz"
 
 [tools.helm."platforms.linux-arm64-musl"]
-checksum = "sha256:5ea2d6bc2cda3f8edf985e028809f5a9278f404fb8ab24044de9b7cb9b79a691"
-url = "https://get.helm.sh/helm-v3.20.2-linux-arm64.tar.gz"
+checksum = "sha256:b54c04b4e0b2540bbdc08c17a121dab70e9a2ed0de5705528fec68a5fd3b85a7"
+url = "https://get.helm.sh/helm-v3.21.4-linux-arm64.tar.gz"
 
 [tools.helm."platforms.linux-x64"]
-checksum = "sha256:258e830a9e613c8a7a302d6059b4bb3b9758f2f3e1bb8ea0d707ce10a9a72fea"
-url = "https://get.helm.sh/helm-v3.20.2-linux-amd64.tar.gz"
+checksum = "sha256:61f88ab166748cb19604d7884cb100ae9ccb13804ddeb98e08af167eacbb6a14"
+url = "https://get.helm.sh/helm-v3.21.4-linux-amd64.tar.gz"
 
 [tools.helm."platforms.linux-x64-musl"]
-checksum = "sha256:258e830a9e613c8a7a302d6059b4bb3b9758f2f3e1bb8ea0d707ce10a9a72fea"
-url = "https://get.helm.sh/helm-v3.20.2-linux-amd64.tar.gz"
+checksum = "sha256:61f88ab166748cb19604d7884cb100ae9ccb13804ddeb98e08af167eacbb6a14"
+url = "https://get.helm.sh/helm-v3.21.4-linux-amd64.tar.gz"
 
 [tools.helm."platforms.macos-arm64"]
-checksum = "sha256:139c794c22f16b579d08ddd3008c8038b9bb2814f35b5bcca91f50a1f458978d"
-url = "https://get.helm.sh/helm-v3.20.2-darwin-arm64.tar.gz"
+checksum = "sha256:6e0bf5eb6daafc2b1ec34bb5ba04ef103f3afc16192fb19805c2924d7ea1033f"
+url = "https://get.helm.sh/helm-v3.21.4-darwin-arm64.tar.gz"
 
 [tools.helm."platforms.macos-x64"]
-checksum = "sha256:7de04301f28b902a74f6286ed941cadc86ee5e6a9086a18f2ccf1f548e99d618"
-url = "https://get.helm.sh/helm-v3.20.2-darwin-amd64.tar.gz"
+checksum = "sha256:9173d05edf9592c6be1d0412ffafd935448dfc7a63c2bc732b8c67e55503e8a8"
+url = "https://get.helm.sh/helm-v3.21.4-darwin-amd64.tar.gz"
 
 [tools.helm."platforms.windows-x64"]
-checksum = "sha256:b3cddfa337723d47422247b503aaefbb3823f1c6d40140ffa9a45a31043e1401"
-url = "https://get.helm.sh/helm-v3.20.2-windows-amd64.tar.gz"
+checksum = "sha256:cc9e4589d6f459a522eefc56b15636dd6e949f103de63bfb944f38d898609457"
+url = "https://get.helm.sh/helm-v3.21.4-windows-amd64.tar.gz"
 
 [[tools.just]]
 version = "1.42.4"
