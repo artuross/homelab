@@ -136,7 +136,7 @@ spec:
                           type: object
                         maxRetries:
                           default: 3
-                          description: MaxRetries defines the number of retries for introspection requests.
+                          description: MaxRetries defines the maximum number of retry attempts for failed requests.
                           type: integer
                         timeoutSeconds:
                           default: 5
@@ -144,14 +144,14 @@ spec:
                             requests.
                           type: integer
                         tls:
-                          description: TLS configures TLS communication with the Authorization Server.
+                          description: TLS configures TLS for the HTTP client.
                           properties:
                             ca:
-                              description: CA sets the CA bundle used to sign the Authorization Server certificate.
+                              description: CA sets the CA bundle used to verify the server certificate.
                               type: string
                             insecureSkipVerify:
                               description: |-
-                                InsecureSkipVerify skips the Authorization Server certificate validation.
+                                InsecureSkipVerify skips the server certificate validation.
                                 For testing purposes only, do not use in production.
                               type: boolean
                           type: object
