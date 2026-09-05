@@ -1,5 +1,7 @@
 configs:
   params:
+    controller.operation.processors: "1"
+    controller.status.processors: "1"
     server.disable.auth: true
     server.insecure: true
 
@@ -10,9 +12,9 @@ controller:
   resources:
     requests:
       cpu: 20m
-      memory: 768Mi
+      memory: 896Mi
     limits:
-      memory: 768Mi
+      memory: 896Mi
   vpa:
     enabled: true
     updateMode: "Off"
