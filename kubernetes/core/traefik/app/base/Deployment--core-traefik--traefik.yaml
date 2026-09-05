@@ -63,7 +63,7 @@ spec:
             - name: USER
               value: traefik
             - name: GOMEMLIMIT
-              value: 115MiB
+              value: 100MiB
           image: docker.io/traefik:v3.6.15
           imagePullPolicy: IfNotPresent
           lifecycle: null
@@ -103,10 +103,10 @@ spec:
             timeoutSeconds: 2
           resources:
             limits:
-              memory: 128Mi
+              memory: 112Mi
             requests:
               cpu: 20m
-              memory: 128Mi
+              memory: 112Mi
           securityContext:
             allowPrivilegeEscalation: false
             capabilities:

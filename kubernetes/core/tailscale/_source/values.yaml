@@ -4,9 +4,9 @@ operatorConfig:
   resources:
     requests:
       cpu: 20m
-      memory: 96Mi
+      memory: 64Mi
     limits:
-      memory: 96Mi
+      memory: 64Mi
 
 proxyConfig:
   defaultTags: "tag:homelab-k8s-service"

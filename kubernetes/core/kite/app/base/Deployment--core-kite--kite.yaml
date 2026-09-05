@@ -54,10 +54,10 @@ spec:
             periodSeconds: 10
           resources:
             limits:
-              memory: 96Mi
+              memory: 64Mi
             requests:
               cpu: 20m
-              memory: 96Mi
+              memory: 64Mi
           volumeMounts: null
       serviceAccountName: kite
       volumes: null

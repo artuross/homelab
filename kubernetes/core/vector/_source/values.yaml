@@ -34,6 +34,6 @@ podHostNetwork: true
 resources:
   requests:
     cpu: 35m
-    memory: 256Mi
+    memory: 224Mi
   limits:
-    memory: 256Mi
+    memory: 224Mi

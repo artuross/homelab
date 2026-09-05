@@ -41,9 +41,9 @@ spec:
           resources:
             requests:
               cpu: "20m"
-              memory: "96Mi"
+              memory: "64Mi"
             limits:
-              memory: "96Mi"
+              memory: "64Mi"
           securityContext:
             runAsNonRoot: true
             runAsUser: 65532

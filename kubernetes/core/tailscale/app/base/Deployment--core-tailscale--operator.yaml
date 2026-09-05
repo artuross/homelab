@@ -62,10 +62,10 @@ spec:
           name: operator
           resources:
             limits:
-              memory: 96Mi
+              memory: 64Mi
             requests:
               cpu: 20m
-              memory: 96Mi
+              memory: 64Mi
           volumeMounts:
             - mountPath: /oauth
               name: oauth
