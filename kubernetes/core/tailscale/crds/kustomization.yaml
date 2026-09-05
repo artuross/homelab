@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - CustomResourceDefinition--connectors.tailscale.com.yaml
   - CustomResourceDefinition--dnsconfigs.tailscale.com.yaml
+  - CustomResourceDefinition--peerrelays.tailscale.com.yaml
   - CustomResourceDefinition--proxyclasses.tailscale.com.yaml
   - CustomResourceDefinition--proxygrouppolicies.tailscale.com.yaml
   - CustomResourceDefinition--proxygroups.tailscale.com.yaml
