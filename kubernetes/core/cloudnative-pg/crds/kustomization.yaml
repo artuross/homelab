@@ -4,6 +4,7 @@ resources:
   - CustomResourceDefinition--backups.postgresql.cnpg.io.yaml
   - CustomResourceDefinition--clusterimagecatalogs.postgresql.cnpg.io.yaml
   - CustomResourceDefinition--clusters.postgresql.cnpg.io.yaml
+  - CustomResourceDefinition--databaseroles.postgresql.cnpg.io.yaml
   - CustomResourceDefinition--databases.postgresql.cnpg.io.yaml
   - CustomResourceDefinition--failoverquorums.postgresql.cnpg.io.yaml
   - CustomResourceDefinition--imagecatalogs.postgresql.cnpg.io.yaml
