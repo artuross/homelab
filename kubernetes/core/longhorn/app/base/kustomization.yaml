@@ -10,6 +10,12 @@ resources:
   - DaemonSet--core-longhorn--longhorn-manager.yaml
   - Deployment--core-longhorn--longhorn-driver-deployer.yaml
   - Deployment--core-longhorn--longhorn-ui.yaml
+  - NetworkPolicy--core-longhorn--backing-image-data-source.yaml
+  - NetworkPolicy--core-longhorn--backing-image-manager.yaml
+  - NetworkPolicy--core-longhorn--instance-manager.yaml
+  - NetworkPolicy--core-longhorn--longhorn-manager.yaml
+  - NetworkPolicy--core-longhorn--longhorn-recovery-backend.yaml
+  - NetworkPolicy--core-longhorn--longhorn-webhook.yaml
   - PriorityClass--longhorn-critical.yaml
   - Role--core-longhorn--longhorn.yaml
   - RoleBinding--core-longhorn--longhorn.yaml
