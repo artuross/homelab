@@ -8,15 +8,21 @@ resources:
   - CustomResourceDefinition--backups.longhorn.io.yaml
   - CustomResourceDefinition--backuptargets.longhorn.io.yaml
   - CustomResourceDefinition--backupvolumes.longhorn.io.yaml
+  - CustomResourceDefinition--enginefrontends.longhorn.io.yaml
   - CustomResourceDefinition--engineimages.longhorn.io.yaml
   - CustomResourceDefinition--engines.longhorn.io.yaml
   - CustomResourceDefinition--instancemanagers.longhorn.io.yaml
+  - CustomResourceDefinition--instancemanagerupgradecontrols.longhorn.io.yaml
+  - CustomResourceDefinition--instancemanagerupgrades.longhorn.io.yaml
   - CustomResourceDefinition--nodes.longhorn.io.yaml
   - CustomResourceDefinition--orphans.longhorn.io.yaml
   - CustomResourceDefinition--recurringjobs.longhorn.io.yaml
   - CustomResourceDefinition--replicas.longhorn.io.yaml
   - CustomResourceDefinition--settings.longhorn.io.yaml
+  - CustomResourceDefinition--shardgroups.longhorn.io.yaml
+  - CustomResourceDefinition--shards.longhorn.io.yaml
   - CustomResourceDefinition--sharemanagers.longhorn.io.yaml
+  - CustomResourceDefinition--snapshotgroups.longhorn.io.yaml
   - CustomResourceDefinition--snapshots.longhorn.io.yaml
   - CustomResourceDefinition--supportbundles.longhorn.io.yaml
   - CustomResourceDefinition--systembackups.longhorn.io.yaml
