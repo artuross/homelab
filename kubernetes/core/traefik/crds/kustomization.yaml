@@ -12,11 +12,7 @@ resources:
   - CustomResourceDefinition--apiratelimits.hub.traefik.io.yaml
   - CustomResourceDefinition--apis.hub.traefik.io.yaml
   - CustomResourceDefinition--apiversions.hub.traefik.io.yaml
-  - CustomResourceDefinition--backendtlspolicies.gateway.networking.k8s.io.yaml
-  - CustomResourceDefinition--gatewayclasses.gateway.networking.k8s.io.yaml
-  - CustomResourceDefinition--gateways.gateway.networking.k8s.io.yaml
-  - CustomResourceDefinition--grpcroutes.gateway.networking.k8s.io.yaml
-  - CustomResourceDefinition--httproutes.gateway.networking.k8s.io.yaml
+  - CustomResourceDefinition--contentitems.hub.traefik.io.yaml
   - CustomResourceDefinition--ingressroutes.traefik.io.yaml
   - CustomResourceDefinition--ingressroutetcps.traefik.io.yaml
   - CustomResourceDefinition--ingressrouteudps.traefik.io.yaml
@@ -24,9 +20,9 @@ resources:
   - CustomResourceDefinition--managedsubscriptions.hub.traefik.io.yaml
   - CustomResourceDefinition--middlewares.traefik.io.yaml
   - CustomResourceDefinition--middlewaretcps.traefik.io.yaml
-  - CustomResourceDefinition--referencegrants.gateway.networking.k8s.io.yaml
   - CustomResourceDefinition--serverstransports.traefik.io.yaml
   - CustomResourceDefinition--serverstransporttcps.traefik.io.yaml
   - CustomResourceDefinition--tlsoptions.traefik.io.yaml
   - CustomResourceDefinition--tlsstores.traefik.io.yaml
   - CustomResourceDefinition--traefikservices.traefik.io.yaml
+  - CustomResourceDefinition--uplinks.hub.traefik.io.yaml
