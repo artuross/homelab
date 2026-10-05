@@ -7,8 +7,8 @@ metadata:
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
-    app.kubernetes.io/version: v1.11.2
-    helm.sh/chart: longhorn-1.11.2
+    app.kubernetes.io/version: v1.13.0
+    helm.sh/chart: longhorn-1.13.0
     longhorn-manager: ""
   name: volumes.longhorn.io
 spec:
@@ -46,6 +46,11 @@ spec:
         - description: The node that the volume is currently attaching to
           jsonPath: .status.currentNodeID
           name: Node
+          type: string
+        - description: The engine switchover state
+          jsonPath: .status.switchoverState
+          name: Switchover
+          priority: 1
           type: string
         - jsonPath: .metadata.creationTimestamp
           name: Age
@@ -108,6 +113,51 @@ spec:
                     - v1
                     - v2
                   type: string
+                dataLayout:
+                  description: |-
+                    DataLayout declares the user's intended data layout (topology type, protection mode, and EC parameters).
+                    The entire struct is immutable after creation.
+                  properties:
+                    dataChunks:
+                      description: |-
+                        DataChunks is the number of data chunks (k) in the EC array.
+                        Required when Type is sharded; must be 0 for replicated volumes.
+                      minimum: 0
+                      type: integer
+                    mode:
+                      description: |-
+                        Mode describes the specific data protection mechanism in use.
+                        Empty for V1 volumes where no SPDK-level mode applies.
+                      enum:
+                        - raid1
+                        - erasureCoding
+                        - ""
+                      type: string
+                    parityChunks:
+                      description: |-
+                        ParityChunks is the number of parity chunks (m) in the EC array.
+                        The volume tolerates up to m simultaneous disk failures.
+                        Required when Type is sharded; must be 0 for replicated volumes.
+                      minimum: 0
+                      type: integer
+                    stripSizeKB:
+                      description: |-
+                        StripSizeKB is the chunk size in KiB used by the EC bdev.
+                        Must be a power of two in the range [4, 1024].
+                        Required when Type is sharded; must be 0 for replicated volumes.
+                      minimum: 0
+                      type: integer
+                    type:
+                      description: Type describes how volume data is distributed across nodes.
+                      enum:
+                        - replicated
+                        - sharded
+                        - ""
+                      type: string
+                  type: object
+                  x-kubernetes-validations:
+                    - message: DataLayout is immutable
+                      rule: self == oldSelf
                 dataLocality:
                   enum:
                     - disabled
@@ -127,6 +177,11 @@ spec:
                   x-kubernetes-validations:
                     - message: Encrypted is immutable
                       rule: self == oldSelf
+                engineNodeID:
+                  description: |-
+                    engineNodeID defines the node where the backend engine (target) runs.
+                    If empty, falls back to NodeID.
+                  type: string
                 freezeFilesystemForSnapshot:
                   description: Setting that freezes the filesystem on the root partition before a snapshot is created.
                   enum:
@@ -153,12 +208,20 @@ spec:
                 migrationNodeID:
                   type: string
                 nodeID:
+                  description: nodeID defines the node where the volume is attached (where the frontend initiator runs).
                   type: string
                 nodeSelector:
                   items:
                     type: string
                   type: array
                 numberOfReplicas:
+                  type: integer
+                nvmeTcpNrIoQueues:
+                  description: |-
+                    nvmeTcpNrIoQueues limits the number of I/O queues the kernel initiator
+                    creates when connecting the blockdev frontend over NVMe-TCP.
+                    0 means inheriting the global setting default-nvme-tcp-nr-io-queues.
+                    Takes effect on (re)attach.
                   type: integer
                 offlineRebuilding:
                   description: "Specifies whether Longhorn should rebuild replicas while the detached volume is degraded.\n-
@@ -234,6 +297,15 @@ spec:
                     - enabled
                     - fast-check
                   type: string
+                snapshotHashingRequestedAt:
+                  description: |-
+                    SnapshotHashingRequestedAt is the RFC3339 timestamp (e.g., "2026-03-16T10:30:00Z") when an on-demand snapshot checksum calculation is requested.
+                    When this value is set and is later than LastOnDemandSnapshotHashingCompleteAt, the system will calculate checksums
+                    for all user snapshots.
+
+                    If SnapshotHashingRequestedAt differs from LastOnDemandSnapshotHashingCompleteAt, it indicates that a hashing request
+                    is still in progress, and a new request will be rejected.
+                  type: string
                 snapshotMaxCount:
                   type: integer
                 snapshotMaxSize:
@@ -241,6 +313,27 @@ spec:
                   type: string
                 staleReplicaTimeout:
                   type: integer
+                topologyRequirement:
+                  description: |-
+                    TopologyRequirement lists the failure domains the volume's replicas must
+                    be scheduled in, derived from the CSI accessible topology at creation —
+                    the same failure domains as the PV nodeAffinity terms (a node must match
+                    at least one term). Empty means unconstrained.
+                  items:
+                    description: |-
+                      VolumeTopologyTerm is one failure domain a volume's replicas may be
+                      scheduled in. A node satisfies the term when its zone and region match the
+                      non-empty fields.
+                    properties:
+                      region:
+                        type: string
+                      zone:
+                        type: string
+                    type: object
+                  type: array
+                  x-kubernetes-validations:
+                    - message: TopologyRequirement is immutable
+                      rule: self == oldSelf
                 ublkNumberOfQueue:
                   description: ublkNumberOfQueue controls the number of queues for ublk frontend.
                   type: integer
@@ -299,6 +392,9 @@ spec:
                     type: object
                   nullable: true
                   type: array
+                currentEngineNodeID:
+                  description: the node that the engine (target) is currently running on.
+                  type: string
                 currentImage:
                   type: string
                 currentMigrationNodeID:
@@ -343,11 +439,19 @@ spec:
                       nullable: true
                       type: array
                   type: object
+                lastAutoSalvagedAt:
+                  type: string
                 lastBackup:
                   type: string
                 lastBackupAt:
                   type: string
                 lastDegradedAt:
+                  type: string
+                lastOnDemandSnapshotHashingCompleteAt:
+                  description: |-
+                    LastOnDemandSnapshotHashingCompleteAt is the RFC3339 timestamp (e.g., "2026-03-16T10:30:00Z") when the
+                    most recent on-demand snapshot checksum calculation completed.
+                    When this value matches SnapshotHashingRequestedAt, the requested on-demand checksum calculation is considered complete.
                   type: string
                 ownerID:
                   type: string
@@ -364,6 +468,11 @@ spec:
                 shareState:
                   type: string
                 state:
+                  type: string
+                switchoverState:
+                  description: |-
+                    SwitchoverState describes the current progress of a v2 engine live switchover.
+                    Empty when no switchover is in progress.
                   type: string
               type: object
           type: object
