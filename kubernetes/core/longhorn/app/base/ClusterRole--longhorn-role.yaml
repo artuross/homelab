@@ -5,8 +5,8 @@ metadata:
     app.kubernetes.io/instance: longhorn
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: longhorn
-    app.kubernetes.io/version: v1.11.2
-    helm.sh/chart: longhorn-1.11.2
+    app.kubernetes.io/version: v1.13.0
+    helm.sh/chart: longhorn-1.13.0
   name: longhorn-role
 rules:
   - apiGroups:
@@ -112,10 +112,21 @@ rules:
     verbs:
       - "*"
   - apiGroups:
+      - groupsnapshot.storage.k8s.io
+    resources:
+      - volumegroupsnapshotclasses
+      - volumegroupsnapshots
+      - volumegroupsnapshotcontents
+      - volumegroupsnapshotcontents/status
+    verbs:
+      - "*"
+  - apiGroups:
       - longhorn.io
     resources:
       - volumes
       - volumes/status
+      - enginefrontends
+      - enginefrontends/status
       - engines
       - engines/status
       - replicas
@@ -158,6 +169,16 @@ rules:
       - volumeattachments/status
       - backupbackingimages
       - backupbackingimages/status
+      - shards
+      - shards/status
+      - shardgroups
+      - shardgroups/status
+      - snapshotgroups
+      - snapshotgroups/status
+      - instancemanagerupgrades
+      - instancemanagerupgrades/status
+      - instancemanagerupgradecontrols
+      - instancemanagerupgradecontrols/status
     verbs:
       - "*"
   - apiGroups:
