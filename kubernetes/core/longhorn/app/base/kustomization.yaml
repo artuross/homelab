@@ -1,22 +1,36 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
+  - ClusterRole--longhorn-csi-role.yaml
+  - ClusterRole--longhorn-csi-secret-role.yaml
   - ClusterRole--longhorn-role.yaml
   - ClusterRoleBinding--longhorn-bind.yaml
+  - ClusterRoleBinding--longhorn-csi-bind.yaml
+  - ClusterRoleBinding--longhorn-csi-secret-bind.yaml
   - ClusterRoleBinding--longhorn-support-bundle.yaml
   - ConfigMap--core-longhorn--longhorn-default-resource.yaml
   - ConfigMap--core-longhorn--longhorn-default-setting.yaml
   - ConfigMap--core-longhorn--longhorn-storageclass.yaml
   - DaemonSet--core-longhorn--longhorn-manager.yaml
   - Deployment--core-longhorn--longhorn-driver-deployer.yaml
+  - Deployment--core-longhorn--longhorn-global-manager.yaml
   - Deployment--core-longhorn--longhorn-ui.yaml
+  - NetworkPolicy--core-longhorn--backing-image-data-source.yaml
+  - NetworkPolicy--core-longhorn--backing-image-manager.yaml
+  - NetworkPolicy--core-longhorn--instance-manager.yaml
+  - NetworkPolicy--core-longhorn--longhorn-manager.yaml
+  - NetworkPolicy--core-longhorn--longhorn-recovery-backend.yaml
+  - NetworkPolicy--core-longhorn--longhorn-webhook.yaml
   - PriorityClass--longhorn-critical.yaml
+  - Role--core-longhorn--longhorn-csi-role.yaml
   - Role--core-longhorn--longhorn.yaml
+  - RoleBinding--core-longhorn--longhorn-csi-bind.yaml
   - RoleBinding--core-longhorn--longhorn.yaml
   - Service--core-longhorn--longhorn-admission-webhook.yaml
   - Service--core-longhorn--longhorn-backend.yaml
   - Service--core-longhorn--longhorn-frontend.yaml
   - Service--core-longhorn--longhorn-recovery-backend.yaml
+  - ServiceAccount--core-longhorn--longhorn-csi-service-account.yaml
   - ServiceAccount--core-longhorn--longhorn-service-account.yaml
   - ServiceAccount--core-longhorn--longhorn-support-bundle.yaml
   - ServiceAccount--core-longhorn--longhorn-ui-service-account.yaml
