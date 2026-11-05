@@ -12,7 +12,8 @@ data:
   resource.customizations.ignoreResourceUpdates.apps_ReplicaSet: "jqPathExpressions:\n  - '.metadata.annotations.\"deployment.kubernetes.io/desired-replicas\"'\n
     \ - '.metadata.annotations.\"deployment.kubernetes.io/max-replicas\"'\n  - '.metadata.annotations.\"rollout.argoproj.io/desired-replicas\"'\n"
   resource.customizations.ignoreResourceUpdates.argoproj.io_Application: "jqPathExpressions:\n  - '.metadata.annotations.\"notified.notifications.argoproj.io\"'\n
-    \ - '.metadata.annotations.\"argocd.argoproj.io/refresh\"'\n  - '.metadata.annotations.\"argocd.argoproj.io/hydrate\"'\n
+    \ - '.metadata.annotations.\"argocd.argoproj.io/refresh\"'\n  - '.metadata.annotations.\"argocd.argoproj.io/refresh-timestamp\"'\n
+    \ - '.metadata.annotations.\"argocd.argoproj.io/hydrate\"'\n  - '.metadata.annotations.\"argocd.argoproj.io/hydrate-timestamp\"'\n
     \ - '.operation'\n"
   resource.customizations.ignoreResourceUpdates.argoproj.io_Rollout: "jqPathExpressions:\n  - '.metadata.annotations.\"notified.notifications.argoproj.io\"'\n"
   resource.customizations.ignoreResourceUpdates.autoscaling_HorizontalPodAutoscaler: "jqPathExpressions:\n  - '.metadata.annotations.\"autoscaling.alpha.kubernetes.io/behavior\"'\n
@@ -46,7 +47,7 @@ metadata:
     app.kubernetes.io/managed-by: Helm
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
-    app.kubernetes.io/version: v3.4.4
-    helm.sh/chart: argo-cd-9.7.1
+    app.kubernetes.io/version: v3.6.1
+    helm.sh/chart: argo-cd-10.14.0
   name: argocd-cm
   namespace: core-argocd
