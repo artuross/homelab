@@ -2,6 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - CustomResourceDefinition--acraccesstokens.generators.external-secrets.io.yaml
+  - CustomResourceDefinition--beyondtrustworkloadcredentialsdynamicsecrets.generators.external-secrets.io.yaml
   - CustomResourceDefinition--cloudsmithaccesstokens.generators.external-secrets.io.yaml
   - CustomResourceDefinition--clusterexternalsecrets.external-secrets.io.yaml
   - CustomResourceDefinition--clustergenerators.generators.external-secrets.io.yaml
@@ -13,6 +14,7 @@ resources:
   - CustomResourceDefinition--gcraccesstokens.generators.external-secrets.io.yaml
   - CustomResourceDefinition--generatorstates.generators.external-secrets.io.yaml
   - CustomResourceDefinition--githubaccesstokens.generators.external-secrets.io.yaml
+  - CustomResourceDefinition--gitlabdeploytokens.generators.external-secrets.io.yaml
   - CustomResourceDefinition--grafanas.generators.external-secrets.io.yaml
   - CustomResourceDefinition--mfas.generators.external-secrets.io.yaml
   - CustomResourceDefinition--passwords.generators.external-secrets.io.yaml
